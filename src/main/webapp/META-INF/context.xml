@@ -1,0 +1,15 @@
+<Context>
+    <Resource
+            name="jdbc/vehicleDB"
+            auth="Container"
+            type="javax.sql.DataSource"
+            driverClassName="com.mysql.cj.jdbc.Driver"
+            url="jdbc:mysql://localhost:3306/vehicle_management"
+            username="root"
+            password="An@19092003"
+            maxTotal="50"
+            maxIdle="20"
+            minIdle="5"
+            maxWaitMillis="10000"
+    />
+</Context>
