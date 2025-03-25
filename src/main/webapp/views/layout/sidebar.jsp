@@ -23,7 +23,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item mt-5">
-                    <a href="<%= request.getContextPath() %>/views/admin/dashboard/dashboard.jsp" class="nav-link">
+                    <a href="<%= request.getContextPath() %>/views/admin/home/dashboard.jsp" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Trang chủ
