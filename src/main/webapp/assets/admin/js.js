@@ -130,3 +130,4 @@ document.querySelector("#actions .cancel").onclick = function() {
     myDropzone.removeAllFiles(true)
 }
 // DropzoneJS Demo Code End
+

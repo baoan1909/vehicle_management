@@ -9,28 +9,7 @@
 <html>
 <head>
     <title>Dashboard</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/fontawesome-free/css/all.min.css">
-<%--    <!-- Ionicons -->--%>
-<%--    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">--%>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/jqvmap/jqvmap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/dist/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/summernote/summernote-bs4.min.css">
-    <!-- Editor Style -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/style.css">
+    <jsp:include page="/views/library/_css.jsp" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -60,32 +39,217 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="container mt-4">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button type="button" class="btn btn-default float-right ml-5" id="daterange-btn">
-                                    <i class="far fa-calendar-alt"></i>
-                                </button>
-                            </div>
-                            <input type="text" class="form-control float-right" id="reservation">
-                        </div>
-                        <div class="row ml-4 mr-4">
-                            <div class="col-12 ml-4 mr-4">
-                                <div class="info-box card-cyan card-outline">
-                                    <div class="info-box-content text-center">
-                                        <span class="info-box-text">Tổng doanh thu</span>
-                                        <span class="info-box-number">3.192.120đ</span>
+                        <div class="col-12">
+                            <div class="card card-cyan card-outline">
+                                <div class="card-body">
+                                    <div class="form-group col-md-4">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-cyan">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control float-right" id="daterange-btn">
+                                        </div>
+                                        <!-- /.input group -->
                                     </div>
-                                    <div class="info-box-content text-center">
-                                        <span class="info-box-text">khách vào bãi</span>
-                                        <span class="info-box-number">4.295</span>
+                                    <div class="col-10 mx-auto"> <!-- Thêm mx-auto để căn giữa -->
+                                        <div class="row info-box d-flex justify-content-center align-items-center">
+                                            <div class="col-md-4 text-center d-flex flex-column justify-content-center">
+                                                <span class="info-box-text">Tổng doanh thu</span>
+                                                <span class="info-box-number">3.192.120đ</span>
+                                            </div>
+                                            <div class="col-md-4 text-center d-flex flex-column justify-content-center">
+                                                <span class="info-box-text">Khách vào bãi</span>
+                                                <span class="info-box-number">4.295</span>
+                                            </div>
+                                            <div class="col-md-4 text-center d-flex flex-column justify-content-center">
+                                                <span class="info-box-text">Thẻ đã đăng ký</span>
+                                                <span class="info-box-number">1.000</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="info-box-content text-center">
-                                        <span class="info-box-text">Thẻ đã đăng ký</span>
-                                        <span class="info-box-number">1.000</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
                                 </div>
-                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <div class="row">
+                            <!-- Area Chart -->
+                            <div class="col-xl-8 col-lg-7">
+                                <div class="card card-cyan card-outline shadow mb-4">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Tổng doanh thu</h3>
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-area">
+                                            <canvas id="myAreaChart" width="978" height="400" style="display: block; height: 320px; width: 783px;" class="chartjs-render-monitor"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-5">
+                                <div class="card card-cyan card-outline shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header">
+                                        <h3 class="card-title">Tổng loại xe</h3>
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="myPieChart" width="448" height="306" style="display: block; height: 245px; width: 359px;" class="chartjs-render-monitor"></canvas>
+                                        </div>
+                                        <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-primary"></i> Xe máy
+                                        </span>
+                                            <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Ô tô
+                                        </span>
+                                            <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Xe khác
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 mb-4">
+                                <!-- Project Card Example -->
+                                <div class="card card-cyan card-outline shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="card-title">Thẻ</h6>
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="small font-weight-bold">Mất <span class="float-right">20%</span></h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-yellowr" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small font-weight-bold">Thành viên <span class="float-right">40%</span></h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small font-weight-bold">Vãng lai<span class="float-right">60%</span></h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <!-- Project Card Example -->
+                                <div class="card card-cyan card-outline shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="card-title">Thẻ</h6>
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-sm-flex justify-content-between">
+                                            <div class="col-xl-6 col-md-6 mb-4">
+                                                <div class="card card-info card-outline shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Camera
+                                                                </div>
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col-auto">
+                                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-dark">50</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <i class="fas fa-video fa-2x text-gray"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-md-6 mb-4">
+                                                <div class="card card-yellow card-outline shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-yellow text-uppercase mb-1">Đầu lọc thẻ
+                                                                </div>
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col-auto">
+                                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-dark">3</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <i class="fas fa-sd-card fa-2x text-gray"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-sm-flex justify-content-between">
+                                            <div class="col-xl-6 col-md-6 mb-4">
+                                                <div class="card card-green card-outline shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-green text-uppercase mb-1">Máy tính
+                                                                </div>
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col-auto">
+                                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-dark">4</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <i class="fas fa-desktop fa-2x text-gray"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-md-6 mb-4">
+                                                <div class="card card-primary card-outline shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Barie
+                                                                </div>
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col-auto">
+                                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-dark">7</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <i class="fas fa-pallet fa-2x text-gray"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -95,50 +259,6 @@
         </div>
     </div>
 </div>
-
-<!-- jQuery -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/jquery-ui/jquery-ui.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Select2 -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/select2/js/select2.full.min.js"></script>
-<!-- bootstrap color picker -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<!-- Bootstrap4 Duallistbox -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-<!-- BS-Stepper -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/bs-stepper/js/bs-stepper.min.js"></script>
-<!-- ChartJS -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/jqvmap/jquery.vmap.min.js"></script>
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/moment/moment.min.js"></script>
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/inputmask/jquery.inputmask.min.js"></script>
-
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/daterangepicker/daterangepicker.js"></script>
-<!-- Bootstrap Switch -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- dropzonejs -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/dropzone/min/dropzone.min.js"></script>
-<!-- Summernote -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<%= request.getContextPath() %>/assets/admin/vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<%= request.getContextPath() %>/assets/admin/dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<%= request.getContextPath() %>/assets/admin/dist/js/pages/dashboard.js"></script>
-<!--js -->
-<script src="<%= request.getContextPath() %>/assets/admin/js.js"></script>
+<jsp:include page="/views/library/_script.jsp" />
 </body>
 </html>
