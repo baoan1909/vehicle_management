@@ -23,7 +23,8 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item mt-5">
-                    <a href="<%= request.getContextPath() %>/views/admin/home/dashboard.jsp" class="nav-link">
+                    <a href="<%= request.getContextPath() %>/admin/dashboard?page=dashboard"
+                       class="nav-link <%="dashboard".equals(request.getParameter("page")) ? "active" : "" %>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Trang chủ
@@ -32,15 +33,15 @@
                 </li>
                 <li class="nav-item sidebar-divider mb-2"></li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="<%= request.getContextPath() %>/admin/card-swipe?page=card-swipe" class="nav-link <%="card-swipe".equals(request.getParameter("page")) ? "active" : "" %>">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý vào ra
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page"))) ? "active" : "" %>">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Quản lý thẻ
@@ -49,13 +50,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<%= request.getContextPath() %>/admin/card?page=card"
+                               class="nav-link <%= "card".equals(request.getParameter("page")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>thẻ</p>
+                                <p>Thẻ</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<%= request.getContextPath() %>/admin/lost-card?page=lost-card"
+                               class="nav-link <%= "lost-card".equals(request.getParameter("page")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thẻ bị mất</p>
                             </a>
@@ -64,11 +67,26 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-book"></i>
                         <p>
-                            Quản lý loại xe
+                            Vé & Phương tiện
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Vé</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Phương tiện</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item sidebar-divider mb-2"></li>
                 <li class="nav-item">
@@ -155,26 +173,11 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                        <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
-                            Vé & Phương tiện
-                            <i class="fas fa-angle-left right"></i>
+                            Quản lý vai trò
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Vé</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Phương tiện</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </nav>

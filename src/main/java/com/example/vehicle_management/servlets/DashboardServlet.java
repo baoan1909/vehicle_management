@@ -13,8 +13,15 @@ import java.io.IOException;
 public class DashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Forward request đến dashboard.jsp
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./views/admin/home/dashboard.jsp");
+        String page = request.getParameter("page");
+
+
+        if (page == null || page.isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/admin/dashboard?page=dashboard");
+            return;
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp");
         dispatcher.forward(request, response);
     }
 }
