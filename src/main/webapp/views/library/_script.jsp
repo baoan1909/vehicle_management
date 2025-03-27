@@ -51,9 +51,23 @@
 <script src="<%= request.getContextPath() %>/assets/admin/dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<%= request.getContextPath() %>/assets/admin/dist/js/pages/dashboard.js"></script>
-<!-- Admin2 -->
 <%--<script src="<%= request.getContextPath() %>/assets/admin/dist/js/sb-admin-2.min.js"></script>--%>
 <script src="<%= request.getContextPath() %>/assets/admin/dist/js/demo/chart-area-demo.js"></script>
 <script src="<%= request.getContextPath() %>/assets/admin/dist/js/demo/chart-pie-demo.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/jszip/jszip.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/pdfmake/pdfmake.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/pdfmake/vfs_fonts.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!--js -->
 <script src="<%= request.getContextPath() %>/assets/admin/js.js"></script>

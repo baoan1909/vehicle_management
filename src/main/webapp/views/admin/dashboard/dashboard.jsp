@@ -54,7 +54,7 @@
                                         <!-- /.input group -->
                                     </div>
                                     <div class="col-10 mx-auto"> <!-- Thêm mx-auto để căn giữa -->
-                                        <div class="row info-box d-flex justify-content-center align-items-center">
+                                        <div class="row info-box d-flex justify-content-center align-items-center shadow">
                                             <div class="col-md-4 text-center d-flex flex-column justify-content-center">
                                                 <span class="info-box-text">Tổng doanh thu</span>
                                                 <span class="info-box-number">3.192.120đ</span>
@@ -156,7 +156,7 @@
                                 <!-- Project Card Example -->
                                 <div class="card card-cyan card-outline shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="card-title">Thẻ</h6>
+                                        <h6 class="card-title">Thiết bị</h6>
                                         <div class="card-tools">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                                 <i class="fas fa-minus"></i>

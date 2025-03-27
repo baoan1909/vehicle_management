@@ -36,6 +36,10 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/daterangepicker/daterangepicker.css">
 <!-- summernote -->
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/summernote/summernote-bs4.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Editor Style -->
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/style.css">
 <%--<!--Theme admin 2 -->--%>

@@ -38,26 +38,190 @@
       <!-- Content Wrapper. Contains page content -->
       <section class="content">
         <div class="container-fluid">
-          <div class="col-12 mt-4">
-            <div class="card shadow">
-              <div class="card-body">
-                <div class="form-group col-md-4 ml-auto">
-                  <div class="input-group">
-                    <input type="text" class="form-control float-right" id="daterange-btn">
-                    <div class="input-group-prepend">
+          <div class="row">
+            <div class="col-12 mt-4">
+              <div class="card shadow">
+                <div class="card-body">
+                  <div class="form-group col-md-4 ml-auto">
+                    <div class="input-group">
+                      <input type="text" class="form-control float-right" id="daterange-btn">
+                      <div class="input-group-prepend">
                       <span class="input-group-text bg-cyan">
                         <i class="far fa-calendar-alt"></i>
                       </span>
+                      </div>
+                    </div>
+                    <!-- /.input group -->
+                  </div>
+                  <div class="col-12 card card-cyan card-outline">
+                    <div class="row">
+                      <!--Search -->
+                      <div class="col-md-4 mt-3">
+                        <div class="input-group">
+                          <input type="search" class="form-control" placeholder="Biển số, loại xe, ngày gửi...">
+                          <div class="input-group-append">
+                            <button class="bg-cyan btn btn-sidebar">
+                              <i class="fa fa-search"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <div class="form-group">
+                          <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Loại xe</option>
+                            <option>Alaska</option>
+                            <option>California</option>
+                            <option>Delaware</option>
+                            <option>Tennessee</option>
+                            <option>Texas</option>
+                            <option>Washington</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <div class="form-group">
+                          <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Loại thẻ</option>
+                            <option>Alaska</option>
+                            <option>California</option>
+                            <option>Delaware</option>
+                            <option>Tennessee</option>
+                            <option>Texas</option>
+                            <option>Washington</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-md-1 mt-3 ml-auto">
+                        <button type="button" class="btn btn-block btn-info">Đặt lại</button>
+                      </div>
                     </div>
                   </div>
-                  <!-- /.input group -->
                 </div>
-                <div class="col-12 card card-cyan card-outline"  >
-
+                <div class="row">
+                  <div class="form-group col-md-3 ml-auto mr-3">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <a href="<%= request.getContextPath() %>/admin/card-swipe/swipe-in" class="btn btn-info btn-block">
+                          <i class="fas fa-plus-circle"></i> Xe vào
+                        </a>
+                      </div>
+                      <div class="col-md-6">
+                        <button type="button" href="<%= request.getContextPath() %>/admin/card-swipe/swipe-out" class="btn btn-outline-warning btn-block">
+                          <i class="fas fa-plus-circle"></i> Xe ra
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <!-- /.info-box -->
             </div>
-            <!-- /.info-box -->
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Bảng quản lý thông tin vào ra</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>Mã thẻ</th>
+                      <th>Biển số</th>
+                      <th>Thời gian vào</th>
+                      <th>Thời gian ra</th>
+                      <th>Loại xe</th>
+                      <th>Loại vé</th>
+                      <th>Phí DV</th>
+                      <th>Chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>Trident</td>
+                      <td>Internet
+                        Explorer 4.0
+                      </td>
+                      <td>Win 95+</td>
+                      <td> 4</td>
+                      <td>X</td>
+                      <td>X</td>
+                      <td>X</td>
+                      <td>X</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <button type="button" class="btn btn-info btn-block">
+                                  <i class="fas fa-pen-square"></i>
+                                </button>
+                              </div>
+                              <div class="col-md-6">
+                                <button type="button" class="btn btn-outline-warning btn-block">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Trident</td>
+                      <td>Internet
+                        Explorer 5.0
+                      </td>
+                      <td>Win 95+</td>
+                      <td>5</td>
+                      <td>C</td>
+                      <td>X</td>
+                      <td>X</td>
+                      <td>X</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <button type="button" class="btn btn-info btn-block">
+                                  <i class="fas fa-pen-square"></i>
+                                </button>
+                              </div>
+                              <div class="col-md-6">
+                                <button type="button" class="btn btn-outline-warning btn-block">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <th>STT</th>
+                      <th>Mã thẻ</th>
+                      <th>Biển số</th>
+                      <th>Thời gian vào</th>
+                      <th>Thời gian ra</th>
+                      <th>Loại xe</th>
+                      <th>Loại vé</th>
+                      <th>Phí DV</th>
+                      <th>Chức năng</th>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
           </div>
 
         </div>

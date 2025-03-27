@@ -3,3 +3,20 @@
     margin: 8px 0;
     list-style: none;
 }
+
+/* Ẩn chữ "Browse" mặc định */
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Duyệt...'; /* Chữ mới thay thế */
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.custom-file-input:hover::before {
+    background: #0056b3;
+}
