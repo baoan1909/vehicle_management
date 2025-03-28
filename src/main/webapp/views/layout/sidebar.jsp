@@ -100,13 +100,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<%= request.getContextPath() %>/admin/walkin-customer?page=walkin-customer" 
+                               class="nav-link <%= ("walkin-customer".equals(request.getParameter("page")) || "walkin-customer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phí vãng lai</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<%= request.getContextPath() %>/admin/registered-customer?page=registered-customer" 
+                               class="nav-link <%= ("registered-customer".equals(request.getParameter("page")) || "registered-customer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phí đăng ký</p>
                             </a>
