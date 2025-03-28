@@ -53,7 +53,7 @@
                     </div>
                     <!-- /.input group -->
                   </div>
-                  <div class="col-12 card card-cyan card-outline">
+                  <div class="col-12 callout callout-info">
                     <div class="row">
                       <!--Search -->
                       <div class="col-md-4 mt-3">
@@ -103,14 +103,14 @@
                   <div class="form-group col-md-3 ml-auto mr-3">
                     <div class="row">
                       <div class="col-md-6">
-                        <a href="<%= request.getContextPath() %>/admin/card-swipe/swipe-in" class="btn btn-info btn-block">
+                        <a href="<%= request.getContextPath() %>/admin/card-swipe/swipe-in?page=swipe-in" class="btn btn-info btn-block">
                           <i class="fas fa-plus-circle"></i> Xe vào
                         </a>
                       </div>
                       <div class="col-md-6">
-                        <button type="button" href="<%= request.getContextPath() %>/admin/card-swipe/swipe-out" class="btn btn-outline-warning btn-block">
+                        <a href="<%= request.getContextPath() %>/admin/card-swipe/swipe-out?page=swipe-out" class="btn btn-outline-warning btn-block">
                           <i class="fas fa-plus-circle"></i> Xe ra
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -131,7 +131,7 @@
                     <thead>
                     <tr>
                       <th>STT</th>
-                      <th>Mã thẻ</th>
+                      <th>ID thẻ</th>
                       <th>Biển số</th>
                       <th>Thời gian vào</th>
                       <th>Thời gian ra</th>
@@ -206,7 +206,7 @@
                     <tfoot>
                     <tr>
                       <th>STT</th>
-                      <th>Mã thẻ</th>
+                      <th>ID thẻ</th>
                       <th>Biển số</th>
                       <th>Thời gian vào</th>
                       <th>Thời gian ra</th>

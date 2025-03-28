@@ -16,7 +16,6 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -33,15 +32,15 @@
                 </li>
                 <li class="nav-item sidebar-divider mb-2"></li>
                 <li class="nav-item">
-                    <a href="<%= request.getContextPath() %>/admin/card-swipe?page=card-swipe" class="nav-link <%="card-swipe".equals(request.getParameter("page")) ? "active" : "" %>">
+                    <a href="<%= request.getContextPath() %>/admin/card-swipe?page=card-swipe" class="nav-link <%=("card-swipe".equals(request.getParameter("page")) || "swipe-out".equals(request.getParameter("page")) || "swipe-in".equals(request.getParameter("page"))) ? "active" : "" %>">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý vào ra
                         </p>
                     </a>
                 </li>
-                <li class="nav-item <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
-                    <a href="#" class="nav-link <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page"))) ? "active" : "" %>">
+                <li class="nav-item <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Quản lý thẻ
@@ -51,7 +50,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<%= request.getContextPath() %>/admin/card?page=card"
-                               class="nav-link <%= "card".equals(request.getParameter("page")) ? "active" : "" %>">
+                               class="nav-link <%=("card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thẻ</p>
                             </a>
