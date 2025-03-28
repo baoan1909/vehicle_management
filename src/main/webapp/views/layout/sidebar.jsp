@@ -64,8 +64,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item <%= ("ticket".equals(request.getParameter("page")) || "vehicle".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= ("ticket".equals(request.getParameter("page")) || "vehicle".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Vé & Phương tiện
@@ -74,13 +74,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<%= request.getContextPath() %>/admin/ticket?page=ticket"
+                               class="nav-link <%=("ticket".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Vé</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<%= request.getContextPath() %>/admin/vehicle?page=vehicle"
+                               class="nav-link <%= "vehicle".equals(request.getParameter("page")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phương tiện</p>
                             </a>
