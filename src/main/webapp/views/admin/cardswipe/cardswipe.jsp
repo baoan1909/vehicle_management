@@ -138,7 +138,7 @@
                       <th>Loại xe</th>
                       <th>Loại vé</th>
                       <th>Phí DV</th>
-                      <th>Chức năng</th>
+                      <th style="width: 100px">Chức năng</th>
                     </tr>
                     </thead>
                     <tbody>

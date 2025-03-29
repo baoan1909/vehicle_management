@@ -136,7 +136,7 @@
                                             <th>Loại xe</th>
                                             <th>Đã tạo thẻ vậy lý</th>
                                             <th>Trạng thái</th>
-                                            <th>Chức năng</th>
+                                            <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>

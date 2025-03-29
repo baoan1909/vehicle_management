@@ -8,9 +8,43 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Lost card detail</title>
+    <jsp:include page="/views/library/_css.jsp" />
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <!--Navbar-->
+    <jsp:include page="/views/layout/navbar.jsp" />
+    <!-- Sidebar -->
+    <jsp:include page="/views/layout/sidebar.jsp" />
 
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Quản lý mất thẻ</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
+                            <li class="breadcrumb-item active">Thẻ</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div>
+
+            <!-- Content Wrapper. Contains page content -->
+            <section class="content">
+                <div class="container-fluid">
+
+                    <!--Nội dung-->
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<jsp:include page="/views/library/_script.jsp" />
 </body>
 </html>

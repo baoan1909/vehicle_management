@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Walk-in Customer Detail</title>
+    <title>Parking Fee Of Visitor Detail</title>
     <jsp:include page="/views/library/_css.jsp" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -35,7 +35,7 @@
                         <div class="col-md-10">
                             <div class="card card-cyan">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thêm/ Sửa Thông Tin Khách Vãng Lai</h3>
+                                    <h3 class="card-title">Thêm/ Sửa thông tin khách vãng lai</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
@@ -74,7 +74,7 @@
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
-                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/walkin-customer?page=walkin-customer">Thoát</a>
+                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/parkingFeeOfVisitor?page=parkingFeeOfVisitor">Thoát</a>
                                         <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Lưu</button>
                                     </div>
                                 </form>

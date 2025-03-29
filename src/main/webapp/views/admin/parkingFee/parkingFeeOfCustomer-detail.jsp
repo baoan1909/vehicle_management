@@ -35,7 +35,7 @@
                         <div class="col-md-10">
                             <div class="card card-cyan">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thêm/ Sửa Thông Tin Khách Đăng Ký</h3>
+                                    <h3 class="card-title">Thêm/ Sửa thông tin khách đăng ký</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->

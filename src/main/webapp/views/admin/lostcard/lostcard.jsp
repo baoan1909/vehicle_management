@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/card/card-detail?page=card-detail" class="btn btn-info btn-block">
+                                        <a href="<%= request.getContextPath() %>/admin/lost-card/lostcard-detail?page=lostcard-detail" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
@@ -128,7 +128,7 @@
                                             <th>Loại thẻ</th>
                                             <th>Biển số xe</th>
                                             <th>Loại xe</th>
-                                            <th>Chức năng</th>
+                                            <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>

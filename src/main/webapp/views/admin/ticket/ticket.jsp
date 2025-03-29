@@ -42,29 +42,19 @@
                         <div class="col-12 mt-4">
                             <div class="card shadow">
                                 <div class="card-body">
-                                    <div class="form-group col-md-4 ml-auto">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control float-right" id="daterange-btn">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-cyan">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
                                     <div class="col-12 callout callout-info">
                                         <div class="row">
                                             <!--Search -->
                                             <div class="col-md-4 mt-3">
                                                 <div class="input-group">
-                                                    <input type="search" class="form-control" placeholder="Mã vé">
-                                                    <div class="input-group-append">
-                                                        <button class="bg-cyan btn btn-sidebar">
-                                                            <i class="fa fa-search"></i>
-                                                        </button>
+                                                    <input type="text" class="form-control float-right" id="daterange-btn">
+                                                    <div class="input-group-prepend">
+                                                <span class="input-group-text bg-cyan">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </span>
                                                     </div>
                                                 </div>
+                                                <!-- /.input group -->
                                             </div>
                                           
                                             <!-- /.col -->
@@ -99,7 +89,7 @@
                                             <th>STT</th>
                                             <th>Loại Vé</th>
                                             <th>Mô Tả</th>
-                                            <th>Chức năng</th>
+                                            <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>

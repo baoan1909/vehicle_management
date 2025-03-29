@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Walk-in Customer</title>
+    <title>Parking Fee Of Visitor</title>
     <jsp:include page="/views/library/_css.jsp" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -59,7 +59,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                          
+
                                             <!-- /.col -->
                                             <div class="col-md-1 mt-3 ml-auto">
                                                 <button type="button" class="btn btn-block btn-info">Đặt lại</button>
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/walkin-customer/walkin-customer-detail?page=walkin-customer-detail" class="btn btn-info btn-block">
+                                        <a href="<%= request.getContextPath() %>/admin/parkingFeeOfVisitor/parkingFeeOfVisitor-detail?page=parkingFeeOfVisitor-detail" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
@@ -93,7 +93,7 @@
                                             <th>Loại Xe</th>
                                             <th>Giá Vé</th>
                                             <th>Ngày Áp Dụng</th>
-                                            <th>Chức năng</th>
+                                            <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>

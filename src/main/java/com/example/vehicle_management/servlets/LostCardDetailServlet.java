@@ -9,13 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/admin/walkin-customer/walkin-customer-detail")
-public class WalkInCustomerDetailServlet extends HttpServlet {
+@WebServlet("/admin/lost-card/lostcard-detail")
+public class LostCardDetailServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request
-                .getRequestDispatcher("/views/admin/parkingFeeOfVisitor/walkin-customer-detail.jsp");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/lostcard/lostcard-detail.jsp");
         dispatcher.forward(request, response);
     }
 }

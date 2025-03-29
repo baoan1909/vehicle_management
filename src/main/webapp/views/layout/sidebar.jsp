@@ -39,8 +39,8 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
-                    <a href="#" class="nav-link <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                <li class="nav-item <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page")) || "lostcard-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page")) || "lostcard-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Quản lý thẻ
@@ -57,15 +57,15 @@
                         </li>
                         <li class="nav-item">
                             <a href="<%= request.getContextPath() %>/admin/lost-card?page=lost-card"
-                               class="nav-link <%= "lost-card".equals(request.getParameter("page")) ? "active" : "" %>">
+                               class="nav-link <%=("lost-card".equals(request.getParameter("page")) || "lostcard-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thẻ bị mất</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item <%= ("ticket".equals(request.getParameter("page")) || "vehicle".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
-                    <a href="#" class="nav-link <%= ("ticket".equals(request.getParameter("page")) || "vehicle".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                <li class="nav-item <%= ("ticket".equals(request.getParameter("page")) || "vehicle".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page")) || "vehicle-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= ("ticket".equals(request.getParameter("page")) || "vehicle".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page")) || "vehicle-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Vé & Phương tiện
@@ -82,7 +82,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="<%= request.getContextPath() %>/admin/vehicle?page=vehicle"
-                               class="nav-link <%= "vehicle".equals(request.getParameter("page")) ? "active" : "" %>">
+                               class="nav-link <%= ("vehicle".equals(request.getParameter("page")) || "vehicle-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phương tiện</p>
                             </a>
@@ -90,8 +90,8 @@
                     </ul>
                 </li>
                 <li class="nav-item sidebar-divider mb-2"></li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item <%= ("parkingFeeOfVisitor".equals(request.getParameter("page")) || "parkingFeeOfCustomer".equals(request.getParameter("page")) || "parkingFeeOfVisitor-detail".equals(request.getParameter("page")) || "parkingFeeOfCustomer-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= ("parkingFeeOfVisitor".equals(request.getParameter("page")) || "parkingFeeOfCustomer".equals(request.getParameter("page")) || "parkingFeeOfVisitor-detail".equals(request.getParameter("page")) || "parkingFeeOfCustomer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
                         <p>
                             Bảng giá
@@ -100,52 +100,17 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/walkin-customer?page=walkin-customer" 
-                               class="nav-link <%= ("walkin-customer".equals(request.getParameter("page")) || "walkin-customer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/parkingFeeOfVisitor?page=parkingFeeOfVisitor"
+                               class="nav-link <%= ("parkingFeeOfVisitor".equals(request.getParameter("page")) || "parkingFeeOfVisitor-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phí vãng lai</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/registered-customer?page=registered-customer" 
-                               class="nav-link <%= ("registered-customer".equals(request.getParameter("page")) || "registered-customer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/parkingFeeOfCustomer?page=parkingFeeOfCustomer"
+                               class="nav-link <%= ("parkingFeeOfCustomer".equals(request.getParameter("page")) || "parkingFeeOfCustomer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phí đăng ký</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-wrench"></i>
-                        <p>
-                            Quản lý thiết bị
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Camera</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đầu lọc thẻ</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Máy tính</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Rào chắn</p>
                             </a>
                         </li>
                     </ul>
@@ -182,6 +147,41 @@
                         </p>
                     </a>
                 </li>
+<%--                <li class="nav-item">--%>
+<%--                    <a href="#" class="nav-link">--%>
+<%--                        <i class="nav-icon fas fa-wrench"></i>--%>
+<%--                        <p>--%>
+<%--                            Quản lý thiết bị--%>
+<%--                            <i class="fas fa-angle-left right"></i>--%>
+<%--                        </p>--%>
+<%--                    </a>--%>
+<%--                    <ul class="nav nav-treeview">--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a href="#" class="nav-link">--%>
+<%--                                <i class="far fa-circle nav-icon"></i>--%>
+<%--                                <p>Camera</p>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a href="#" class="nav-link">--%>
+<%--                                <i class="far fa-circle nav-icon"></i>--%>
+<%--                                <p>Đầu lọc thẻ</p>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a href="#" class="nav-link">--%>
+<%--                                <i class="far fa-circle nav-icon"></i>--%>
+<%--                                <p>Máy tính</p>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a href="#" class="nav-link">--%>
+<%--                                <i class="far fa-circle nav-icon"></i>--%>
+<%--                                <p>Rào chắn</p>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
+<%--                </li>--%>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
