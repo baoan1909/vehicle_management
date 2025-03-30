@@ -16,7 +16,16 @@
             <a href="#" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="<%= request.getContextPath() %>/contact?page=contact" 
+               class="nav-link <%= "contact".equals(request.getParameter("page")) ? "active" : "" %>">
+               Contact
+            </a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="<%= request.getContextPath() %>/pricing?page=pricing" 
+               class="nav-link <%= "pricing".equals(request.getParameter("page")) ? "active" : "" %>">
+               Pricing
+            </a>
         </li>
     </ul>
 
