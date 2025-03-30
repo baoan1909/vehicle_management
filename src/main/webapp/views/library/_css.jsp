@@ -42,5 +42,9 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Editor Style -->
 <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/style.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<%--<!-- Toastr -->--%>
+<%--<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/toastr/toastr.min.css">--%>
 <%--<!--Theme admin 2 -->--%>
 <%--<link href="<%= request.getContextPath() %>assets/admin/dist/css/sb-admin-2.min.css" rel="stylesheet">--%>

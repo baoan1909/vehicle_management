@@ -69,5 +69,9 @@
 <script src="<%= request.getContextPath() %>/assets/admin/vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="<%= request.getContextPath() %>/assets/admin/vendor/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!--dilogbox -->
+<script src="<%= request.getContextPath() %>/assets/admin/vendor/sweetalert2/sweetalert2.min.js"></script>
+<%--<!-- Toastr -->--%>
+<%--<script src="<%= request.getContextPath() %>/assets/admin/vendor/toastr/toastr.min.js"></script>--%>
 <!--js -->
 <script src="<%= request.getContextPath() %>/assets/admin/js.js"></script>
