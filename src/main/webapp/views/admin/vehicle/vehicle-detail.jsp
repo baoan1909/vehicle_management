@@ -42,22 +42,18 @@
                         <div class="col-md-10">
                             <div class="card card-cyan">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thêm/ Sửa Phương Tiện</h3>
+                                    <h3 class="card-title">Thêm/ Sửa phương tiện</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>ID:</label>
-                                            <input type="text" class="form-control" placeholder="001">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Tên Phương Tiện:</label>
+                                            <label>Tên phương tiện:</label>
                                             <input type="text" class="form-control" placeholder="Xe máy">
                                         </div>
                                         <div class="form-group">
-                                            <label>Mô Tả:</label>
+                                            <label>Mô tả:</label>
                                             <textarea class="form-control" rows="3" placeholder="Nhập mô tả chi tiết về phương tiện"></textarea>
                                         </div>
                                     </div>

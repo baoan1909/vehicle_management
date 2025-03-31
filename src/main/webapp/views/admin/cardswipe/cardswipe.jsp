@@ -58,7 +58,7 @@
                       <!--Search -->
                       <div class="col-md-4 mt-3">
                         <div class="input-group">
-                          <input type="search" class="form-control" placeholder="Biển số, loại xe, ngày gửi...">
+                          <input type="search" class="form-control" placeholder="ID thẻ, Biển số...">
                           <div class="input-group-append">
                             <button class="bg-cyan btn btn-sidebar">
                               <i class="fa fa-search"></i>
@@ -131,19 +131,20 @@
                     <thead>
                     <tr>
                       <th>STT</th>
+                      <th>ID quét thẻ</th>
                       <th>ID thẻ</th>
                       <th>Biển số</th>
                       <th>Thời gian vào</th>
                       <th>Thời gian ra</th>
                       <th>Loại xe</th>
-                      <th>Loại vé</th>
+                      <th>Loại thẻ</th>
                       <th>Phí DV</th>
-                      <th style="width: 100px">Chức năng</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                       <td>Trident</td>
+                      <td> 1</td>
                       <td>Internet
                         Explorer 4.0
                       </td>
@@ -153,27 +154,10 @@
                       <td>X</td>
                       <td>X</td>
                       <td>X</td>
-                      <td>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <button type="button" class="btn btn-info btn-block">
-                                  <i class="fas fa-pen-square"></i>
-                                </button>
-                              </div>
-                              <div class="col-md-6">
-                                <button type="button" class="btn btn-outline-warning btn-block">
-                                  <i class="fas fa-trash-alt"></i>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
                     </tr>
                     <tr>
                       <td>Trident</td>
+                      <td> 2</td>
                       <td>Internet
                         Explorer 5.0
                       </td>
@@ -183,37 +167,19 @@
                       <td>X</td>
                       <td>X</td>
                       <td>X</td>
-                      <td>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <button type="button" class="btn btn-info btn-block">
-                                  <i class="fas fa-pen-square"></i>
-                                </button>
-                              </div>
-                              <div class="col-md-6">
-                                <button type="button" class="btn btn-outline-warning btn-block">
-                                  <i class="fas fa-trash-alt"></i>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr>
                       <th>STT</th>
+                      <th>ID quét thẻ</th>
                       <th>ID thẻ</th>
                       <th>Biển số</th>
                       <th>Thời gian vào</th>
                       <th>Thời gian ra</th>
                       <th>Loại xe</th>
-                      <th>Loại vé</th>
+                      <th>Loại thẻ</th>
                       <th>Phí DV</th>
-                      <th>Chức năng</th>
                     </tr>
                     </tfoot>
                   </table>

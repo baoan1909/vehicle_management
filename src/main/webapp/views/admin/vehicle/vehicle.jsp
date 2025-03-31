@@ -87,13 +87,15 @@
                                         <thead>
                                         <tr>
                                             <th>STT</th>
-                                            <th>Loại Xe</th>
-                                            <th>Mô Tả</th>
+                                            <th>ID xe</th>
+                                            <th>Loại xe</th>
+                                            <th>Mô tả</th>
                                             <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
+                                            <td>1</td>
                                             <td>1</td>
                                             <td>Xe máy</td>
                                             <td>Xe hai bánh</td>
@@ -118,6 +120,7 @@
                                         </tr>
                                         <tr>
                                             <td>2</td>
+                                            <td>2</td>
                                             <td>Ô tô</td>
                                             <td>Xe bốn bánh</td>
                                             <td>
@@ -140,6 +143,7 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>3</td>
                                             <td>3</td>
                                             <td>Xe tải</td>
                                             <td>Xe chở hàng hóa</td>
@@ -166,8 +170,9 @@
                                         <tfoot>
                                         <tr>
                                             <th>STT</th>
-                                            <th>Loại Xe</th>
-                                            <th>Mô Tả</th>
+                                            <th>ID xe</th>
+                                            <th>Loại xe</th>
+                                            <th>Mô tả</th>
                                             <th>Chức năng</th>
                                         </tr>
                                         </tfoot>

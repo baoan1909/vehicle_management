@@ -108,13 +108,12 @@
                                         <div class="form-group">
                                             <label>Biển số</label>
                                             <div class="row">
-                                                <div class="col-xl-5">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="customFile">
-                                                        <label class="custom-file-label" for="customFile">Chọn tệp</label>
-                                                    </div>
+                                                <div class="col-md-3">
+                                                    <button class="btn btn-info form-control">
+                                                        <i class="fas fa-qrcode"></i> Quét
+                                                    </button>
                                                 </div>
-                                                <div class="col-xl-7">
+                                                <div class="col-md-9">
                                                     <input type="text" class="form-control" placeholder="80H-1826-127" disabled="">
                                                 </div>
                                             </div>
@@ -127,7 +126,7 @@
                                             <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                                 <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
                                                 <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                 </div>
                                             </div>
                                         </div>

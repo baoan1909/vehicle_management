@@ -122,6 +122,7 @@
                                         <thead>
                                         <tr>
                                             <th>STT</th>
+                                            <th>ID mất thẻ</th>
                                             <th>Ngày báo</th>
                                             <th>Tên khách hàng</th>
                                             <th>SDT</th>
@@ -134,6 +135,7 @@
                                         <tbody>
                                         <tr>
                                             <td>Trident</td>
+                                            <td>1</td>
                                             <td>Internet
                                                 Explorer 4.0
                                             </td>
@@ -163,6 +165,7 @@
                                         </tr>
                                         <tr>
                                             <td>Trident</td>
+                                            <td>2</td>
                                             <td>Internet
                                                 Explorer 5.0
                                             </td>
@@ -194,6 +197,7 @@
                                         <tfoot>
                                         <tr>
                                             <th>STT</th>
+                                            <th>ID mất thẻ</th>
                                             <th>Ngày báo</th>
                                             <th>Tên khách hàng</th>
                                             <th>SDT</th>

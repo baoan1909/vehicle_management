@@ -76,15 +76,11 @@
                                                     <input type="text" class="form-control" placeholder="Loại xe" disabled="">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 mt-3">
+                                            <div class="col-md-4 mt-3">
                                                 <div class="form-group">
                                                     <label>Biển số:</label>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" placeholder="Biển số xe" disabled="">
-                                                            </div>
-                                                        </div>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="Biển số xe" disabled="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,7 +89,12 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Thành tiển</label>
-                                                    <input type="text" class="form-control" placeholder="10.000 đ" disabled="">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="200000" disabled="">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text bg-cyan">VNĐ</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,7 +128,7 @@
                                             <div class="input-group date">
                                                 <input type="text" class="form-control datetimepicker-input" disabled=""/>
                                                 <div class="input-group-append">
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -180,7 +181,7 @@
                                             <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                                 <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
                                                 <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                 </div>
                                             </div>
                                         </div>

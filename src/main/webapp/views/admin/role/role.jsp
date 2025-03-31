@@ -1,7 +1,14 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: baoan
+  Date: 3/25/2025
+  Time: 4:07 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Parking Fee Of Visitor</title>
+    <title>Role</title>
     <jsp:include page="/views/library/_css.jsp" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -17,12 +24,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Quản lý phí khách vãng lai</h1>
+                        <h1 class="m-0">Quản lý vai trò</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
-                            <li class="breadcrumb-item active">Phí khách vãng lai</li>
+                            <li class="breadcrumb-item active">Vai trò</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -35,42 +42,19 @@
                         <div class="col-12 mt-4">
                             <div class="card shadow">
                                 <div class="card-body">
-                                    <div class="form-group col-md-4 ml-auto">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control float-right" id="daterange-btn">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-cyan">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
                                     <div class="col-12 callout callout-info">
                                         <div class="row">
                                             <!--Search -->
                                             <div class="col-md-4 mt-3">
                                                 <div class="input-group">
-                                                    <input type="search" class="form-control" placeholder="Giá vé">
-                                                    <div class="input-group-append">
-                                                        <button class="bg-cyan btn btn-sidebar">
-                                                            <i class="fa fa-search"></i>
-                                                        </button>
+                                                    <input type="text" class="form-control float-right" id="daterange-btn">
+                                                    <div class="input-group-prepend">
+                                                <span class="input-group-text bg-cyan">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </span>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Loại xe</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
-                                                    </select>
-                                                </div>
+                                                <!-- /.input group -->
                                             </div>
 
                                             <!-- /.col -->
@@ -82,7 +66,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/parkingFeeOfVisitor/parkingFeeOfVisitor-detail?page=parkingFeeOfVisitor-detail" class="btn btn-info btn-block">
+                                        <a href="<%= request.getContextPath() %>/admin/role/role-detail?page=role-detail" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
@@ -95,7 +79,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Bảng quản lý thông tin phí khách vãng lai</h3>
+                                    <h3 class="card-title">Bảng quản lý thông tin vai trò</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -103,20 +87,16 @@
                                         <thead>
                                         <tr>
                                             <th>STT</th>
-                                            <th>ID phí vé</th>
-                                            <th>Loại xe</th>
-                                            <th>Giá Vé</th>
-                                            <th>Ngày áp dụng</th>
+                                            <th>Tên vai trò</th>
+                                            <th>Mô Tả</th>
                                             <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>1</td>
-                                            <td>Xe máy</td>
-                                            <td>15,000 VNĐ</td>
-                                            <td>01/03/2025</td>
+                                            <td>Admin</td>
+                                            <td>Phân quyền cao nhất</td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -138,35 +118,8 @@
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>2</td>
-                                            <td>Ô tô</td>
-                                            <td>30,000 VNĐ</td>
-                                            <td>15/03/2025</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>3</td>
-                                            <td>Xe tải</td>
-                                            <td>50,000 VNĐ</td>
-                                            <td>20/03/2025</td>
+                                            <td>User</td>
+                                            <td>Phân quyền danh cho khách hàng</td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -190,10 +143,8 @@
                                         <tfoot>
                                         <tr>
                                             <th>STT</th>
-                                            <th>ID phí vé</th>
-                                            <th>Loại xe</th>
-                                            <th>Giá Vé</th>
-                                            <th>Ngày áp dụng</th>
+                                            <th>Tên vai trò</th>
+                                            <th>Mô Tả</th>
                                             <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </tfoot>
@@ -204,6 +155,7 @@
                             <!-- /.card -->
                         </div>
                     </div>
+
                 </div>
             </section>
         </div>

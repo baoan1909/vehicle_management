@@ -17,12 +17,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Thông tin chi tiết khách vãng lai</h1>
+                        <h1 class="m-0">Thông tin chi tiết phí khách vãng lai</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Quản lý khách vãng lai</a></li>
-                            <li class="breadcrumb-item active">Thông tin khách vãng lai</li>
+                            <li class="breadcrumb-item"><a href="#">Quản lý phí khách vãng lai</a></li>
+                            <li class="breadcrumb-item active">Thông tin phí khách vãng lai</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -35,39 +35,35 @@
                         <div class="col-md-10">
                             <div class="card card-cyan">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thêm/ Sửa thông tin khách vãng lai</h3>
+                                    <h3 class="card-title">Thêm/ Sửa thông tin phí khách vãng lai</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>STT:</label>
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Loại Xe:</label>
-                                            <select class="form-control">
-                                                <option>Xe máy</option>
+                                            <label>Loại xe:</label>
+                                            <select class="form-control select2">
+                                                <option selected="selected">Xe máy</option>
                                                 <option>Ô tô</option>
                                                 <option>Xe tải</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Giá Vé:</label>
+                                            <label>Giá vé:</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" placeholder="15000">
                                                 <div class="input-group-append">
-                                                    <span class="input-group-text">VNĐ</span>
+                                                    <span class="input-group-text bg-cyan">VNĐ</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>Ngày Áp Dụng:</label>
+                                            <label>Ngày áp dụng:</label>
                                             <div class="input-group date" id="reservationdate" data-target-input="nearest">
                                                 <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="01/01/2025"/>
                                                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                 </div>
                                             </div>
                                         </div>

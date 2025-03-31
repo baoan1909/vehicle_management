@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registered Customer</title>
+    <title>Parking Fee Of Customer</title>
     <jsp:include page="/views/library/_css.jsp" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -17,12 +17,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Quản lý khách đăng ký</h1>
+                        <h1 class="m-0">Quản lý phí khách đăng ký</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
-                            <li class="breadcrumb-item active">Khách đăng ký</li>
+                            <li class="breadcrumb-item active">Phí khách đăng ký</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -51,12 +51,38 @@
                                             <!--Search -->
                                             <div class="col-md-4 mt-3">
                                                 <div class="input-group">
-                                                    <input type="search" class="form-control" placeholder="Tìm kiếm">
+                                                    <input type="search" class="form-control" placeholder="Giá vé">
                                                     <div class="input-group-append">
                                                         <button class="bg-cyan btn btn-sidebar">
                                                             <i class="fa fa-search"></i>
                                                         </button>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mt-3">
+                                                <div class="form-group">
+                                                    <select class="form-control select2" style="width: 100%;">
+                                                        <option selected="selected">Loại xe</option>
+                                                        <option>Alaska</option>
+                                                        <option>California</option>
+                                                        <option>Delaware</option>
+                                                        <option>Tennessee</option>
+                                                        <option>Texas</option>
+                                                        <option>Washington</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mt-3">
+                                                <div class="form-group">
+                                                    <select class="form-control select2" style="width: 100%;">
+                                                        <option selected="selected">Loại vé</option>
+                                                        <option>Alaska</option>
+                                                        <option>California</option>
+                                                        <option>Delaware</option>
+                                                        <option>Tennessee</option>
+                                                        <option>Texas</option>
+                                                        <option>Washington</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                           
@@ -82,7 +108,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Bảng quản lý thông tin khách đăng ký</h3>
+                                    <h3 class="card-title">Bảng quản lý thông tin phí khách đăng ký</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -90,15 +116,17 @@
                                         <thead>
                                         <tr>
                                             <th>STT</th>
-                                            <th>Loại Vé</th>
-                                            <th>Loại Xe</th>
-                                            <th>Giá Vé</th>
-                                            <th>Ngày Áp Dụng</th>
+                                            <th>ID phí vé</th>
+                                            <th>Loại vé</th>
+                                            <th>Loại xe</th>
+                                            <th>Giá vé</th>
+                                            <th>Ngày áp dụng</th>
                                             <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
+                                            <td>1</td>
                                             <td>1</td>
                                             <td>Vé tháng</td>
                                             <td>Xe máy</td>
@@ -125,6 +153,7 @@
                                         </tr>
                                         <tr>
                                             <td>2</td>
+                                            <td>2</td>
                                             <td>Vé năm</td>
                                             <td>Ô tô</td>
                                             <td>5,000,000 VNĐ</td>
@@ -149,6 +178,7 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>3</td>
                                             <td>3</td>
                                             <td>Vé quý</td>
                                             <td>Xe tải</td>
@@ -177,11 +207,12 @@
                                         <tfoot>
                                         <tr>
                                             <th>STT</th>
-                                            <th>Loại Vé</th>
-                                            <th>Loại Xe</th>
-                                            <th>Giá Vé</th>
-                                            <th>Ngày Áp Dụng</th>
-                                            <th>Chức năng</th>
+                                            <th>ID phí vé</th>
+                                            <th>Loại vé</th>
+                                            <th>Loại xe</th>
+                                            <th>Giá vé</th>
+                                            <th>Ngày áp dụng</th>
+                                            <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </tfoot>
                                     </table>

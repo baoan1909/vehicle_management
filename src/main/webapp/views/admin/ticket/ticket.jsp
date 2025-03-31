@@ -87,13 +87,15 @@
                                         <thead>
                                         <tr>
                                             <th>STT</th>
-                                            <th>Loại Vé</th>
-                                            <th>Mô Tả</th>
+                                            <th>ID vé</th>
+                                            <th>Loại vé</th>
+                                            <th>Mô tả</th>
                                             <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
+                                            <td>1</td>
                                             <td>1</td>
                                             <td>Vé thường</td>
                                             <td>Vé dành cho khách vãng lai</td>
@@ -118,6 +120,7 @@
                                         </tr>
                                         <tr>
                                             <td>2</td>
+                                            <td>2</td>
                                             <td>Vé tháng</td>
                                             <td>Vé dành cho khách hàng thành viên</td>
                                             <td>
@@ -140,6 +143,7 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>3</td>
                                             <td>3</td>
                                             <td>Vé VIP</td>
                                             <td>Vé dành cho khách hàng đặc biệt</td>
@@ -166,8 +170,9 @@
                                         <tfoot>
                                         <tr>
                                             <th>STT</th>
-                                            <th>Loại Vé</th>
-                                            <th>Mô Tả</th>
+                                            <th>ID vé</th>
+                                            <th>Loại vé</th>
+                                            <th>Mô tả</th>
                                             <th>Chức năng</th>
                                         </tr>
                                         </tfoot>

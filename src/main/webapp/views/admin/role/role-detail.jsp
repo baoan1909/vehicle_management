@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Ticket Detail</title>
+    <title>Role Detail</title>
     <jsp:include page="/views/library/_css.jsp" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -24,12 +24,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Thông tin chi tiết vé</h1>
+                        <h1 class="m-0">Thông tin chi tiết vai trò</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Quản lý vé</a></li>
-                            <li class="breadcrumb-item active">Thông tin vé</li>
+                            <li class="breadcrumb-item"><a href="#">Quản lý vai trò</a></li>
+                            <li class="breadcrumb-item active">Thông tin vai trò</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -42,24 +42,24 @@
                         <div class="col-md-10">
                             <div class="card card-cyan">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thêm/ Sửa vé</h3>
+                                    <h3 class="card-title">Thêm/ Sửa vai trò</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Loại vé:</label>
-                                            <input type="text" class="form-control" placeholder="Vé thường">
+                                            <label>Tên vai trò:</label>
+                                            <input type="text" class="form-control" placeholder="Admin">
                                         </div>
                                         <div class="form-group">
                                             <label>Mô tả:</label>
-                                            <textarea class="form-control" rows="3" placeholder="Nhập mô tả chi tiết về loại vé"></textarea>
+                                            <textarea class="form-control" rows="3" placeholder="Nhập mô tả chi tiết về vai trò"></textarea>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
-                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/ticket?page=ticket">Thoát</a>
+                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/role?page=role">Thoát</a>
                                         <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Lưu</button>
                                     </div>
                                 </form>

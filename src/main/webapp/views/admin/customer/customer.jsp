@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Card</title>
+    <title>Customer</title>
     <jsp:include page="/views/library/_css.jsp" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -24,12 +24,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Quản lý thẻ</h1>
+                        <h1 class="m-0">Quản lý khách hàng</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
-                            <li class="breadcrumb-item active">Thẻ</li>
+                            <li class="breadcrumb-item active">Khách hàng</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -58,7 +58,7 @@
                                             <!--Search -->
                                             <div class="col-md-4 mt-3">
                                                 <div class="input-group">
-                                                    <input type="search" class="form-control" placeholder="Mã thẻ, Số thẻ">
+                                                    <input type="search" class="form-control" placeholder="ID thành viên, tên khách hàng, biển số...">
                                                     <div class="input-group-append">
                                                         <button class="bg-cyan btn btn-sidebar">
                                                             <i class="fa fa-search"></i>
@@ -82,21 +82,13 @@
                                             <div class="col-md-2 mt-3">
                                                 <div class="form-group">
                                                     <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Loại thẻ</option>
+                                                        <option selected="selected">Loại vé</option>
                                                         <option>Alaska</option>
                                                         <option>California</option>
                                                         <option>Delaware</option>
                                                         <option>Tennessee</option>
                                                         <option>Texas</option>
                                                         <option>Washington</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Đã tạo thẻ</option>
-                                                        <option>Chưa tạo thẻ</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -109,7 +101,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/card/card-detail?page=card-detail" class="btn btn-info btn-block">
+                                        <a href="<%= request.getContextPath() %>/admin/customer/customer-detail?page=customer-detail" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
@@ -122,7 +114,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Bảng quản lý thông tin thẻ</h3>
+                                    <h3 class="card-title">Bảng quản lý thông tin khách hàng</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -130,12 +122,15 @@
                                         <thead>
                                         <tr>
                                             <th>STT</th>
-                                            <th>ID thẻ</th>
-                                            <th>Số thẻ</th>
-                                            <th>Loại thẻ</th>
+                                            <th>ID Khách hàng</th>
+                                            <th>Tên khách hàng</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Email</th>
                                             <th>Loại xe</th>
-                                            <th>Đã tạo thẻ vậy lý</th>
-                                            <th>Trạng thái</th>
+                                            <th>Biển số</th>
+                                            <th>Loại vé</th>
+                                            <th>Ngày đăng ký</th>
+                                            <th>Ngày hết hạn</th>
                                             <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
@@ -149,40 +144,10 @@
                                             <td> 4</td>
                                             <td>X</td>
                                             <td>X</td>
-                                            <td class="project-state">
-                                                <span class="badge bg-cyan">Đang được sử dụng</span>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 5.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td>5</td>
-                                            <td>C</td>
                                             <td>X</td>
-                                            <td class="project-state">
-                                                <span class="badge bg-yellow">Chưa được sử dụng</span>
-                                            </td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -205,15 +170,48 @@
                                         <tr>
                                             <td>Trident</td>
                                             <td>Internet
-                                                Explorer 5.0
+                                                Explorer 4.0
                                             </td>
                                             <td>Win 95+</td>
-                                            <td>5</td>
-                                            <td>C</td>
-                                            <td></td>
-                                            <td class="project-state">
-                                                <span class="badge bg-red">Chưa được sử dụng</span>
+                                            <td> 4</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <button type="button" class="btn btn-info btn-block">
+                                                                    <i class="fas fa-pen-square"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button type="button" class="btn btn-outline-warning btn-block">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Trident</td>
+                                            <td>Internet
+                                                Explorer 4.0
+                                            </td>
+                                            <td>Win 95+</td>
+                                            <td> 4</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -237,13 +235,16 @@
                                         <tfoot>
                                         <tr>
                                             <th>STT</th>
-                                            <th>ID thẻ</th>
-                                            <th>Số thẻ</th>
-                                            <th>Loại thẻ</th>
+                                            <th>ID Khách hàng</th>
+                                            <th>Tên khách hàng</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Email</th>
                                             <th>Loại xe</th>
-                                            <th>Đã tạo thẻ vậy lý</th>
-                                            <th>Trạng thái</th>
-                                            <th>Chức năng</th>
+                                            <th>Biển số</th>
+                                            <th>Loại vé</th>
+                                            <th>Ngày đăng ký</th>
+                                            <th>Ngày hết hạn</th>
+                                            <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </tfoot>
                                     </table>

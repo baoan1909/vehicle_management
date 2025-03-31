@@ -115,24 +115,25 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item <%= ("customer".equals(request.getParameter("page")) || "customer-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= ("customer".equals(request.getParameter("page")) || "customer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Thành viên
                             <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">6</span>
+                            <span class= "badge right <%= ("customer".equals(request.getParameter("page")) || "customer-detail".equals(request.getParameter("page"))) ? "badge-light" : "badge-info" %>">6</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        <li class="nav-item ">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tài khoản</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<%= request.getContextPath() %>/admin/customer?page=customer"
+                               class="nav-link <%= ("customer".equals(request.getParameter("page")) || "customer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Khách hàng</p>
                             </a>
@@ -140,7 +141,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<%= request.getContextPath() %>/admin/role?page=role"
+                       class="nav-link <%= ("role".equals(request.getParameter("page")) || "role-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Quản lý vai trò

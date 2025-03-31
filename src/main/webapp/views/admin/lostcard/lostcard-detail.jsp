@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>ID Thành viên:</label>
+                                                <label>ID khách hàng:</label>
                                                 <select class="form-control select2">
                                                     <option selected="selected">Mercedes</option>
                                                     <option>Alaska</option>
@@ -89,7 +89,7 @@
                                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                                     <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
                                                     <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                        <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,7 +101,7 @@
                                                 <div class="input-group date" id="reservationdatetime1" data-target-input="nearest">
                                                     <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime1"/>
                                                     <div class="input-group-append" data-target="#reservationdatetime1" data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                        <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,7 +138,12 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Phí gửi xe:</label>
-                                                <input type="text" class="form-control" placeholder="5.000đ">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="200000">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text bg-cyan">VNĐ</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +153,7 @@
                                                 <label>Số điện thoại:</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                        <span class="input-group-text bg-cyan"><i class="fas fa-phone"></i></span>
                                                     </div>
                                                     <input type="text" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text">
                                                 </div>
@@ -164,7 +169,12 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Phí mất thẻ:</label>
-                                                <input type="text" class="form-control" placeholder="50.000đ">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="200000">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text bg-cyan">VNĐ</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
