@@ -48,3 +48,4 @@
 <%--<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/admin/vendor/toastr/toastr.min.css">--%>
 <%--<!--Theme admin 2 -->--%>
 <%--<link href="<%= request.getContextPath() %>assets/admin/dist/css/sb-admin-2.min.css" rel="stylesheet">--%>
+<%--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">--%>
