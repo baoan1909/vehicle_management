@@ -13,7 +13,7 @@ import java.io.IOException;
 public class PricingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/Pricing.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/customer/pricing.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -12,8 +12,9 @@ import java.io.IOException;
 @WebServlet("/contact")
 public class ContactServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/Contact.jsp");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/customer/contact.jsp");
         dispatcher.forward(request, response);
     }
 }

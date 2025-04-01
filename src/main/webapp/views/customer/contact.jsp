@@ -2,34 +2,52 @@
 <html>
 <head>
     <title>Trang Chủ - Liên Hệ</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/style.css">
     <jsp:include page="/views/library/_css.jsp" />
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition">
 <div class="wrapper">
     <!-- Navbar -->
-    <jsp:include page="/views/layout/navbar.jsp" />
+    <nav class="navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="<%= request.getContextPath() %>/contact?page=contact" 
+                   class="nav-link <%= "contact".equals(request.getParameter("page")) ? "active" : "" %>">
+                   Contact
+                </a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="<%= request.getContextPath() %>/pricing?page=pricing" 
+                   class="nav-link <%= "pricing".equals(request.getParameter("page")) ? "active" : "" %>">
+                   Pricing
+                </a>
+            </li>
+        </ul>
+    
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Navbar Search -->
+            <li class="nav-item mr-2">
+                <a class="input-group" data-widget="">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar bg-cyan">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </nav>
     
     <!-- Sidebar -->
-    <jsp:include page="/views/layout/sidebar.jsp" />
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Trang Chủ</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
-                            <li class="breadcrumb-item active">Liên Hệ</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
 
         <section class="content">
             <div class="container-fluid">
@@ -172,6 +190,6 @@
 </div><!-- /.wrapper -->
 
 <jsp:include page="/views/library/_script.jsp" />
-<script src="${pageContext.request.contextPath}/assets/js/contact.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/contact.js"></script>
 </body>
 </html>

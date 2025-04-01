@@ -307,3 +307,41 @@ body {
         flex-direction: column;
     }
 }
+.wrapper .content-wrapper, 
+body:not(.sidebar-mini) .content-wrapper, 
+.content-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+/* CSS mới - đảm bảo ghi đè lên CSS cũ */
+.pricing-cards {
+    display: flex;
+    flex-direction: row; /* Đảm bảo hiển thị theo chiều ngang */
+    flex-wrap: nowrap; /* Không cho phép xuống dòng */
+    gap: 20px; /* Khoảng cách giữa các cột */
+}
+
+.pricing-left-column, .pricing-right-column {
+    flex: 1; /* Chia đều không gian */
+    max-width: 50%; /* Giới hạn chiều rộng */
+    display: flex;
+    flex-direction: column; /* Card trong column sẽ xếp dọc */
+    gap: 20px; /* Khoảng cách giữa các card */
+}
+
+.pricing-card {
+    width: 100%; /* Chiều rộng 100% của column cha */
+    margin-bottom: 0; /* Bỏ margin-bottom nếu có */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pricing-cards {
+        flex-direction: column; /* Chuyển sang hiển thị dọc trên mobile */
+    }
+    
+    .pricing-left-column, .pricing-right-column {
+        max-width: 100%;
+    }
+}

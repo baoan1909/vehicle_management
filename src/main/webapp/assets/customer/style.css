@@ -528,3 +528,10 @@ body {
 .float-animation {
     animation: float 6s ease-in-out infinite;
 }
+
+.wrapper .content-wrapper, 
+body:not(.sidebar-mini) .content-wrapper, 
+.content-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
