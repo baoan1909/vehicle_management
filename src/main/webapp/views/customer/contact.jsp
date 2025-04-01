@@ -16,7 +16,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="contact-card animate-fadeInUp">
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-lg-4">
                             <div class="contact-info-section">
                                 <div class="contact-decoration decoration-1"></div>

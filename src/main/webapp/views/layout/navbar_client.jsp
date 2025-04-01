@@ -21,10 +21,10 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Trang chủ</a>
+                    <a href="<%= request.getContextPath() %>/pricing?page=pricing" class="nav-link">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Liên hệ</a>
+                    <a href="<%= request.getContextPath() %>/contact?page=contact" class="nav-link">Liên hệ</a>
                 </li>
             </ul>
         </div>
@@ -34,8 +34,8 @@
             <li class="nav-item">
                 <div class="col-md-12">
                     <ol class="breadcrumb bg-white">
-                        <li class="breadcrumb-item"><a href="#">Đăng nhập</a></li>
-                        <li class="breadcrumb-item"><a href="#">Đăng ký</a></li>
+                        <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/login?page=login">Đăng nhập</a></li>
+                        <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/register?page=register">Đăng ký</a></li>
                     </ol>
                 </div>
             </li>
