@@ -1,4 +1,4 @@
-package com.example.vehicle_management.servlets;
+package com.example.vehicle_management.servlets.auth;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/pricing")
-public class PricingServlet extends HttpServlet {
+@WebServlet("/register")
+public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/customer/pricing.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/login&register/register.jsp");
         dispatcher.forward(request, response);
     }
 }

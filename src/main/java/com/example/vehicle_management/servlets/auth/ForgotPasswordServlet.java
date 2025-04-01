@@ -1,4 +1,4 @@
-package com.example.vehicle_management.servlets;
+package com.example.vehicle_management.servlets.auth;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/forgot-password")
+public class ForgotPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/login&register/register.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/login&register/forgot-password.jsp");
         dispatcher.forward(request, response);
     }
 }

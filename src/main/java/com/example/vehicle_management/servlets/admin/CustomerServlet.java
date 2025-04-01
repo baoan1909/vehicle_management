@@ -1,4 +1,4 @@
-package com.example.vehicle_management.servlets;
+package com.example.vehicle_management.servlets.admin;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

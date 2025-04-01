@@ -1,4 +1,4 @@
-package com.example.vehicle_management.servlets;
+package com.example.vehicle_management.servlets.admin;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/admin/card")
-public class CardServlet extends HttpServlet {
+@WebServlet("/admin/card-swipe/swipe-in")
+public class CardSwipeInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/card/card.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/cardswipe/swipe-in.jsp");
         dispatcher.forward(request, response);
     }
 }

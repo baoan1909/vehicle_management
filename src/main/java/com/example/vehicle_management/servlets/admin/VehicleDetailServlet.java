@@ -1,4 +1,4 @@
-package com.example.vehicle_management.servlets;
+package com.example.vehicle_management.servlets.admin;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,13 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/admin/parkingFeeOfVisitor/parkingFeeOfVisitor-detail")
-public class ParkingFeeOfVisitorDetailServlet extends HttpServlet {
+@WebServlet("/admin/vehicle/vehicle-detail")
+public class VehicleDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request
-                .getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfVisitor-detail.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/vehicle/vehicle-detail.jsp");
         dispatcher.forward(request, response);
     }
 }

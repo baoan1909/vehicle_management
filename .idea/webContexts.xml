@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/lostcard/lostcard-detail.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/lostcard" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/customer/contact.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/customer" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/layout/sidebar.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/shared/sidebar.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>

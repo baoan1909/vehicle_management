@@ -1,4 +1,4 @@
-package com.example.vehicle_management.servlets;
+package com.example.vehicle_management.servlets.admin;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,12 +9,19 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/admin/card-swipe")
-public class CardswipeServlet extends HttpServlet {
+@WebServlet({"/","/admin/dashboard"})
+public class DashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String page = request.getParameter("page");
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/cardswipe/cardswipe.jsp");
+
+        if (page == null || page.isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/admin/dashboard?page=dashboard");
+            return;
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp");
         dispatcher.forward(request, response);
     }
 }
