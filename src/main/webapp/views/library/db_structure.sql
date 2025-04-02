@@ -1,0 +1,156 @@
+CREATE DATABASE IF NOT EXISTS parking_manager;
+
+USE parking_manager;
+
+-- 1. Tạo bảng VehicleType
+CREATE TABLE VehicleType (
+    VehicleTypeId INT AUTO_INCREMENT PRIMARY KEY,
+    VehicleTypeName NVARCHAR(50) NOT NULL,
+    Description TEXT NULL,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 2. Tạo bảng Customer
+CREATE TABLE Customer (
+    CustomerId INT AUTO_INCREMENT PRIMARY KEY,
+    FullName NVARCHAR(100) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    Gender NVARCHAR(50) NOT NULL,
+    PhoneNumber VARCHAR(15) UNIQUE NOT NULL,
+    Address NVARCHAR(150) NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    IdentifyCard VARCHAR(20) UNIQUE NOT NULL,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 3. Tạo bảng Role
+CREATE TABLE Role (
+    RoleId INT AUTO_INCREMENT PRIMARY KEY,
+    RoleName NVARCHAR(100) NOT NULL UNIQUE,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 4. Tạo bảng Account
+CREATE TABLE Account (
+    AccountId INT AUTO_INCREMENT PRIMARY KEY,
+    UserName NVARCHAR(100) NOT NULL UNIQUE,
+    HashPassword VARCHAR(255) NOT NULL,
+    CustomerId INT NOT NULL,
+    RoleId INT NOT NULL,
+    Status TINYINT(1) NOT NULL DEFAULT 1,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId) ON DELETE CASCADE,
+    FOREIGN KEY (RoleId) REFERENCES Role(RoleId) ON DELETE CASCADE
+);
+
+-- 5. Tạo bảng TicketType
+CREATE TABLE TicketType (
+    TicketTypeId INT AUTO_INCREMENT PRIMARY KEY,
+    TicketTypeName NVARCHAR(50) NOT NULL,
+    Description TEXT NULL,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 6. Tạo bảng ParkingFeeOfVisitor
+CREATE TABLE ParkingFeeOfVisitor (
+    FeeVisitorId INT AUTO_INCREMENT PRIMARY KEY,
+    Price DECIMAL(10,2) NOT NULL,
+    VehicleTypeId INT NOT NULL,
+    StartDate DATE NOT NULL,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (VehicleTypeId) REFERENCES VehicleType(VehicleTypeId)
+);
+
+-- 7. Tạo bảng ParkingFeeOfCustomer
+CREATE TABLE ParkingFeeOfCustomer (
+    FeeCustomerId INT AUTO_INCREMENT PRIMARY KEY,
+    TicketTypeId INT NOT NULL,
+    VehicleTypeId INT NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    Description TEXT NULL,
+    StartDate DATE NOT NULL,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (TicketTypeId) REFERENCES TicketType(TicketTypeId),
+    FOREIGN KEY (VehicleTypeId) REFERENCES VehicleType(VehicleTypeId)
+);
+
+-- 8. Tạo bảng Card
+CREATE TABLE Card (
+    CardId INT AUTO_INCREMENT PRIMARY KEY,
+    CardNumber VARCHAR(50) NOT NULL UNIQUE,
+    Type VARCHAR(20) NOT NULL,
+    VehicleTypeId INT NOT NULL,
+    IsCreated BOOLEAN DEFAULT FALSE,
+    IsUsed BOOLEAN DEFAULT FALSE,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (VehicleTypeId) REFERENCES VehicleType(VehicleTypeId)
+);
+
+-- 9. Tạo bảng CustomerRegisterTicket
+CREATE TABLE CustomerRegisterTicket (
+    CardId INT NOT NULL,
+    CustomerId INT NOT NULL,
+    FeeCustomerId INT NOT NULL,
+    EffectiveDate DATE NOT NULL,
+    ExpirationDate DATE NOT NULL,
+    LicensePlate VARCHAR(20) NOT NULL,
+    VehicleTypeId INT NOT NULL,
+    CardReceiptDate DATE NULL,
+    TicketTypeId INT NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (CardId, CustomerId), 
+    FOREIGN KEY (CardId) REFERENCES Card(CardId),
+    FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
+    FOREIGN KEY (FeeCustomerId) REFERENCES ParkingFeeOfCustomer(FeeCustomerId),
+    FOREIGN KEY (VehicleTypeId) REFERENCES VehicleType(VehicleTypeId),
+    FOREIGN KEY (TicketTypeId) REFERENCES TicketType(TicketTypeId)
+);
+
+-- 10. Tạo bảng LostCard
+CREATE TABLE LostCard (
+    LostCardId INT AUTO_INCREMENT PRIMARY KEY,
+    CustomerId INT NULL,
+    CardId INT NOT NULL,
+    NotificationTime DATETIME NOT NULL,
+    TimeOfLost DATETIME NOT NULL,
+    TicketPrice DECIMAL(10,2) NOT NULL,
+    LostCardFee DECIMAL(10,2) NOT NULL,
+    CheckInLicensePhoto VARCHAR(255) NULL,
+    CheckInCustomerPhoto VARCHAR(255) NULL,
+    VisitorName NVARCHAR(100) NULL,
+    VisitorPhoneNum VARCHAR(15) NULL,
+    IdentifyCard VARCHAR(20) NULL,
+    RegistrationLicense VARCHAR(50) NULL,
+    Note TEXT NULL,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
+    FOREIGN KEY (CardId) REFERENCES Card(CardId)
+);
+
+-- 11. Tạo bảng CardSwipe
+CREATE TABLE CardSwipe (
+    CardSwipeId INT AUTO_INCREMENT PRIMARY KEY,
+    LicensePlate VARCHAR(20) NOT NULL,
+    CardId INT NOT NULL,
+    CheckInTime DATETIME NOT NULL,
+    CheckOutTime DATETIME NULL,
+    CheckInImagePath VARCHAR(255) NULL,
+    ImagePathOut VARCHAR(255) NULL,
+    Price DECIMAL(10,2) NULL,
+    VehicleTypeId INT NOT NULL,
+    CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (CardId) REFERENCES Card(CardId),
+    FOREIGN KEY (VehicleTypeId) REFERENCES VehicleType(VehicleTypeId)
+);

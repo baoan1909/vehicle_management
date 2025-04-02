@@ -26,26 +26,34 @@
                 <div class="container-fluid">
 
                     <!--Nội dung-->
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
+                    <div class="row mt-4">
+                        <div class="col-md-3">
+                            <div class="info-box" style="background:linear-gradient(135deg, var(--primary), var(--indigo) ) ;color: white; box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);">
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Tổng vào</span>
-                                    <span class="info-box-number">42</span>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="info-box-text">Tổng vào: </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="info-box-number">41</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
                             <!-- /.info-box -->
                         </div>
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
+                        <div class="col-md-3">
+                            <div class="info-box" style="background:linear-gradient(135deg, var(--primary), var(--indigo) ) ;color: white; box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);">
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Tổng ra: </span>
-                                    <span class="info-box-number">41</span>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="info-box-text">Tổng ra: </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="info-box-number">41</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -56,7 +64,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
+                                <div class="card-header" style="background:linear-gradient(135deg, var(--primary), var(--indigo) ) ;color: white; box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);">
                                     <h3 class="card-title">Bảng quản lý thông tin thẻ</h3>
                                 </div>
                                 <!-- /.card-header -->

@@ -26,8 +26,8 @@
                 <div class="container-fluid">
                     <div class="row d-flex justify-content-center mt-4">
                         <div class="col-md-10">
-                            <div class="card card-cyan">
-                                <div class="card-header">
+                            <div class="card">
+                                <div class="card-header" style="background:linear-gradient(135deg, var(--primary), var(--indigo) ) ;color: white; box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);">
                                     <h3 class="card-title">Thêm/Sửa thông tin khách hàng</h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -50,16 +50,18 @@
                                             <label>Họ tên:</label>
                                             <input type="text" class="form-control" placeholder="Nguyễn Văn A">
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <label>Ngày sinh/ Giới tính</label>
-                                                    <input type="date" class="form-control">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <label>Ngày sinh/ Giới tính</label>
+                                                        <input type="date" class="form-control">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label><br></label>
-                                                <input type="text" class="form-control" placeholder="Nam">
+                                                <div class="col-md-6">
+                                                    <label><br></label>
+                                                    <input type="text" class="form-control" placeholder="Nam">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -78,7 +80,7 @@
                                     <!-- /.card-body -->
                                     <div class="card-footer">
                                         <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/card?page=card">Thoát</a>
-                                        <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Lưu</button>
+                                        <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Lưu</button>
                                     </div>
                                 </form>
                             </div>
