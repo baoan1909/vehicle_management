@@ -1,11 +1,17 @@
 package com.example.vehicle_management.servicesImpl;
 
 import com.example.vehicle_management.models.CardSwipe;
+import com.example.vehicle_management.repositories.ICardSwipeRepository;
 import com.example.vehicle_management.services.ICardSwipeService;
 
 import java.util.List;
 
 public class CardSwipeServiceImpl implements ICardSwipeService {
+    private final ICardSwipeRepository cardSwipeRepository;
+    public CardSwipeServiceImpl(ICardSwipeRepository cardSwipeRepository) {
+        this.cardSwipeRepository = cardSwipeRepository;
+    }
+
     @Override
     public boolean addCardSwipe(CardSwipe cardSwipe) {
         return false;

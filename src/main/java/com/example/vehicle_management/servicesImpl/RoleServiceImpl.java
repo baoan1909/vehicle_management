@@ -1,11 +1,17 @@
 package com.example.vehicle_management.servicesImpl;
 
 import com.example.vehicle_management.models.Role;
+import com.example.vehicle_management.repositories.IRoleRepository;
 import com.example.vehicle_management.services.IRoleService;
 
 import java.util.List;
 
 public class RoleServiceImpl implements IRoleService {
+    private final IRoleRepository iRoleRepository;
+    public RoleServiceImpl(IRoleRepository repository) {
+        this.iRoleRepository = repository;
+    }
+
     @Override
     public boolean addRole(Role role) {
         return false;

@@ -1,11 +1,17 @@
 package com.example.vehicle_management.servicesImpl;
 
 import com.example.vehicle_management.models.ParkingFeeOfCustomer;
+import com.example.vehicle_management.repositories.IParkingFeeOfCustomerRepository;
 import com.example.vehicle_management.services.IParkingFeeOfCustomerService;
 
 import java.util.List;
 
 public class ParkingFeeOfCustomerServiceImpl implements IParkingFeeOfCustomerService {
+    private final IParkingFeeOfCustomerRepository iParkingFeeOfCustomerRepository;
+    public ParkingFeeOfCustomerServiceImpl(IParkingFeeOfCustomerRepository repository) {
+        this.iParkingFeeOfCustomerRepository = repository;
+    }
+
     @Override
     public boolean addParkingFeeOfCustomer(ParkingFeeOfCustomer parkingFeeOfCustomer) {
         return false;

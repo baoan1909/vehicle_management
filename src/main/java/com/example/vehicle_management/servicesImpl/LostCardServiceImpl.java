@@ -1,11 +1,17 @@
 package com.example.vehicle_management.servicesImpl;
 
 import com.example.vehicle_management.models.LostCard;
+import com.example.vehicle_management.repositories.ILostCardRepository;
 import com.example.vehicle_management.services.ILostCardService;
 
 import java.util.List;
 
 public class LostCardServiceImpl implements ILostCardService {
+    private final ILostCardRepository lostCardRepository;
+    public LostCardServiceImpl(ILostCardRepository lostCardRepository) {
+        this.lostCardRepository = lostCardRepository;
+    }
+
     @Override
     public boolean addLostCard(LostCard lostCard) {
         return false;

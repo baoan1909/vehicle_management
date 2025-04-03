@@ -1,11 +1,17 @@
 package com.example.vehicle_management.servicesImpl;
 
 import com.example.vehicle_management.models.Account;
+import com.example.vehicle_management.repositories.IAccountRepository;
 import com.example.vehicle_management.services.IAccountService;
 
 import java.util.List;
 
 public class AccountServiceImpl implements IAccountService {
+    private final IAccountRepository accountRepository;
+    public AccountServiceImpl(IAccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
     @Override
     public boolean insertAccount(Account account) {
         return false;

@@ -1,11 +1,17 @@
 package com.example.vehicle_management.servicesImpl;
 
 import com.example.vehicle_management.models.Customer;
+import com.example.vehicle_management.repositories.ICustomerRepository;
 import com.example.vehicle_management.services.ICustomerService;
 
 import java.util.List;
 
 public class CustomerServiceImpl implements ICustomerService {
+    private final ICustomerRepository customerRepository;
+    public CustomerServiceImpl(ICustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
     @Override
     public boolean addCustomer(Customer customer) {
         return false;
