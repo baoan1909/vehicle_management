@@ -13,7 +13,7 @@ public class DBConnectionPool {
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
-            dataSource = (DataSource) envContext.lookup("jdbc/bookDB");
+            dataSource = (DataSource) envContext.lookup("jdbc/vehicleDB");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Không thể khởi tạo DataSource");

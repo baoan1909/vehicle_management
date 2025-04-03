@@ -1,4 +1,4 @@
-use parking_manager;
+use vehicle_management;
 -- Thêm dữ liệu cho VehicleType
 INSERT INTO VehicleType (VehicleTypeName, Description) VALUES
 ('Xe đạp', 'Phù hợp với khu công nghiệp'),

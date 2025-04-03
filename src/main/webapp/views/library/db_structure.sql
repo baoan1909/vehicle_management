@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS parking_manager;
+CREATE DATABASE IF NOT EXISTS vehicle_management;
 
-USE parking_manager;
+USE vehicle_management;
 
 -- 1. Tạo bảng VehicleType
 CREATE TABLE VehicleType (
