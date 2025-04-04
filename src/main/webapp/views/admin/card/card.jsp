@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Card</title>
@@ -129,7 +130,7 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
-                                            <th>STT</th>
+                                            <th style="width: 50px">STT</th>
                                             <th>ID thẻ</th>
                                             <th>Số thẻ</th>
                                             <th>Loại thẻ</th>
@@ -140,99 +141,39 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td> 4</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td class="project-state">
-                                                <span class="badge bg-cyan">Đang được sử dụng</span>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 5.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td>5</td>
-                                            <td>C</td>
-                                            <td>X</td>
-                                            <td class="project-state">
-                                                <span class="badge bg-yellow">Chưa được sử dụng</span>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
+                                        <c:forEach var="card" items="${lstCards}" varStatus="loop">
+                                            <tr>
+                                                <td>${loop.count}</td>
+                                                <td>${card.cardId}</td>
+                                                <td>${card.cardNumber}</td>
+                                                <td>${card.type}</td>
+                                                <td>${card.vehicleTypeName}</td>
+                                                <td>${card.isCreated ? "X" : ""}</td>
+                                                <td class="project-state">
+                                                    <span class="badge ${(card.isCreated && card.isUsed ) ? 'bg-cyan' : (card.isCreated && not card.isUsed) ? 'bg-yellow' : 'bg-red' }">
+                                                            ${(card.isCreated && card.isUsed) ? "Đang được sử dụng" : 'Chưa được sử dụng' }
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <a href="${pageContext.request.contextPath}/admin/card/edit?id=${card.cardId}" class="btn btn-info btn-block">
+                                                                        <i class="fas fa-pen-square"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <a href="${pageContext.request.contextPath}/admin/card/delete?id=${card.cardId}" class="btn btn-outline-warning btn-block" onclick="return confirm('Bạn có chắc muốn xóa?')">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 5.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td>5</td>
-                                            <td>C</td>
-                                            <td></td>
-                                            <td class="project-state">
-                                                <span class="badge bg-red">Chưa được sử dụng</span>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                         <tfoot>
                                         <tr>

@@ -14,26 +14,26 @@ public class CardServiceImpl implements ICardService {
 
     @Override
     public boolean insertCard(Card card) {
-        return false;
+        return cardRepository.insert(card);
     }
 
     @Override
     public boolean updateCard(Card card) {
-        return false;
+        return cardRepository.update(card);
     }
 
     @Override
     public boolean deleteCard(int id) {
-        return false;
+        return cardRepository.delete(id);
     }
 
     @Override
     public Card getCardById(int id) {
-        return null;
+        return cardRepository.getById(id);
     }
 
     @Override
     public List<Card> getAllCards() {
-        return List.of();
+        return cardRepository.getAll();
     }
 }

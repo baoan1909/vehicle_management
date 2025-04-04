@@ -22,6 +22,15 @@ public class Card {
         this.updateDate = updateDate;
     }
 
+    public Card(int cardId, String cardNumber, String type, int vehicleTypeId, boolean isCreated, boolean isUsed) {
+        this.cardId = cardId;
+        this.cardNumber = cardNumber;
+        this.type = type;
+        this.vehicleTypeId = vehicleTypeId;
+        this.isCreated = isCreated;
+        this.isUsed = isUsed;
+    }
+
     public Card() {
     }
 
