@@ -5,7 +5,7 @@ import com.example.vehicle_management.models.CardSwipe;
 import java.util.List;
 
 public interface ICardSwipeService {
-    boolean addCardSwipe(CardSwipe cardSwipe);
+    boolean insertCardSwipe(CardSwipe cardSwipe);
     boolean updateCardSwipe(CardSwipe cardSwipe);
     boolean deleteCardSwipe(int id);
     CardSwipe getCardSwipeById(int id);

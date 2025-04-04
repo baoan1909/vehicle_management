@@ -16,6 +16,14 @@ public class VehicleType {
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
+
+    public VehicleType(int vehicleTypeId, String vehicleTypeName, String description) {
+        this.vehicleTypeId = vehicleTypeId;
+        this.vehicleTypeName = vehicleTypeName;
+        this.description = description;
+    }
+
+
     public VehicleType() {
 
     }

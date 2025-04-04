@@ -42,24 +42,25 @@
                         <div class="col-md-10">
                             <div class="card card-cyan">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thêm/ Sửa vé</h3>
+                                    <h3 class="card-title">${ticketType.ticketTypeId == 0 ? "Thêm Vé mới" : "Chỉnh sửa Vé"}</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form action="${pageContext.request.contextPath}/admin/ticket/save" method="post">
                                     <div class="card-body">
+                                        <input type="hidden" name="id" value="${ticketType.ticketTypeId != null ? ticketType.ticketTypeId : 0}">
                                         <div class="form-group">
                                             <label>Loại vé:</label>
-                                            <input type="text" class="form-control" placeholder="Vé thường">
+                                            <input type="text" class="form-control" placeholder="Vé thường" name="ticketTypeName" value="${ticketType.ticketTypeName}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Mô tả:</label>
-                                            <textarea class="form-control" rows="3" placeholder="Nhập mô tả chi tiết về loại vé"></textarea>
+                                            <textarea class="form-control" rows="3" placeholder="Nhập mô tả chi tiết về loại vé" name="description">${ticketType.description}</textarea>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
-                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/ticket?page=ticket">Thoát</a>
+                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/ticket">Thoát</a>
                                         <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Lưu</button>
                                     </div>
                                 </form>

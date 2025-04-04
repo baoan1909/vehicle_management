@@ -7,33 +7,33 @@ import com.example.vehicle_management.services.ITicketTypeService;
 import java.util.List;
 
 public class TicketTypeServiceImpl implements ITicketTypeService {
-    private final ITicketTypeRepository iTicketTypeRepository;
-    public TicketTypeServiceImpl(ITicketTypeRepository repository) {
-        this.iTicketTypeRepository = repository;
+    private final ITicketTypeRepository ticketTypeRepository;
+    public TicketTypeServiceImpl(ITicketTypeRepository ticketTypeRepository) {
+        this.ticketTypeRepository = ticketTypeRepository;
     }
 
     @Override
-    public boolean addTicketType(TicketType ticketType) {
-        return false;
+    public boolean insertTicketType(TicketType ticketType) {
+        return ticketTypeRepository.insert(ticketType);
     }
 
     @Override
     public boolean updateTicketType(TicketType ticketType) {
-        return false;
+        return ticketTypeRepository.update(ticketType);
     }
 
     @Override
     public boolean deleteTicketType(int id) {
-        return false;
+        return ticketTypeRepository.delete(id);
     }
 
     @Override
     public TicketType getTicketTypeById(int id) {
-        return null;
+        return ticketTypeRepository.getById(id);
     }
 
     @Override
     public List<TicketType> getAllTicketTypes() {
-        return List.of();
+        return ticketTypeRepository.getAll();
     }
 }

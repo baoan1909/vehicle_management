@@ -5,7 +5,7 @@ import com.example.vehicle_management.models.ParkingFeeOfVisitor;
 import java.util.List;
 
 public interface IParkingFeeOfVisitorService {
-    boolean addParkingFeeOfVisitor(ParkingFeeOfVisitor parkingFeeOfVisitor);
+    boolean insertParkingFeeOfVisitor(ParkingFeeOfVisitor parkingFeeOfVisitor);
     boolean updateParkingFeeOfVisitor(ParkingFeeOfVisitor parkingFeeOfVisitor);
     boolean deleteParkingFeeOfVisitor(int id);
     ParkingFeeOfVisitor getParkingFeeOfVisitorById(int id);

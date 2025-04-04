@@ -42,24 +42,25 @@
                         <div class="col-md-10">
                             <div class="card card-cyan">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thêm/ Sửa phương tiện</h3>
+                                    <h3 class="card-title">${vehicleType.vehicleTypeId == 0 ? "Thêm Phương tiện mới" : "Chỉnh sửa Phương tiện"}</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form action="${pageContext.request.contextPath}/admin/vehicle/save" method="post">
                                     <div class="card-body">
+                                        <input type="hidden" name="id" value="${vehicleType.vehicleTypeId != null ? vehicleType.vehicleTypeId : 0}">
                                         <div class="form-group">
                                             <label>Tên phương tiện:</label>
-                                            <input type="text" class="form-control" placeholder="Xe máy">
+                                            <input type="text" class="form-control" placeholder="Xe máy" name="vehicleTypeName" value="${vehicleType.vehicleTypeName}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Mô tả:</label>
-                                            <textarea class="form-control" rows="3" placeholder="Nhập mô tả chi tiết về phương tiện"></textarea>
+                                            <textarea class="form-control" rows="3" placeholder="Nhập mô tả chi tiết về phương tiện" name="description">${vehicleType.description}</textarea>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
-                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/vehicle?page=vehicle">Thoát</a>
+                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/vehicle">Thoát</a>
                                         <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Lưu</button>
                                     </div>
                                 </form>

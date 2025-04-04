@@ -64,8 +64,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item <%= ("ticket".equals(request.getParameter("page")) || "vehicle".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page")) || "vehicle-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
-                    <a href="#" class="nav-link <%= ("ticket".equals(request.getParameter("page")) || "vehicle".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page")) || "vehicle-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                <li class="nav-item <%= (request.getRequestURI().contains("/admin/ticket") || request.getRequestURI().contains("/admin/ticket/edit") || request.getRequestURI().contains("/admin/ticket/add") || request.getRequestURI().contains("/admin/ticket/delete") || request.getRequestURI().contains("/admin/ticket/save")
+                                    || request.getRequestURI().contains("/admin/vehicle") || request.getRequestURI().contains("/admin/vehicle/edit") || request.getRequestURI().contains("/admin/vehicle/add") || request.getRequestURI().contains("/admin/vehicle/delete") || request.getRequestURI().contains("/admin/vehicle/save"))
+                                    ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= (request.getRequestURI().contains("/admin/ticket") || request.getRequestURI().contains("/admin/ticket/edit") || request.getRequestURI().contains("/admin/ticket/add") || request.getRequestURI().contains("/admin/ticket/delete") || request.getRequestURI().contains("/admin/ticket/save")
+                                                || request.getRequestURI().contains("/admin/vehicle") || request.getRequestURI().contains("/admin/vehicle/edit") || request.getRequestURI().contains("/admin/vehicle/add") || request.getRequestURI().contains("/admin/vehicle/delete") || request.getRequestURI().contains("/admin/vehicle/save"))
+                                                 ? "active" : "" %>">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Vé & Phương tiện
@@ -74,15 +78,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/ticket?page=ticket"
-                               class="nav-link <%=("ticket".equals(request.getParameter("page")) || "ticket-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/ticket"
+                               class="nav-link <%=(request.getRequestURI().contains("/admin/ticket") || request.getRequestURI().contains("/admin/ticket/edit") || request.getRequestURI().contains("/admin/ticket/add") || request.getRequestURI().contains("/admin/ticket/delete") || request.getRequestURI().contains("/admin/ticket/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Vé</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/vehicle?page=vehicle"
-                               class="nav-link <%= ("vehicle".equals(request.getParameter("page")) || "vehicle-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/vehicle"
+                               class="nav-link <%= (request.getRequestURI().contains("/admin/vehicle") || request.getRequestURI().contains("/admin/vehicle/edit") || request.getRequestURI().contains("/admin/vehicle/add") || request.getRequestURI().contains("/admin/vehicle/delete") || request.getRequestURI().contains("/admin/vehicle/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phương tiện</p>
                             </a>
@@ -142,8 +146,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="<%= request.getContextPath() %>/admin/role?page=role"
-                       class="nav-link <%= ("role".equals(request.getParameter("page")) || "role-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                    <a href="<%= request.getContextPath() %>/admin/role"
+                       class="nav-link <%=(request.getRequestURI().contains("/admin/role") || request.getRequestURI().contains("/admin/role/edit") || request.getRequestURI().contains("/admin/role/add") || request.getRequestURI().contains("/admin/role/delete") || request.getRequestURI().contains("/admin/role/save")) ? "active" : "" %>">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Quản lý vai trò

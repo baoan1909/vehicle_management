@@ -18,6 +18,12 @@ public class TicketType {
         this.updateDate = updateDate;
     }
 
+    public TicketType(int ticketTypeId, String ticketTypeName, String description) {
+        this.ticketTypeId = ticketTypeId;
+        this.ticketTypeName = ticketTypeName;
+        this.description = description;
+    }
+
     public TicketType(){
 
     }

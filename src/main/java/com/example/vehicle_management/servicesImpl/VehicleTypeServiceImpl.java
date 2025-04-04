@@ -7,33 +7,33 @@ import com.example.vehicle_management.services.IVehicleTypeService;
 import java.util.List;
 
 public class VehicleTypeServiceImpl implements IVehicleTypeService {
-    private final IVehicleTypeRepository iVehicleTypeRepository;
+    private final IVehicleTypeRepository vehicleTypeRepository;
     public VehicleTypeServiceImpl(IVehicleTypeRepository repository) {
-        this.iVehicleTypeRepository = repository;
+        this.vehicleTypeRepository = repository;
     }
 
     @Override
     public boolean insertVehicleType(VehicleType vehicleType) {
-        return false;
+        return vehicleTypeRepository.insert(vehicleType);
     }
 
     @Override
     public boolean updateVehicleType(VehicleType vehicleType) {
-        return false;
+        return vehicleTypeRepository.update(vehicleType);
     }
 
     @Override
     public boolean deleteVehicleType(int id) {
-        return false;
+        return vehicleTypeRepository.delete(id);
     }
 
     @Override
     public VehicleType getVehicleTypeById(int id) {
-        return null;
+        return vehicleTypeRepository.getById(id);
     }
 
     @Override
     public List<VehicleType> getAllVehicleTypes() {
-        return List.of();
+        return vehicleTypeRepository.getAll();
     }
 }

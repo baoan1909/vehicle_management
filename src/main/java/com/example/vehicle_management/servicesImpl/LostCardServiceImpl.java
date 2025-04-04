@@ -13,7 +13,7 @@ public class LostCardServiceImpl implements ILostCardService {
     }
 
     @Override
-    public boolean addLostCard(LostCard lostCard) {
+    public boolean insertLostCard(LostCard lostCard) {
         return false;
     }
 

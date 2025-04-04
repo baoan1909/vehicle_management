@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Role</title>
@@ -66,7 +67,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/role/role-detail?page=role-detail" class="btn btn-info btn-block">
+                                        <a href="<%= request.getContextPath() %>/admin/role/add" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
@@ -86,59 +87,38 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
-                                            <th>STT</th>
+                                            <th style="width: 50px">STT</th>
+                                            <th style="width: 100px">ID Vai trò</th>
                                             <th>Tên vai trò</th>
-                                            <th>Mô Tả</th>
                                             <th style="width: 100px">Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Admin</td>
-                                            <td>Phân quyền cao nhất</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>User</td>
-                                            <td>Phân quyền danh cho khách hàng</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
+                                        <c:forEach var="role" items="${lstRole}" varStatus="loop">
+                                            <tr>
+                                                <td>${loop.count}</td>
+                                                <td>${role.roleId}</td>
+                                                <td>${role.roleName}</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <a href="${pageContext.request.contextPath}/admin/role/edit?id=${role.roleId}" class="btn btn-info btn-block">
+                                                                        <i class="fas fa-pen-square"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <a href="${pageContext.request.contextPath}/admin/role/delete?id=${role.roleId}" class="btn btn-outline-warning btn-block" onclick="return confirm('Bạn có chắc muốn xóa?')">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                         <tfoot>
                                         <tr>

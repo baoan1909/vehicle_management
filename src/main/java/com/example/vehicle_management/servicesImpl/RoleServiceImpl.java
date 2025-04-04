@@ -7,33 +7,33 @@ import com.example.vehicle_management.services.IRoleService;
 import java.util.List;
 
 public class RoleServiceImpl implements IRoleService {
-    private final IRoleRepository iRoleRepository;
+    private final IRoleRepository roleRepository;
     public RoleServiceImpl(IRoleRepository repository) {
-        this.iRoleRepository = repository;
+        this.roleRepository = repository;
     }
 
     @Override
-    public boolean addRole(Role role) {
-        return false;
+    public boolean insertRole(Role role) {
+        return roleRepository.insert(role);
     }
 
     @Override
     public boolean updateRole(Role role) {
-        return false;
+        return roleRepository.update(role);
     }
 
     @Override
     public boolean deleteRole(int id) {
-        return false;
+        return roleRepository.delete(id);
     }
 
     @Override
     public Role getRoleById(int id) {
-        return null;
+        return roleRepository.getById(id);
     }
 
     @Override
     public List<Role> getAllRoles() {
-        return List.of();
+        return roleRepository.getAll();
     }
 }

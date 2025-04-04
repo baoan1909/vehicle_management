@@ -5,7 +5,7 @@ import com.example.vehicle_management.models.CustomerRegisterTicket;
 import java.util.List;
 
 public interface ICustomerRegisterTicketService {
-    boolean addCustomerRegisterTicket(CustomerRegisterTicket customerRegisterTicket);
+    boolean insertCustomerRegisterTicket(CustomerRegisterTicket customerRegisterTicket);
     boolean updateCustomerRegisterTicket(CustomerRegisterTicket customerRegisterTicket);
     boolean deleteCustomerRegisterTicket(int id);
     CustomerRegisterTicket getCustomerRegisterTicketById(int id);

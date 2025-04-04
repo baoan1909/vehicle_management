@@ -13,7 +13,7 @@ public class CardSwipeServiceImpl implements ICardSwipeService {
     }
 
     @Override
-    public boolean addCardSwipe(CardSwipe cardSwipe) {
+    public boolean insertCardSwipe(CardSwipe cardSwipe) {
         return false;
     }
 

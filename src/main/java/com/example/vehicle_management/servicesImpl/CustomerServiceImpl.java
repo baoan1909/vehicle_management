@@ -13,7 +13,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public boolean addCustomer(Customer customer) {
+    public boolean insertCustomer(Customer customer) {
         return false;
     }
 

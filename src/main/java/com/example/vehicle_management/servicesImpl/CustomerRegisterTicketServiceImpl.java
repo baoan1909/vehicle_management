@@ -13,7 +13,7 @@ public class CustomerRegisterTicketServiceImpl implements ICustomerRegisterTicke
     }
 
     @Override
-    public boolean addCustomerRegisterTicket(CustomerRegisterTicket customerRegisterTicket) {
+    public boolean insertCustomerRegisterTicket(CustomerRegisterTicket customerRegisterTicket) {
         return false;
     }
 
