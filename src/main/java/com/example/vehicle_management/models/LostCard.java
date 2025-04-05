@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class LostCard {
     private int lostCardId;
-    private Integer customerId;
+    private int customerId;
     private int cardId;
     private LocalDateTime notificationTime;
     private LocalDateTime timeOfLost;
@@ -20,7 +20,7 @@ public class LostCard {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-    public LostCard(int lostCardId, Integer customerId, int cardId, LocalDateTime notificationTime, LocalDateTime timeOfLost, double ticketPrice, double lostCardFee, String checkInLicensePhoto, String checkInCustomerPhoto, String visitorName, String visitorPhoneNum, String identifyCard, String registrationLicense, String note, LocalDateTime createDate, LocalDateTime updateDate) {
+    public LostCard(int lostCardId, int customerId, int cardId, LocalDateTime notificationTime, LocalDateTime timeOfLost, double ticketPrice, double lostCardFee, String checkInLicensePhoto, String checkInCustomerPhoto, String visitorName, String visitorPhoneNum, String identifyCard, String registrationLicense, String note, LocalDateTime createDate, LocalDateTime updateDate) {
         this.lostCardId = lostCardId;
         this.customerId = customerId;
         this.cardId = cardId;
@@ -39,6 +39,23 @@ public class LostCard {
         this.updateDate = updateDate;
     }
 
+    public LostCard(int lostCardId, int customerId, int cardId, LocalDateTime notificationTime, LocalDateTime timeOfLost, double ticketPrice, double lostCardFee, String checkInLicensePhoto, String checkInCustomerPhoto, String visitorName, String visitorPhoneNum, String identifyCard, String registrationLicense, String note) {
+        this.lostCardId = lostCardId;
+        this.customerId = customerId;
+        this.cardId = cardId;
+        this.notificationTime = notificationTime;
+        this.timeOfLost = timeOfLost;
+        this.ticketPrice = ticketPrice;
+        this.lostCardFee = lostCardFee;
+        this.checkInLicensePhoto = checkInLicensePhoto;
+        this.checkInCustomerPhoto = checkInCustomerPhoto;
+        this.visitorName = visitorName;
+        this.visitorPhoneNum = visitorPhoneNum;
+        this.identifyCard = identifyCard;
+        this.registrationLicense = registrationLicense;
+        this.note = note;
+    }
+
     public LostCard() {
     }
 
@@ -50,7 +67,7 @@ public class LostCard {
         this.lostCardId = lostCardId;
     }
 
-    public Integer getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 

@@ -66,17 +66,16 @@ public class CardServlet extends HttpServlet {
 
         Card card = new Card(cardId, cardNumber, type, vehicleTypeId, isCreated, isUsed);
 
-        // Kiểm tra nếu số thẻ đã tồn tại
-        if (cardService.isExistsCardNumber(cardNumber)) {
-            request.setAttribute("error", "Số thẻ này đã tồn tại.");
-            request.setAttribute("card", card);
-            request.setAttribute("vehicleTypes", vehicleTypeService.getAllVehicleTypes());
-            request.getRequestDispatcher("/views/admin/card/card-detail.jsp").forward(request, response);
-            return;
-        }
-
         if (cardId == 0) {
-            cardService.insertCard(card);
+            if (cardService.isExistsCardNumber(cardNumber)) {
+                request.setAttribute("error", "Số thẻ này đã tồn tại.");
+                request.setAttribute("card", card);
+                request.setAttribute("vehicleTypes", vehicleTypeService.getAllVehicleTypes());
+                request.getRequestDispatcher("/views/admin/card/card-detail.jsp").forward(request, response);
+                return;
+            }else {
+                cardService.insertCard(card);
+            }
         } else {
             cardService.updateCard(card);
         }

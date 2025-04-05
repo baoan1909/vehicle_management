@@ -14,26 +14,26 @@ public class LostCardServiceImpl implements ILostCardService {
 
     @Override
     public boolean insertLostCard(LostCard lostCard) {
-        return false;
+        return lostCardRepository.insert(lostCard);
     }
 
     @Override
     public boolean updateLostCard(LostCard lostCard) {
-        return false;
+        return lostCardRepository.update(lostCard);
     }
 
     @Override
     public boolean deleteLostCard(int id) {
-        return false;
+        return lostCardRepository.delete(id);
     }
 
     @Override
     public LostCard getLostCardById(int id) {
-        return null;
+        return lostCardRepository.getById(id);
     }
 
     @Override
     public List<LostCard> getAllLostCards() {
-        return List.of();
+        return lostCardRepository.getAll();
     }
 }

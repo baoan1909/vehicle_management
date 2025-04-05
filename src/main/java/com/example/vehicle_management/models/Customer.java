@@ -27,6 +27,19 @@ public class Customer {
         this.updateDate = updateDate;
     }
 
+    public Customer(int customerId, String fullName, String dateOfBirth, String gender, String phoneNumber, String address, String email, String identifyCard) {
+        this.customerId = customerId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.identifyCard = identifyCard;
+    }
+
+
+
     public Customer() {
 
     }
