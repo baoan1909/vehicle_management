@@ -70,13 +70,7 @@
                                             <div class="col-md-2 mt-3">
                                                 <div class="form-group">
                                                     <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Loại xe</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
+                                                        <option value="">Loại xe</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -110,7 +104,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/card/card-detail?page=card-detail" class="btn btn-info btn-block">
+                                        <a href="<%= request.getContextPath() %>/admin/card/add" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
@@ -135,7 +129,7 @@
                                             <th>Số thẻ</th>
                                             <th>Loại thẻ</th>
                                             <th>Loại xe</th>
-                                            <th>Đã tạo thẻ vậy lý</th>
+                                            <th>Thẻ vậy lý</th>
                                             <th>Trạng thái</th>
                                             <th style="width: 100px">Chức năng</th>
                                         </tr>
@@ -148,12 +142,34 @@
                                                 <td>${card.cardNumber}</td>
                                                 <td>${card.type}</td>
                                                 <td>${card.vehicleTypeName}</td>
-                                                <td>${card.isCreated ? "X" : ""}</td>
                                                 <td class="project-state">
-                                                    <span class="badge ${(card.isCreated && card.isUsed ) ? 'bg-cyan' : (card.isCreated && not card.isUsed) ? 'bg-yellow' : 'bg-red' }">
-                                                            ${(card.isCreated && card.isUsed) ? "Đang được sử dụng" : 'Chưa được sử dụng' }
-                                                    </span>
+                                                    <c:choose>
+                                                        <c:when test="${card.isCreated == 1}">
+                                                            <span class="badge bg-cyan">Đã tạo</span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span class="badge bg-danger">Chưa tạo</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </td>
+                                                <td class="project-state">
+                                                    <c:choose>
+                                                        <c:when test="${card.isUsed == 1}">
+                                                            <span class="badge bg-cyan">Đã sử dụng</span>
+                                                        </c:when>
+                                                        <c:when test="${card.isUsed == 0 && card.isCreated == 1}">
+                                                            <span class="badge bg-yellow">Chưa sử dụng</span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span class="badge bg-danger">Chưa sử dụng</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+<%--                                                <td class="project-state">--%>
+<%--                                                    <span class="badge ${card.isUsed ? 'bg-cyan' : 'bg-red'}">--%>
+<%--                                                        ${card.isUsed ? 'Đang được sử dụng' : 'Chưa được sử dụng'}--%>
+<%--                                                    </span>--%>
+<%--                                                </td>--%>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -182,7 +198,7 @@
                                             <th>Số thẻ</th>
                                             <th>Loại thẻ</th>
                                             <th>Loại xe</th>
-                                            <th>Đã tạo thẻ vậy lý</th>
+                                            <th>Thẻ vậy lý</th>
                                             <th>Trạng thái</th>
                                             <th>Chức năng</th>
                                         </tr>

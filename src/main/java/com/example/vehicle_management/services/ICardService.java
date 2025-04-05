@@ -10,4 +10,5 @@ public interface ICardService {
     boolean deleteCard(int id);
     Card getCardById(int id);
     List<Card> getAllCards();
+    boolean isExistsCardNumber(String cardNumber);
 }

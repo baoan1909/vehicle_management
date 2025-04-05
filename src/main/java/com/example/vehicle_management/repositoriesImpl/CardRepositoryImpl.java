@@ -26,8 +26,8 @@ public class CardRepositoryImpl implements ICardRepository {
             stmt.setString(1, card.getCardNumber());
             stmt.setString(2, card.getType());
             stmt.setInt(3, card.getVehicleTypeId());
-            stmt.setBoolean(4, card.isCreated());
-            stmt.setBoolean(5, card.isUsed());
+            stmt.setInt(4, card.getIsCreated());
+            stmt.setInt(5, card.getIsUsed());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -44,8 +44,8 @@ public class CardRepositoryImpl implements ICardRepository {
             stmt.setString(1, card.getCardNumber());
             stmt.setString(2, card.getType());
             stmt.setInt(3, card.getVehicleTypeId());
-            stmt.setBoolean(4, card.isCreated());
-            stmt.setBoolean(5, card.isUsed());
+            stmt.setInt(4, card.getIsCreated());
+            stmt.setInt(5, card.getIsUsed());
             stmt.setInt(6, card.getCardId());
 
             return stmt.executeUpdate() > 0;
@@ -107,8 +107,29 @@ public class CardRepositoryImpl implements ICardRepository {
                 rs.getString("cardNumber"),
                 rs.getString("type"),
                 rs.getInt("vehicleTypeId"),
-                rs.getBoolean("isCreated"),
-                rs.getBoolean("isUsed")
+                rs.getInt("isCreated"),
+                rs.getInt("isUsed")
         );
+    }
+
+    @Override
+    public boolean existsByCardNumber(String cardNumber) {
+        String query = "SELECT COUNT(*) FROM Card WHERE cardNumber = ?";
+
+        try (Connection conn = DBConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, cardNumber);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Nếu số lượng bản ghi tìm thấy lớn hơn 0 thì thẻ đã tồn tại
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // Nếu không có kết quả hoặc có lỗi
     }
 }

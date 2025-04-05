@@ -61,10 +61,19 @@ public class CardServlet extends HttpServlet {
         String cardNumber = request.getParameter("cardNumber");
         String type = request.getParameter("type");
         int vehicleTypeId = Integer.parseInt(request.getParameter("vehicleTypeId"));
-        boolean isCreated = request.getParameter("isCreated") != null;
-        boolean isUsed = request.getParameter("isUsed") != null;
+        int isCreated = (request.getParameter("isCreated") != null) ? 1 : 0;
+        int isUsed = (request.getParameter("isUsed") != null) ? 1 : 0;
 
         Card card = new Card(cardId, cardNumber, type, vehicleTypeId, isCreated, isUsed);
+
+        // Kiểm tra nếu số thẻ đã tồn tại
+        if (cardService.isExistsCardNumber(cardNumber)) {
+            request.setAttribute("error", "Số thẻ này đã tồn tại.");
+            request.setAttribute("card", card);
+            request.setAttribute("vehicleTypes", vehicleTypeService.getAllVehicleTypes());
+            request.getRequestDispatcher("/views/admin/card/card-detail.jsp").forward(request, response);
+            return;
+        }
 
         if (cardId == 0) {
             cardService.insertCard(card);

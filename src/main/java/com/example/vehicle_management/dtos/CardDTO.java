@@ -5,10 +5,10 @@ public class CardDTO {
     private String cardNumber;
     private String type;
     private String vehicleTypeName;
-    private boolean isCreated;
-    private boolean isUsed;
+    private int isCreated;
+    private int isUsed;
 
-    public CardDTO(int cardId, String cardNumber, String type, String vehicleTypeName, boolean isCreated, boolean isUsed) {
+    public CardDTO(int cardId, String cardNumber, String type, String vehicleTypeName, int isCreated, int isUsed) {
         this.cardId = cardId;
         this.cardNumber = cardNumber;
         this.type = type;
@@ -33,11 +33,11 @@ public class CardDTO {
         return vehicleTypeName;
     }
 
-    public boolean isCreated() {
+    public int getIsCreated() {
         return isCreated;
     }
 
-    public boolean isUsed() {
+    public int getIsUsed() {
         return isUsed;
     }
 }

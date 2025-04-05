@@ -6,12 +6,12 @@ public class Card {
     private String cardNumber;
     private String type;
     private int vehicleTypeId;
-    private boolean isCreated;
-    private boolean isUsed;
+    private int isCreated;
+    private int isUsed;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-    public Card(int cardId, String cardNumber, String type, int vehicleTypeId, boolean isCreated, boolean isUsed, LocalDateTime createDate, LocalDateTime updateDate) {
+    public Card(int cardId, String cardNumber, String type, int vehicleTypeId, int isCreated, int isUsed, LocalDateTime createDate, LocalDateTime updateDate) {
         this.cardId = cardId;
         this.cardNumber = cardNumber;
         this.type = type;
@@ -22,7 +22,7 @@ public class Card {
         this.updateDate = updateDate;
     }
 
-    public Card(int cardId, String cardNumber, String type, int vehicleTypeId, boolean isCreated, boolean isUsed) {
+    public Card(int cardId, String cardNumber, String type, int vehicleTypeId, int isCreated, int isUsed) {
         this.cardId = cardId;
         this.cardNumber = cardNumber;
         this.type = type;
@@ -66,20 +66,20 @@ public class Card {
         this.vehicleTypeId = vehicleTypeId;
     }
 
-    public boolean isCreated() {
-        return isCreated;
-    }
-
-    public void setCreated(boolean created) {
-        isCreated = created;
-    }
-
-    public boolean isUsed() {
+    public int getIsUsed() {
         return isUsed;
     }
 
-    public void setUsed(boolean used) {
-        isUsed = used;
+    public void setIsUsed(int isUsed) {
+        this.isUsed = isUsed;
+    }
+
+    public int getIsCreated() {
+        return isCreated;
+    }
+
+    public void setIsCreated(int isCreated) {
+        this.isCreated = isCreated;
     }
 
     public LocalDateTime getCreateDate() {

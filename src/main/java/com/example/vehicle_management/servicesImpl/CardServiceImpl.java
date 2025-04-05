@@ -36,4 +36,9 @@ public class CardServiceImpl implements ICardService {
     public List<Card> getAllCards() {
         return cardRepository.getAll();
     }
+
+    @Override
+    public boolean isExistsCardNumber(String cardNumber) {
+        return cardRepository.existsByCardNumber(cardNumber);
+    }
 }

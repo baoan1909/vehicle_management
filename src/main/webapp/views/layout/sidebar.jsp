@@ -39,8 +39,12 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page")) || "lostcard-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
-                    <a href="#" class="nav-link <%= ("card".equals(request.getParameter("page")) || "lost-card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page")) || "lostcard-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                <li class="nav-item <%= (request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save")
+                                    || request.getRequestURI().contains("/admin/lost-card") || request.getRequestURI().contains("/admin/lost-card/edit") || request.getRequestURI().contains("/admin/lost-card/add") || request.getRequestURI().contains("/admin/lost-card/delete") || request.getRequestURI().contains("/admin/lost-card/save"))
+                                    ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= (request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save")
+                                                || request.getRequestURI().contains("/admin/lost-card") || request.getRequestURI().contains("/admin/lost-card/edit") || request.getRequestURI().contains("/admin/lost-card/add") || request.getRequestURI().contains("/admin/lost-card/delete") || request.getRequestURI().contains("/admin/lost-card/save"))
+                                                ? "active" : "" %>">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Quản lý thẻ
@@ -49,15 +53,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/card?page=card"
-                               class="nav-link <%=("card".equals(request.getParameter("page")) || "card-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/card"
+                               class="nav-link <%= (request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thẻ</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/lost-card?page=lost-card"
-                               class="nav-link <%=("lost-card".equals(request.getParameter("page")) || "lostcard-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/lost-card"
+                               class="nav-link <%=(request.getRequestURI().contains("/admin/lost-card") || request.getRequestURI().contains("/admin/lost-card/edit") || request.getRequestURI().contains("/admin/lost-card/add") || request.getRequestURI().contains("/admin/lost-card/delete") || request.getRequestURI().contains("/admin/lost-card/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thẻ bị mất</p>
                             </a>

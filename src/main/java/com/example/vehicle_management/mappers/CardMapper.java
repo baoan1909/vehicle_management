@@ -12,7 +12,16 @@ public class CardMapper {
     public static CardDTO toDTO(Card card, IVehicleTypeService vehicleTypeService) {
         VehicleType vehicleType = vehicleTypeService.getVehicleTypeById(card.getVehicleTypeId());
         String vehicleTypeName = (vehicleType != null) ? vehicleType.getVehicleTypeName() : "Không xác định";
-        return new CardDTO(card.getCardId(), card.getCardNumber(), card.getType(), vehicleTypeName, card.isCreated(), card.isUsed());
+
+        // Tạo CardDTO
+        return new CardDTO(
+                card.getCardId(),
+                card.getCardNumber(),
+                card.getType(),
+                vehicleTypeName,
+                card.getIsCreated(),
+                card.getIsUsed()
+        );
     }
 
     public static List<CardDTO> toDTOList(List<Card> cards, IVehicleTypeService vehicleTypeService) {
