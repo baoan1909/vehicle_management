@@ -36,4 +36,9 @@ public class CardSwipeServiceImpl implements ICardSwipeService {
     public List<CardSwipe> getAllCardSwipes() {
         return List.of();
     }
+
+    @Override
+    public CardSwipe getCardSwipeByCardId(int cardId) {
+        return cardSwipeRepository.getCardSwipeByCardId(cardId);
+    }
 }

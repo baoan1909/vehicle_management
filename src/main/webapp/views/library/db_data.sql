@@ -40,9 +40,9 @@ INSERT INTO ParkingFeeOfCustomer (TicketTypeId, VehicleTypeId, Price, Descriptio
 
 -- Thêm dữ liệu cho Card
 INSERT INTO Card (CardNumber, Type, VehicleTypeId, IsCreated, IsUsed) VALUES
-('C001', 'Tháng', 1, TRUE, FALSE),
-('C002', 'Tháng', 2, TRUE, TRUE),
-('C003', 'Tháng', 3, TRUE, TRUE);
+('C001', 'Đăng ký', 1, TRUE, FALSE),
+('C002', 'Vãng lai', 2, TRUE, TRUE),
+('C003', 'Đăng ký', 3, TRUE, TRUE);
 
 -- Thêm dữ liệu cho CustomerRegisterTicket
 INSERT INTO CustomerRegisterTicket (CardId, CustomerId, FeeCustomerId, EffectiveDate, ExpirationDate, LicensePlate, VehicleTypeId, CardReceiptDate, TicketTypeId, Price) VALUES

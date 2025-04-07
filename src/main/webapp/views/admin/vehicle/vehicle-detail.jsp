@@ -42,7 +42,7 @@
                         <div class="col-md-10">
                             <div class="card card-cyan">
                                 <div class="card-header">
-                                    <h3 class="card-title">${vehicleType.vehicleTypeId == 0 ? "Thêm Phương tiện mới" : "Chỉnh sửa Phương tiện"}</h3>
+                                    <h3 class="card-title">${vehicleType.vehicleTypeId == 0 ? "Thêm Phương tiện mới" : "Chỉnh sửa thông tin Phương tiện"}</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Lost card detail</title>
@@ -48,47 +49,51 @@
                         </div>
                         <div class="card card-cyan">
                             <div class="card-header">
-                                <h3 class="card-title">Thêm/Sửa thông tin mất thẻ</h3>
+                                <h3 class="card-title">${lostCard.lostCardId == 0 ? "Thêm Thẻ mất mới" : "Chỉnh sửa thông tin Thẻ mất"}</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form>
+                            <form action="${pageContext.request.contextPath}/admin/lostcard/save" method="post">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-3">
+                                            <input type="hidden" name="id" value="${lostCard.cardId}" />
+
                                             <div class="form-group">
                                                 <label>ID thẻ:</label>
-                                                <select class="form-control select2">
-                                                    <option selected="selected">Mercedes</option>
-                                                    <option>Alaska</option>
-                                                    <option>California</option>
-                                                    <option>Delaware</option>
-                                                    <option>Tennessee</option>
-                                                    <option>Texas</option>
-                                                    <option>Washington</option>
+                                                <select class="form-control select2" name="cardId" style="width: 100%;" required>
+                                                    <option value="">-- Chọn thẻ --</option>
+                                                    <c:forEach var="card" items="${cards}">
+                                                        <option value="${card.cardId}"
+                                                                <c:if test="${not empty lostCard.cardId && lostCard.cardId == card.cardId}">
+                                                                    selected
+                                                                </c:if>>
+                                                            (ID:${card.cardId}) ${card.cardNumber}
+                                                        </option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>ID khách hàng:</label>
-                                                <select class="form-control select2">
-                                                    <option selected="selected">Mercedes</option>
-                                                    <option>Alaska</option>
-                                                    <option>California</option>
-                                                    <option>Delaware</option>
-                                                    <option>Tennessee</option>
-                                                    <option>Texas</option>
-                                                    <option>Washington</option>
+                                                <select class="form-control select2" name="customerId" id="customerSelect" style="width: 100%;">
+                                                    <option value="">-- Chọn khách hàng --</option>
+                                                    <c:forEach var="customer" items="${customers}">
+                                                        <option value="${customer.customerId}" ${customer.customerId == lostCard.customerId ? "selected" : ""}>
+                                                            (ID:${customer.customerId}) ${customer.fullName}
+                                                        </option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Thời gian thông báo:</label>
-                                                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
-                                                    <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                                                <div class="input-group date" id="reservationdatetime2" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input" name="notificationTime"
+                                                           data-target="#reservationdatetime2" value="${notificationTimeStr}" data-toggle="datetimepicker" />
+                                                    <div class="input-group-append" data-target="#reservationdatetime2" data-toggle="datetimepicker">
                                                         <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                     </div>
                                                 </div>
@@ -99,7 +104,8 @@
                                             <div class="form-group">
                                                 <label>Thời gian mất:</label>
                                                 <div class="input-group date" id="reservationdatetime1" data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime1"/>
+                                                    <input type="text" class="form-control datetimepicker-input" name="timeOfLost"
+                                                           data-target="#reservationdatetime1" value="${timeOfLostStr}" data-toggle="datetimepicker" />
                                                     <div class="input-group-append" data-target="#reservationdatetime1" data-toggle="datetimepicker">
                                                         <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                     </div>
@@ -108,38 +114,35 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>Số thẻ:</label>
-                                                <input type="number" class="form-control" min="0" placeholder="002">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>Loại thẻ:</label>
-                                                <select class="form-control select2" style="width: 100%;">
-                                                    <option selected="selected">Vãng lai</option>
-                                                    <option>Đăng ký</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Tên khách hàng:</label>
-                                                <input type="text" class="form-control" placeholder="Nguyễn Văn A">
+                                                <input type="text" id="visitorName"  name="visitorName" class="form-control" value="${displayName}" placeholder="Nguyễn Văn A" readonly  />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>CCCD:</label>
-                                                <input type="text" class="form-control" placeholder="8362632742">
+                                                <input type="text" id="identifyCard" name="identifyCard" class="form-control" value="${displayIdentifyCard}" placeholder="8362632742" readonly  />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Số điện thoại:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text bg-cyan"><i class="fas fa-phone"></i></span>
+                                                    </div>
+                                                    <input type="text" id="visitorPhoneNum" name="visitorPhoneNum" class="form-control" value="${displayPhone}" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text" readonly  />
+                                                </div>
+                                                <!-- /.input group -->
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Phí gửi xe:</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="200000">
+                                                    <input type="number" name="ticketPrice" class="form-control" value="${lostCard.ticketPrice}" placeholder="200000" required />
                                                     <div class="input-group-append">
                                                         <span class="input-group-text bg-cyan">VNĐ</span>
                                                     </div>
@@ -148,29 +151,17 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label>Số điện thoại:</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-cyan"><i class="fas fa-phone"></i></span>
-                                                    </div>
-                                                    <input type="text" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text">
-                                                </div>
-                                                <!-- /.input group -->
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-10">
                                             <div class="form-group">
                                                 <label>Số giấy tờ xe:</label>
-                                                <input type="text" class="form-control" placeholder="02621234256">
+                                                <input type="text" name="registrationLicense" class="form-control" value="${lostCard.registrationLicense}" placeholder="02621234256" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Phí mất thẻ:</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="200000">
+                                                    <input type="number" name="lostCardFee" class="form-control" value="${lostCard.lostCardFee}" placeholder="100000" required/>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text bg-cyan">VNĐ</span>
                                                     </div>
@@ -188,15 +179,33 @@
                                                     <!-- /.card-header -->
                                                     <div class="card-body">
                                                         <div class="col-lx-12">
-                                                            <div class="position-relative" style="min-height: 250px;">
-                                                                <img src="<%= request.getContextPath() %>/assets/admin/dist/img/photo1.png" alt="Photo 1" class="img-fluid">
+                                                            <div class="position-relative" id="licensePhotoPreview" style="min-height: 250px;">
+                                                                <c:choose>
+                                                                    <c:when test="${not empty lostCard.checkInLicensePhoto}">
+                                                                        <img id="checkInLicensePhoto" src="<%=request.getContextPath()%>/assets/admin/dist/img/checkInLicensePhoto/${lostCard.checkInLicensePhoto}" alt="Check-in License Photo" class="img-fluid">
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <p>Không có hình ảnh xe vào.</p>
+                                                                    </c:otherwise>
+                                                                </c:choose>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <!-- /.card-body -->
+                                                    <div class="card-footer">
+                                                        <div class="form-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" id="checkInLicensePhotoFile" name="checkInLicensePhoto" onchange="previewLicenseImage()">
+                                                                <label class="custom-file-label" for="checkInLicensePhotoFile">
+                                                                    ${not empty lostCard.checkInLicensePhoto ? lostCard.checkInLicensePhoto : 'Chọn ảnh'}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <!-- /.card -->
                                             </div>
+
                                             <div class="col-xl-4">
                                                 <div class="card card-cyan">
                                                     <div class="card-header">
@@ -205,8 +214,25 @@
                                                     <!-- /.card-header -->
                                                     <div class="card-body">
                                                         <div class="col-lx-12">
-                                                            <div class="position-relative" style="min-height: 250px;">
-                                                                <img src="<%= request.getContextPath() %>/assets/admin/dist/img/photo1.png" alt="Photo 1" class="img-fluid">
+                                                            <div class="position-relative" id="customerPhotoPreview" style="min-height: 250px;">
+                                                                <c:choose>
+                                                                    <c:when test="${not empty lostCard.checkInCustomerPhoto}">
+                                                                        <img id="checkInCustomerPhoto" src="<%=request.getContextPath()%>/assets/admin/dist/img/checkInCustomerPhoto/${lostCard.checkInCustomerPhoto}" alt="Check-in Customer Photo" class="img-fluid">
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <p>Không có hình ảnh khuôn mặt khách hàng.</p>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div class="form-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" id="checkInCustomerPhotoFile" name="checkInCustomerPhoto" onchange="previewCustomerImage()">
+                                                                <label class="custom-file-label" for="checkInCustomerPhotoFile">
+                                                                    ${not empty lostCard.checkInCustomerPhoto ? lostCard.checkInCustomerPhoto : 'Chọn ảnh'}
+                                                                </label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -216,7 +242,7 @@
                                             <div class="col-xl-4">
                                                 <div class="form-group">
                                                     <label>Mô tả:</label>
-                                                    <textarea class="form-control" rows="3" placeholder="Khách hàng này cần giải quyết ..." style="height: 250px;"></textarea>
+                                                    <textarea class="form-control" rows="3" name="note" placeholder="Khách hàng này cần giải quyết ..." style="height: 250px;">${lostCard.note}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -224,7 +250,7 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/lost-card?page=lost-card">Thoát</a>
+                                    <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/lostcard">Thoát</a>
                                     <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Lưu</button>
                                 </div>
                             </form>
@@ -343,12 +369,94 @@
 </div>
 <jsp:include page="/views/library/_script.jsp" />
 <script>
-    $(function () {
-        $('#reservationdatetime1').datetimepicker({
-            format: 'MM/DD/YYYY HH:mm A',
-            icons: { time: 'far fa-clock' }
+    $(document).ready(function () {
+        $('#customerSelect').on('change', function () {
+            const selectedValue = $(this).val();
+            console.log("Giá trị đã thay đổi (Select2):", selectedValue);
+
+            if (selectedValue) {
+                // Gửi request để lấy thông tin khách hàng
+                fetch("${pageContext.request.contextPath}/admin/lostcard/getcustomer?customerId=" + selectedValue)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Dữ liệu khách hàng:", data);
+                        $('input[name="visitorName"]').val(data.fullName).prop('readonly', true);
+                        $('input[name="visitorPhoneNum"]').val(data.phoneNumber).prop('readonly', true);
+                        $('input[name="identifyCard"]').val(data.identifyCard).prop('readonly', true);
+                    })
+                    .catch(err => {
+                        console.error("Lỗi khi fetch thông tin:", err);
+                    });
+            } else {
+                // Khách vãng lai: cho phép nhập tay
+                $('input[name="visitorName"]').val("").prop('readonly', false);
+                $('input[name="visitorPhoneNum"]').val("").prop('readonly', false);
+                $('input[name="identifyCard"]').val("").prop('readonly', false);
+            }
         });
     });
+
+    $(function () {
+        $('#reservationdatetime1').datetimepicker({
+            format: 'MM/DD/YYYY hh:mm A',
+            icons: { time: 'far fa-clock' }
+        });
+
+        $('#reservationdatetime2').datetimepicker({
+            format: 'MM/DD/YYYY hh:mm A',
+            icons: { time: 'far fa-clock' }
+        });
+
+        bsCustomFileInput.init();
+    });
+
+    function previewLicenseImage() {
+        var file = document.getElementById('checkInLicensePhotoFile').files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            var previewContainer = document.getElementById('licensePhotoPreview');
+            var img = document.getElementById('checkInLicensePhoto');
+
+            if (!img) {
+                img = document.createElement('img');
+                img.id = 'checkInLicensePhoto';
+                img.classList.add('img-fluid');
+                previewContainer.innerHTML = ''; // clear old content (if any <p>)
+                previewContainer.appendChild(img);
+            }
+            img.src = e.target.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function previewCustomerImage() {
+        var file = document.getElementById('checkInCustomerPhotoFile').files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            var previewContainer = document.getElementById('customerPhotoPreview');
+            var img = document.getElementById('checkInCustomerPhoto');
+
+            if (!img) {
+                img = document.createElement('img');
+                img.id = 'checkInCustomerPhoto';
+                img.classList.add('img-fluid');
+                previewContainer.innerHTML = ''; // clear old content (if any <p>)
+                previewContainer.appendChild(img);
+            }
+            img.src = e.target.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+
 </script>
 </body>
 </html>

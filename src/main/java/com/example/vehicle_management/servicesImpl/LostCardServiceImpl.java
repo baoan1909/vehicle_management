@@ -36,4 +36,5 @@ public class LostCardServiceImpl implements ILostCardService {
     public List<LostCard> getAllLostCards() {
         return lostCardRepository.getAll();
     }
+
 }

@@ -10,4 +10,5 @@ public interface ICardSwipeService {
     boolean deleteCardSwipe(int id);
     CardSwipe getCardSwipeById(int id);
     List<CardSwipe> getAllCardSwipes();
+    CardSwipe getCardSwipeByCardId(int cardId);
 }

@@ -39,12 +39,8 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item <%= (request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save")
-                                    || request.getRequestURI().contains("/admin/lost-card") || request.getRequestURI().contains("/admin/lost-card/edit") || request.getRequestURI().contains("/admin/lost-card/add") || request.getRequestURI().contains("/admin/lost-card/delete") || request.getRequestURI().contains("/admin/lost-card/save"))
-                                    ? "menu-open" : "" %>">
-                    <a href="#" class="nav-link <%= (request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save")
-                                                || request.getRequestURI().contains("/admin/lost-card") || request.getRequestURI().contains("/admin/lost-card/edit") || request.getRequestURI().contains("/admin/lost-card/add") || request.getRequestURI().contains("/admin/lost-card/delete") || request.getRequestURI().contains("/admin/lost-card/save"))
-                                                ? "active" : "" %>">
+                <li class="nav-item <%= (request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save") || request.getRequestURI().contains("/admin/lostcard") || request.getRequestURI().contains("/admin/lostcard/edit") || request.getRequestURI().contains("/admin/lostcard/add") || request.getRequestURI().contains("/admin/lostcard/delete") || request.getRequestURI().contains("/admin/lostcard/save")) ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= (request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save") || request.getRequestURI().contains("/admin/lostcard") || request.getRequestURI().contains("/admin/lostcard/edit") || request.getRequestURI().contains("/admin/lostcard/add") || request.getRequestURI().contains("/admin/lostcard/delete") || request.getRequestURI().contains("/admin/lostcard/save")) ? "active" : "" %>">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Quản lý thẻ
@@ -60,8 +56,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/lost-card"
-                               class="nav-link <%=(request.getRequestURI().contains("/admin/lost-card") || request.getRequestURI().contains("/admin/lost-card/edit") || request.getRequestURI().contains("/admin/lost-card/add") || request.getRequestURI().contains("/admin/lost-card/delete") || request.getRequestURI().contains("/admin/lost-card/save")) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/lostcard"
+                               class="nav-link <%=(request.getRequestURI().contains("/admin/lostcard") || request.getRequestURI().contains("/admin/lostcard/edit") || request.getRequestURI().contains("/admin/lostcard/add") || request.getRequestURI().contains("/admin/lostcard/delete") || request.getRequestURI().contains("/admin/lostcard/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thẻ bị mất</p>
                             </a>

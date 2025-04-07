@@ -8,92 +8,38 @@ public class LostCardDTO {
     private String customerName;
     private String phoneNumber;
     private String type;
+    private String vehicleTypeName;
 
-
-    private LocalDateTime timeOfLost;
-    private double ticketPrice;
-    private double lostCardFee;
-    private String checkInLicensePhoto;
-    private String checkInCustomerPhoto;
-    private String visitorName;
-    private String visitorPhoneNum;
-    private String identifyCard;
-    private String registrationLicense;
-    private String note;
-
-    public LostCardDTO(int lostCardId, String customerName, String cardNumber, LocalDateTime notificationTime,
-                       LocalDateTime timeOfLost, double ticketPrice, double lostCardFee, String checkInLicensePhoto,
-                       String checkInCustomerPhoto, String visitorName, String visitorPhoneNum, String identifyCard,
-                       String registrationLicense, String note) {
+    public LostCardDTO(int lostCardId, LocalDateTime notificationTime, String customerName, String phoneNumber, String type, String vehicleTypeName) {
         this.lostCardId = lostCardId;
-        this.customerName = customerName;
-        this.cardNumber = cardNumber;
         this.notificationTime = notificationTime;
-        this.timeOfLost = timeOfLost;
-        this.ticketPrice = ticketPrice;
-        this.lostCardFee = lostCardFee;
-        this.checkInLicensePhoto = checkInLicensePhoto;
-        this.checkInCustomerPhoto = checkInCustomerPhoto;
-        this.visitorName = visitorName;
-        this.visitorPhoneNum = visitorPhoneNum;
-        this.identifyCard = identifyCard;
-        this.registrationLicense = registrationLicense;
-        this.note = note;
+        this.customerName = customerName;
+        this.phoneNumber = phoneNumber;
+        this.type = type;
+        this.vehicleTypeName = vehicleTypeName;
     }
 
     public int getLostCardId() {
         return lostCardId;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
     public LocalDateTime getNotificationTime() {
         return notificationTime;
     }
 
-    public LocalDateTime getTimeOfLost() {
-        return timeOfLost;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public double getTicketPrice() {
-        return ticketPrice;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public double getLostCardFee() {
-        return lostCardFee;
+    public String getType() {
+        return type;
     }
 
-    public String getCheckInLicensePhoto() {
-        return checkInLicensePhoto;
-    }
-
-    public String getCheckInCustomerPhoto() {
-        return checkInCustomerPhoto;
-    }
-
-    public String getVisitorName() {
-        return visitorName;
-    }
-
-    public String getVisitorPhoneNum() {
-        return visitorPhoneNum;
-    }
-
-    public String getIdentifyCard() {
-        return identifyCard;
-    }
-
-    public String getRegistrationLicense() {
-        return registrationLicense;
-    }
-
-    public String getNote() {
-        return note;
+    public String getVehicleTypeName() {
+        return vehicleTypeName;
     }
 }

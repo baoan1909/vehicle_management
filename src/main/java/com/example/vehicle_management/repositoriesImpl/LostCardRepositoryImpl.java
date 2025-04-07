@@ -20,8 +20,17 @@ public class LostCardRepositoryImpl implements ILostCardRepository {
         try (Connection conn = DBConnectionPool.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_LOST_CARD)) {
 
-            stmt.setInt(1, lostCard.getCustomerId());
-            stmt.setInt(2, lostCard.getCardId());
+            if (lostCard.getCustomerId() != null) {
+                stmt.setInt(1, lostCard.getCustomerId());
+            } else {
+                stmt.setNull(1, java.sql.Types.INTEGER);
+            }
+
+            if (lostCard.getCardId() != null) {
+                stmt.setInt(2, lostCard.getCardId());
+            } else {
+                stmt.setNull(2, java.sql.Types.INTEGER);
+            }
             stmt.setTimestamp(3, Timestamp.valueOf(lostCard.getNotificationTime()));
             stmt.setTimestamp(4, Timestamp.valueOf(lostCard.getTimeOfLost()));
             stmt.setDouble(5, lostCard.getTicketPrice());
@@ -46,8 +55,17 @@ public class LostCardRepositoryImpl implements ILostCardRepository {
         try (Connection conn = DBConnectionPool.getConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE_LOST_CARD)) {
 
-            stmt.setInt(1, lostCard.getCustomerId());
-            stmt.setInt(2, lostCard.getCardId());
+            if (lostCard.getCustomerId() != null) {
+                stmt.setInt(1, lostCard.getCustomerId());
+            } else {
+                stmt.setNull(1, java.sql.Types.INTEGER);
+            }
+
+            if (lostCard.getCardId() != null) {
+                stmt.setInt(2, lostCard.getCardId());
+            } else {
+                stmt.setNull(2, java.sql.Types.INTEGER);
+            }
             stmt.setTimestamp(3, Timestamp.valueOf(lostCard.getNotificationTime()));
             stmt.setTimestamp(4, Timestamp.valueOf(lostCard.getTimeOfLost()));
             stmt.setDouble(5, lostCard.getTicketPrice());
@@ -132,4 +150,5 @@ public class LostCardRepositoryImpl implements ILostCardRepository {
                 rs.getString("note")
         );
     }
+
 }

@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class LostCard {
     private int lostCardId;
-    private int customerId;
-    private int cardId;
+    private Integer customerId;
+    private Integer cardId;
     private LocalDateTime notificationTime;
     private LocalDateTime timeOfLost;
     private double ticketPrice;
@@ -20,7 +20,7 @@ public class LostCard {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-    public LostCard(int lostCardId, int customerId, int cardId, LocalDateTime notificationTime, LocalDateTime timeOfLost, double ticketPrice, double lostCardFee, String checkInLicensePhoto, String checkInCustomerPhoto, String visitorName, String visitorPhoneNum, String identifyCard, String registrationLicense, String note, LocalDateTime createDate, LocalDateTime updateDate) {
+    public LostCard(int lostCardId, Integer customerId, Integer cardId, LocalDateTime notificationTime, LocalDateTime timeOfLost, double ticketPrice, double lostCardFee, String checkInLicensePhoto, String checkInCustomerPhoto, String visitorName, String visitorPhoneNum, String identifyCard, String registrationLicense, String note, LocalDateTime createDate, LocalDateTime updateDate) {
         this.lostCardId = lostCardId;
         this.customerId = customerId;
         this.cardId = cardId;
@@ -39,7 +39,7 @@ public class LostCard {
         this.updateDate = updateDate;
     }
 
-    public LostCard(int lostCardId, int customerId, int cardId, LocalDateTime notificationTime, LocalDateTime timeOfLost, double ticketPrice, double lostCardFee, String checkInLicensePhoto, String checkInCustomerPhoto, String visitorName, String visitorPhoneNum, String identifyCard, String registrationLicense, String note) {
+    public LostCard(int lostCardId, Integer customerId, Integer cardId, LocalDateTime notificationTime, LocalDateTime timeOfLost, double ticketPrice, double lostCardFee, String checkInLicensePhoto, String checkInCustomerPhoto, String visitorName, String visitorPhoneNum, String identifyCard, String registrationLicense, String note) {
         this.lostCardId = lostCardId;
         this.customerId = customerId;
         this.cardId = cardId;
@@ -67,7 +67,7 @@ public class LostCard {
         this.lostCardId = lostCardId;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
@@ -75,7 +75,7 @@ public class LostCard {
         this.customerId = customerId;
     }
 
-    public int getCardId() {
+    public Integer getCardId() {
         return cardId;
     }
 
