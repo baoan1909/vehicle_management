@@ -41,4 +41,16 @@ public class CardServiceImpl implements ICardService {
     public boolean isExistsCardNumber(String cardNumber) {
         return cardRepository.existsByCardNumber(cardNumber);
     }
+
+    @Override
+    public double getParkingFeeVisitorByCardId(int cardId) {
+        return cardRepository.getParkingFeeVisitorByCardId(cardId);
+    }
+
+    @Override
+    public int getCustomerIdByCardId(int cardId) {
+        return cardRepository.getCustomerIdByCardId(cardId);
+    }
+
+
 }

@@ -6,15 +6,9 @@ import com.example.vehicle_management.models.Card;
 import com.example.vehicle_management.models.CardSwipe;
 import com.example.vehicle_management.models.Customer;
 import com.example.vehicle_management.models.LostCard;
-import com.example.vehicle_management.repositoriesImpl.CardRepositoryImpl;
-import com.example.vehicle_management.repositoriesImpl.CustomerRepositoryImpl;
-import com.example.vehicle_management.repositoriesImpl.LostCardRepositoryImpl;
-import com.example.vehicle_management.repositoriesImpl.VehicleTypeRepositoryImpl;
+import com.example.vehicle_management.repositoriesImpl.*;
 import com.example.vehicle_management.services.*;
-import com.example.vehicle_management.servicesImpl.CardServiceImpl;
-import com.example.vehicle_management.servicesImpl.CustomerServiceImpl;
-import com.example.vehicle_management.servicesImpl.LostCardServiceImpl;
-import com.example.vehicle_management.servicesImpl.VehicleTypeServiceImpl;
+import com.example.vehicle_management.servicesImpl.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,6 +33,7 @@ public class LostcardServlet extends HttpServlet {
         cardService = new CardServiceImpl(new CardRepositoryImpl());
         vehicleTypeService = new VehicleTypeServiceImpl(new VehicleTypeRepositoryImpl());
         customerService = new CustomerServiceImpl(new CustomerRepositoryImpl());
+        cardSwipeService = new CardSwipeServiceImpl(new CardSwipeRepositoryImpl());
     }
 
     @Override
@@ -46,21 +41,54 @@ public class LostcardServlet extends HttpServlet {
         String uri = request.getRequestURI();
 
         if (uri.contains("getcustomer")) {
-            int customerId = Integer.parseInt(request.getParameter("customerId"));
-            Customer customer = customerService.getCustomerById(customerId);
+            String cardIdStr = request.getParameter("cardId");
 
+            StringBuilder jsonBuilder = new StringBuilder();
+            jsonBuilder.append("{");
+
+            if (cardIdStr != null) {
+                int cardId = Integer.parseInt(cardIdStr);
+                CardSwipe cardSwipe = cardSwipeService.getCardSwipeByCardId(cardId);
+                Card card = cardService.getCardById(cardId);
+                double cardPriceVisitor = cardService.getParkingFeeVisitorByCardId(cardId);
+                int customerByCardId = cardService.getCustomerIdByCardId(cardId);
+
+                if (cardSwipe != null && card != null) {
+                    if (customerByCardId != 0) {
+                        // Có thông tin khách hàng
+                        Customer customer = customerService.getCustomerById(customerByCardId);
+
+                        jsonBuilder.append(String.format(
+                                " \"type\":\"%s\", \"checkInImagePath\":\"%s\", \"customerId\":\"%s\", \"fullName\":\"%s\", \"phoneNumber\":\"%s\", \"identifyCard\":\"%s\"",
+                                card.getType(),
+                                cardSwipe.getCheckInImagePath(),
+                                customerByCardId,
+                                customer.getFullName(),
+                                customer.getPhoneNumber(),
+                                customer.getIdentifyCard()
+                        ));
+                    } else {
+                        // Không có customerId => là khách vãng lai
+                        jsonBuilder.append(String.format(
+                                " \"type\":\"%s\", \"checkInImagePath\":\"%s\", \"price\":\"%s\"",
+                                card.getType(),
+                                cardSwipe.getCheckInImagePath(),
+                                cardPriceVisitor
+                        ));
+                    }
+                } else {
+                        // cardSwipe hoặc card bị null
+                        jsonBuilder.append(" \"message\": \"Thẻ này đã được quẹt THANH TOÁN hoặc CHƯA VÀO cổng\"");
+                }
+
+            } else {
+                jsonBuilder.append(" \"message\": \"Không tìm thấy thẻ này\"");
+            }
+
+            jsonBuilder.append("}");
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-
-            if (customer != null) {
-                String json = String.format(
-                        "{\"fullName\":\"%s\", \"phoneNumber\":\"%s\", \"identifyCard\":\"%s\"}",
-                        customer.getFullName(), customer.getPhoneNumber(), customer.getIdentifyCard()
-                );
-                response.getWriter().write(json);
-            } else {
-                response.getWriter().write("{}");
-            }
+            response.getWriter().write(jsonBuilder.toString());
             return;
         }
 
@@ -73,6 +101,7 @@ public class LostcardServlet extends HttpServlet {
             String name = lostCard.getVisitorName();
             String phone = lostCard.getVisitorPhoneNum();
             String cccd = lostCard.getIdentifyCard();
+            String type = "-- Loại xe --";
 
             if (lostCard.getCustomerId() != null && lostCard.getCustomerId() != 0) {
                 Customer customer = customerService.getCustomerById(lostCard.getCustomerId());
@@ -80,6 +109,12 @@ public class LostcardServlet extends HttpServlet {
                     name = customer.getFullName();
                     phone = customer.getPhoneNumber();
                     cccd = customer.getIdentifyCard();
+                }
+            }
+            if (lostCard.getCardId() != null && lostCard.getCardId() != 0) {
+                Card card = cardService.getCardById(lostCard.getCardId());
+                if (card != null) {
+                    type = card.getType();
                 }
             }
 
@@ -91,6 +126,7 @@ public class LostcardServlet extends HttpServlet {
             request.setAttribute("displayName", name);
             request.setAttribute("displayPhone", phone);
             request.setAttribute("displayIdentifyCard", cccd);
+            request.setAttribute("displayType", type);
             request.setAttribute("notificationTimeStr", notificationTimeStr);
             request.setAttribute("timeOfLostStr", timeOfLostStr);
             request.setAttribute("lostCard", lostCard);

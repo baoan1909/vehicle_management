@@ -46,9 +46,9 @@ INSERT INTO Card (CardNumber, Type, VehicleTypeId, IsCreated, IsUsed) VALUES
 
 -- Thêm dữ liệu cho CustomerRegisterTicket
 INSERT INTO CustomerRegisterTicket (CardId, CustomerId, FeeCustomerId, EffectiveDate, ExpirationDate, LicensePlate, VehicleTypeId, CardReceiptDate, TicketTypeId, Price) VALUES
-(1, 1, 1, '2024-01-01', '2024-12-31', '29A-12345', 1, '2024-01-01', 1, 84000),
-(2, 2, 2, '2024-01-01', '2024-12-31', '59B-67890', 2, '2024-01-01', 1, 140000),
-(3, 3, 3, '2024-01-01', '2024-12-31', '43C-11223', 3, '2024-01-01', 1, 840000);
+(1, 1, 1, '2025-01-01', '2025-12-31', '29A-12345', 1, '2024-01-01', 1, 84000),
+(2, 2, 2, '2025-01-01', '2025-12-31', '59B-67890', 2, '2024-01-01', 1, 140000),
+(3, 3, 3, '2025-01-01', '2025-12-31', '43C-11223', 3, '2024-01-01', 1, 840000);
 
 -- Thêm dữ liệu cho LostCard
 INSERT INTO LostCard (CustomerId, CardId, NotificationTime, TimeOfLost, TicketPrice, LostCardFee, CheckInLicensePhoto, CheckInCustomerPhoto, VisitorName, VisitorPhoneNum, IdentifyCard, RegistrationLicense, Note) VALUES
@@ -61,3 +61,5 @@ INSERT INTO CardSwipe (LicensePlate, CardId, CheckInTime, CheckOutTime, CheckInI
 ('29A-12345', 1, '2024-03-01 07:00:00', '2024-03-01 18:00:00', 'checkin1.jpg', 'checkout1.jpg', NULL, 1),
 ('59B-67890', 2, '2024-03-05 10:00:00', '2024-03-05 20:00:00', 'checkin2.jpg', 'checkout2.jpg', NULL, 2),
 ('43C-11223', 3, '2024-03-10 16:00:00', NULL, 'checkin3.jpg', NULL, NULL, 3);
+
+

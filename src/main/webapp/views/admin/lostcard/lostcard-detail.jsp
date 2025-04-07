@@ -55,13 +55,16 @@
                             <!-- form start -->
                             <form action="${pageContext.request.contextPath}/admin/lostcard/save" method="post">
                                 <div class="card-body">
+                                    <div class="form-group">
+                                        <div id="cardMessage" class="alert alert-danger" style="display: none"></div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-3">
                                             <input type="hidden" name="id" value="${lostCard.cardId}" />
 
                                             <div class="form-group">
                                                 <label>ID thẻ:</label>
-                                                <select class="form-control select2" name="cardId" style="width: 100%;" required>
+                                                <select class="form-control select2" id="cardSelect" name="cardId" style="width: 100%;" required>
                                                     <option value="">-- Chọn thẻ --</option>
                                                     <c:forEach var="card" items="${cards}">
                                                         <option value="${card.cardId}"
@@ -114,26 +117,32 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-md-2" >
+                                            <div class="form-group">
+                                                <label>Loại thẻ:</label>
+                                                <input type="text" id="type"  name="type" class="form-control" value="${displayType}" placeholder="-- Loại thẻ --" readonly/>
+                                            </div>
+                                        </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Tên khách hàng:</label>
-                                                <input type="text" id="visitorName"  name="visitorName" class="form-control" value="${displayName}" placeholder="Nguyễn Văn A" readonly  />
+                                                <input type="text" id="visitorName"  name="visitorName" class="form-control" value="${displayName}" placeholder="Nguyễn Văn A" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>CCCD:</label>
-                                                <input type="text" id="identifyCard" name="identifyCard" class="form-control" value="${displayIdentifyCard}" placeholder="8362632742" readonly  />
+                                                <input type="text" id="identifyCard" name="identifyCard" class="form-control" value="${displayIdentifyCard}" placeholder="8362632742" required  />
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Số điện thoại:</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text bg-cyan"><i class="fas fa-phone"></i></span>
                                                     </div>
-                                                    <input type="text" id="visitorPhoneNum" name="visitorPhoneNum" class="form-control" value="${displayPhone}" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text" readonly  />
+                                                    <input type="text" id="visitorPhoneNum" name="visitorPhoneNum" class="form-control" value="${displayPhone}" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text" required  />
                                                 </div>
                                                 <!-- /.input group -->
                                             </div>
@@ -142,7 +151,7 @@
                                             <div class="form-group">
                                                 <label>Phí gửi xe:</label>
                                                 <div class="input-group">
-                                                    <input type="number" name="ticketPrice" class="form-control" value="${lostCard.ticketPrice}" placeholder="200000" required />
+                                                    <input type="number" name="ticketPrice" class="form-control" value="${lostCard.ticketPrice}" placeholder="0.0" required />
                                                     <div class="input-group-append">
                                                         <span class="input-group-text bg-cyan">VNĐ</span>
                                                     </div>
@@ -154,14 +163,14 @@
                                         <div class="col-md-10">
                                             <div class="form-group">
                                                 <label>Số giấy tờ xe:</label>
-                                                <input type="text" name="registrationLicense" class="form-control" value="${lostCard.registrationLicense}" placeholder="02621234256" required/>
+                                                <input type="text" name="registrationLicense" class="form-control" value="${lostCard.registrationLicense}" placeholder="Reg2" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Phí mất thẻ:</label>
                                                 <div class="input-group">
-                                                    <input type="number" name="lostCardFee" class="form-control" value="${lostCard.lostCardFee}" placeholder="100000" required/>
+                                                    <input type="number" name="lostCardFee" class="form-control" value="${lostCard.lostCardFee == 0.0 ? 100000.0 : lostCard.lostCardFee}" required/>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text bg-cyan">VNĐ</span>
                                                     </div>
@@ -179,13 +188,13 @@
                                                     <!-- /.card-header -->
                                                     <div class="card-body">
                                                         <div class="col-lx-12">
-                                                            <div class="position-relative" id="licensePhotoPreview" style="min-height: 250px;">
+                                                            <div class="position-relative" id="checkInLicensePhotoPreview" style="min-height: 250px;">
                                                                 <c:choose>
                                                                     <c:when test="${not empty lostCard.checkInLicensePhoto}">
                                                                         <img id="checkInLicensePhoto" src="<%=request.getContextPath()%>/assets/admin/dist/img/checkInLicensePhoto/${lostCard.checkInLicensePhoto}" alt="Check-in License Photo" class="img-fluid">
                                                                     </c:when>
                                                                     <c:otherwise>
-                                                                        <p>Không có hình ảnh xe vào.</p>
+                                                                        <img id="checkInLicensePhoto" src="" alt="Check-in License Photo" class="img-fluid">
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </div>
@@ -220,7 +229,7 @@
                                                                         <img id="checkInCustomerPhoto" src="<%=request.getContextPath()%>/assets/admin/dist/img/checkInCustomerPhoto/${lostCard.checkInCustomerPhoto}" alt="Check-in Customer Photo" class="img-fluid">
                                                                     </c:when>
                                                                     <c:otherwise>
-                                                                        <p>Không có hình ảnh khuôn mặt khách hàng.</p>
+                                                                        <img id="checkInCustomerPhoto" src="" alt="Check-in Customer Photo" class="img-fluid">
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </div>
@@ -369,33 +378,6 @@
 </div>
 <jsp:include page="/views/library/_script.jsp" />
 <script>
-    $(document).ready(function () {
-        $('#customerSelect').on('change', function () {
-            const selectedValue = $(this).val();
-            console.log("Giá trị đã thay đổi (Select2):", selectedValue);
-
-            if (selectedValue) {
-                // Gửi request để lấy thông tin khách hàng
-                fetch("${pageContext.request.contextPath}/admin/lostcard/getcustomer?customerId=" + selectedValue)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log("Dữ liệu khách hàng:", data);
-                        $('input[name="visitorName"]').val(data.fullName).prop('readonly', true);
-                        $('input[name="visitorPhoneNum"]').val(data.phoneNumber).prop('readonly', true);
-                        $('input[name="identifyCard"]').val(data.identifyCard).prop('readonly', true);
-                    })
-                    .catch(err => {
-                        console.error("Lỗi khi fetch thông tin:", err);
-                    });
-            } else {
-                // Khách vãng lai: cho phép nhập tay
-                $('input[name="visitorName"]').val("").prop('readonly', false);
-                $('input[name="visitorPhoneNum"]').val("").prop('readonly', false);
-                $('input[name="identifyCard"]').val("").prop('readonly', false);
-            }
-        });
-    });
-
     $(function () {
         $('#reservationdatetime1').datetimepicker({
             format: 'MM/DD/YYYY hh:mm A',
@@ -410,12 +392,79 @@
         bsCustomFileInput.init();
     });
 
+    $('#cardSelect').on('change', function () {
+        const selectedValue = $(this).val();
+
+        console.log("Thẻ đã chọn:", selectedValue);
+
+        if (selectedValue) {
+            fetch("${pageContext.request.contextPath}/admin/lostcard/getcustomer?cardId=" + selectedValue)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Dữ liệu thẻ:", data);
+                    // Hiển thị message nếu có
+                    if (data.message) {
+                        $('#cardMessage').text(data.message).show(); // hoặc alert(data.message);
+                    } else {
+                        $('#cardMessage').text("").hide();
+                    }
+
+                    // Gán selected cho option customerId tương ứng nếu có
+                    if (data.customerId) {
+                        $('#customerSelect').val(data.customerId).trigger('change');
+                        $('input[name="type"]').val(data.type || "");
+                        $('input[name="ticketPrice"]').val("0.0").prop('readonly', true);
+                        $('input[name="visitorName"]').val(data.fullName || "").prop('readonly', true);
+                        $('input[name="visitorPhoneNum"]').val(data.phoneNumber || "").prop('readonly', true);
+                        $('input[name="identifyCard"]').val(data.identifyCard || "").prop('readonly', true);
+                    }else {
+                        $('#customerSelect').val("").trigger('change');
+                        $('input[name="type"]').val(data.type || "");
+                        $('input[name="ticketPrice"]').val(data.price || "").prop('readonly', true);
+                        $('input[name="visitorName"]').val("").prop('readonly', false);
+                        $('input[name="visitorPhoneNum"]').val("").prop('readonly', false);
+                        $('input[name="identifyCard"]').val("").prop('readonly', false);
+                    }
+
+                    // Cập nhật ảnh check-in license
+                    if (data.checkInImagePath) {
+                        var imageSrc = "${pageContext.request.contextPath}/assets/admin/dist/img/checkInLicensePhoto/" + data.checkInImagePath;
+                        $('#checkInLicensePhoto').attr("src", imageSrc);
+                        $('#checkInLicensePhotoPreview').show();
+                        $('#checkInLicensePhotoFile').next('label').text(data.checkInImagePath);
+                    } else {
+                        $('#checkInLicensePhoto').attr("src", "");
+                        $('#checkInLicensePhotoPreview').show();
+                        $('#checkInLicensePhotoFile').next('label').text('Chọn ảnh');
+                    }
+                })
+                .catch(err => {
+                    console.error("Lỗi khi fetch dữ liệu thẻ:", err);
+                });
+        } else {
+            // Reset lại nếu không có cardId được chọn
+            $('input[name="type"]').val("");
+            $('input[name="ticketPrice"]').val("").prop('readonly', false);
+            $('input[name="visitorName"]').val("").prop('readonly', false);
+            $('input[name="visitorPhoneNum"]').val("").prop('readonly', false);
+            $('input[name="identifyCard"]').val("").prop('readonly', false);
+            $('#checkInLicensePhoto').attr("src", "");
+            $('#checkInLicensePhotoPreview').show();
+            $('#checkInLicensePhotoFile').next('label').text('Chọn ảnh');
+
+            // Reset selected customer
+            $('#customerSelect').val("").trigger('change');
+        }
+    });
+
+
+    // Hàm preview ảnh khi chọn ảnh từ input file
     function previewLicenseImage() {
         var file = document.getElementById('checkInLicensePhotoFile').files[0];
         var reader = new FileReader();
 
         reader.onload = function(e) {
-            var previewContainer = document.getElementById('licensePhotoPreview');
+            var previewContainer = document.getElementById('checkInLicensePhotoPreview');
             var img = document.getElementById('checkInLicensePhoto');
 
             if (!img) {
@@ -426,12 +475,14 @@
                 previewContainer.appendChild(img);
             }
             img.src = e.target.result;
+            $('#checkInLicensePhotoPreview').show(); // Hiển thị ảnh khi người dùng chọn ảnh
         };
 
         if (file) {
             reader.readAsDataURL(file);
         }
     }
+
 
     function previewCustomerImage() {
         var file = document.getElementById('checkInCustomerPhotoFile').files[0];
@@ -455,7 +506,6 @@
             reader.readAsDataURL(file);
         }
     }
-
 
 </script>
 </body>

@@ -150,5 +150,4 @@ public class LostCardRepositoryImpl implements ILostCardRepository {
                 rs.getString("note")
         );
     }
-
 }
