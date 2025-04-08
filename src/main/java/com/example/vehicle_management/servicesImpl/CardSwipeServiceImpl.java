@@ -14,27 +14,27 @@ public class CardSwipeServiceImpl implements ICardSwipeService {
 
     @Override
     public boolean insertCardSwipe(CardSwipe cardSwipe) {
-        return false;
+        return cardSwipeRepository.insert(cardSwipe);
     }
 
     @Override
     public boolean updateCardSwipe(CardSwipe cardSwipe) {
-        return false;
+        return cardSwipeRepository.update(cardSwipe);
     }
 
     @Override
     public boolean deleteCardSwipe(int id) {
-        return false;
+        return cardSwipeRepository.delete(id);
     }
 
     @Override
     public CardSwipe getCardSwipeById(int id) {
-        return null;
+        return cardSwipeRepository.getById(id);
     }
 
     @Override
     public List<CardSwipe> getAllCardSwipes() {
-        return List.of();
+        return cardSwipeRepository.getAll();
     }
 
     @Override

@@ -29,6 +29,18 @@ public class CardSwipe {
         this.updateDate = updateDate;
     }
 
+    public CardSwipe(int cardSwipeId, String licensePlate, int cardId, LocalDateTime checkInTime, LocalDateTime checkOutTime, String checkInImagePath, String imagePathOut, double price, int vehicleTypeId) {
+        this.cardSwipeId = cardSwipeId;
+        this.licensePlate = licensePlate;
+        this.cardId = cardId;
+        this.checkInTime = checkInTime;
+        this.checkOutTime = checkOutTime;
+        this.checkInImagePath = checkInImagePath;
+        this.imagePathOut = imagePathOut;
+        this.price = price;
+        this.vehicleTypeId = vehicleTypeId;
+    }
+
     public CardSwipe() {
     }
 

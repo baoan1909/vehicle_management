@@ -289,69 +289,51 @@
                                                             <thead>
                                                             <tr>
                                                                 <th>STT</th>
+                                                                <th>ID quét thẻ</th>
                                                                 <th>ID thẻ</th>
                                                                 <th>Biển số</th>
                                                                 <th>Thời gian vào</th>
                                                                 <th>Thời gian ra</th>
                                                                 <th>Loại xe</th>
-                                                                <th>Loại vé</th>
+                                                                <th>Loại thẻ</th>
                                                                 <th>Phí DV</th>
                                                                 <th style="width: 50px">Chức năng</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
-                                                                <td>Trident</td>
-                                                                <td>Internet
-                                                                    Explorer 4.0
-                                                                </td>
-                                                                <td>Win 95+</td>
-                                                                <td> 4</td>
-                                                                <td>X</td>
-                                                                <td>X</td>
-                                                                <td>X</td>
-                                                                <td>X</td>
-                                                                <td>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <button type="button" class="btn btn-info btn-block">
-                                                                                <i class="fas fa-pen-square"></i>
-                                                                            </button>
+                                                            <c:forEach var="cardSwipe" items="${lstCardSwipe}" varStatus="loop">
+                                                                <tr>
+                                                                    <td>${loop.count}</td>
+                                                                    <td>${cardSwipe.cardSwipeId}</td>
+                                                                    <td>${cardSwipe.cardId}</td>
+                                                                    <td>${cardSwipe.licensePlate}</td>
+                                                                    <td>${cardSwipe.checkInTime}</td>
+                                                                    <td>${cardSwipe.checkOutTime}</td>
+                                                                    <td>${cardSwipe.vehicleTypeName}</td>
+                                                                    <td>${cardSwipe.type}</td>
+                                                                    <td>${cardSwipe.price}</td>
+                                                                    <td>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <button type="button" class="btn btn-info btn-block">
+                                                                                    <i class="fas fa-pen-square"></i>
+                                                                                </button>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Trident</td>
-                                                                <td>Internet
-                                                                    Explorer 5.0
-                                                                </td>
-                                                                <td>Win 95+</td>
-                                                                <td>5</td>
-                                                                <td>C</td>
-                                                                <td>X</td>
-                                                                <td>X</td>
-                                                                <td>X</td>
-                                                                <td>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <button type="button" class="btn btn-info btn-block">
-                                                                                <i class="fas fa-pen-square"></i>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                                    </td>
+                                                                </tr>
+                                                            </c:forEach>
                                                             </tbody>
                                                             <tfoot>
                                                             <tr>
                                                                 <th>STT</th>
+                                                                <th>ID quét thẻ</th>
                                                                 <th>ID thẻ</th>
                                                                 <th>Biển số</th>
                                                                 <th>Thời gian vào</th>
                                                                 <th>Thời gian ra</th>
                                                                 <th>Loại xe</th>
-                                                                <th>Loại vé</th>
+                                                                <th>Loại thẻ</th>
                                                                 <th>Phí DV</th>
                                                                 <th>Chức năng</th>
                                                             </tr>

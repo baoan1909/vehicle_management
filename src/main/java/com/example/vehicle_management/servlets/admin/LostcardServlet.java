@@ -1,6 +1,8 @@
 package com.example.vehicle_management.servlets.admin;
 
+import com.example.vehicle_management.dtos.CardSwipeDTO;
 import com.example.vehicle_management.dtos.LostCardDTO;
+import com.example.vehicle_management.mappers.CardSwipeMapper;
 import com.example.vehicle_management.mappers.LostCardMapper;
 import com.example.vehicle_management.models.Card;
 import com.example.vehicle_management.models.CardSwipe;
@@ -77,8 +79,22 @@ public class LostcardServlet extends HttpServlet {
                         ));
                     }
                 } else {
-                        // cardSwipe hoặc card bị null
+                    //Trường hợp không cardswipe nhưng là khách hàng đăng ký
+                    if(customerByCardId != 0) {
+                        // Có thông tin khách hàng
+                        Customer customer = customerService.getCustomerById(customerByCardId);
+
+                        jsonBuilder.append(String.format(
+                                " \"type\":\"%s\", \"customerId\":\"%s\", \"fullName\":\"%s\", \"phoneNumber\":\"%s\", \"identifyCard\":\"%s\"",
+                                card.getType(),
+                                customerByCardId,
+                                customer.getFullName(),
+                                customer.getPhoneNumber(),
+                                customer.getIdentifyCard()
+                        ));
+                    }else {
                         jsonBuilder.append(" \"message\": \"Thẻ này đã được quẹt THANH TOÁN hoặc CHƯA VÀO cổng\"");
+                    }
                 }
 
             } else {
@@ -97,6 +113,8 @@ public class LostcardServlet extends HttpServlet {
             LostCard lostCard = (lostCardId == 0) ? new LostCard() : lostCardService.getLostCardById(lostCardId);
             List<Card> cards = cardService.getAllCards();
             List<Customer> customers = customerService.getAllCustomers();
+            List<CardSwipe> cardSwipes = cardSwipeService.getAllCardSwipes();
+            List<CardSwipeDTO> lstCardSwipe = CardSwipeMapper.toDTOList(cardSwipes, cardService, vehicleTypeService);
 
             String name = lostCard.getVisitorName();
             String phone = lostCard.getVisitorPhoneNum();
@@ -132,6 +150,7 @@ public class LostcardServlet extends HttpServlet {
             request.setAttribute("lostCard", lostCard);
             request.setAttribute("cards", cards);
             request.setAttribute("customers", customers);
+            request.setAttribute("lstCardSwipe", lstCardSwipe);
             request.getRequestDispatcher("/views/admin/lostcard/lostcard-detail.jsp").forward(request, response);
         } else if (uri.contains("delete")) {
             int lostCardId = Integer.parseInt(request.getParameter("id"));
@@ -140,6 +159,7 @@ public class LostcardServlet extends HttpServlet {
         } else {
             List<LostCard> lostCards = lostCardService.getAllLostCards();
             List<LostCardDTO> lstLostCards = LostCardMapper.toDTOList(lostCards, cardService, customerService, vehicleTypeService);
+
             request.setAttribute("lstLostCards", lstLostCards);
             request.getRequestDispatcher("/views/admin/lostcard/lostcard.jsp").forward(request, response);
         }

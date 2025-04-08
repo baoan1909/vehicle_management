@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Card Swipe</title>
@@ -142,32 +143,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td>Trident</td>
-                      <td> 1</td>
-                      <td>Internet
-                        Explorer 4.0
-                      </td>
-                      <td>Win 95+</td>
-                      <td> 4</td>
-                      <td>X</td>
-                      <td>X</td>
-                      <td>X</td>
-                      <td>X</td>
-                    </tr>
-                    <tr>
-                      <td>Trident</td>
-                      <td> 2</td>
-                      <td>Internet
-                        Explorer 5.0
-                      </td>
-                      <td>Win 95+</td>
-                      <td>5</td>
-                      <td>C</td>
-                      <td>X</td>
-                      <td>X</td>
-                      <td>X</td>
-                    </tr>
+                      <c:forEach var="cardSwipe" items="${lstCardSwipe}" varStatus="loop">
+                        <tr>
+                          <td>${loop.count}</td>
+                          <td>${cardSwipe.cardSwipeId}</td>
+                          <td>${cardSwipe.cardId}</td>
+                          <td>${cardSwipe.licensePlate}</td>
+                          <td>${cardSwipe.checkInTime}</td>
+                          <td>${cardSwipe.checkOutTime}</td>
+                          <td>${cardSwipe.vehicleTypeName}</td>
+                          <td>${cardSwipe.type}</td>
+                          <td>${cardSwipe.price}</td>
+                        </tr>
+                      </c:forEach>
                     </tbody>
                     <tfoot>
                     <tr>
