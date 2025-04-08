@@ -117,34 +117,24 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-2" >
+                                        <div class="col-md-3" >
                                             <div class="form-group">
                                                 <label>Loại thẻ:</label>
                                                 <input type="text" id="type"  name="type" class="form-control" value="${displayType}" placeholder="-- Loại thẻ --" readonly/>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Tên khách hàng:</label>
                                                 <input type="text" id="visitorName"  name="visitorName" class="form-control" value="${displayName}" placeholder="Nguyễn Văn A" required/>
+                                                <input type="text" id="customerName"  name="customerName" class="form-control" value="${displayName}" placeholder="Nguyễn Văn A" hidden="hidden"/>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>CCCD:</label>
                                                 <input type="text" id="identifyCard" name="identifyCard" class="form-control" value="${displayIdentifyCard}" placeholder="8362632742" required  />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>Số điện thoại:</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-cyan"><i class="fas fa-phone"></i></span>
-                                                    </div>
-                                                    <input type="text" id="visitorPhoneNum" name="visitorPhoneNum" class="form-control" value="${displayPhone}" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text" required  />
-                                                </div>
-                                                <!-- /.input group -->
+                                                <input type="text" id="customerIdentifyCard" name="customerIdentifyCard" class="form-control" value="${displayIdentifyCard}" placeholder="8362632742" hidden="hidden" />
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -160,10 +150,23 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-10">
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>Số giấy tờ xe:</label>
                                                 <input type="text" name="registrationLicense" class="form-control" value="${lostCard.registrationLicense}" placeholder="Reg2" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>Số điện thoại:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text bg-cyan"><i class="fas fa-phone"></i></span>
+                                                    </div>
+                                                    <input type="text" id="visitorPhoneNum" name="visitorPhoneNum" class="form-control" value="${displayPhone}" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text" required  />
+                                                    <input type="text" id="customerPhoneNum" name="customerPhoneNum" class="form-control" value="${displayPhone}" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text" hidden="hidden"  />
+                                                </div>
+                                                <!-- /.input group -->
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -315,7 +318,8 @@
                                                                     <td>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <button type="button" class="btn btn-info btn-block">
+                                                                                <button type="button" class="btn btn-info btn-block edit-card-btn"
+                                                                                data-card-id="${cardSwipe.cardId}">
                                                                                     <i class="fas fa-pen-square"></i>
                                                                                 </button>
                                                                             </div>
@@ -396,16 +400,25 @@
                         $('#customerSelect').val(data.customerId).trigger('change');
                         $('input[name="type"]').val(data.type || "");
                         $('input[name="ticketPrice"]').val("0.0").prop('readonly', true);
-                        $('input[name="visitorName"]').val(data.fullName || "").prop('readonly', true);
-                        $('input[name="visitorPhoneNum"]').val(data.phoneNumber || "").prop('readonly', true);
-                        $('input[name="identifyCard"]').val(data.identifyCard || "").prop('readonly', true);
+                        $('input[name="customerName"]').val(data.fullName || "").prop('hidden', false).prop('readonly', true);
+                        $('input[name="customerPhoneNum"]').val(data.phoneNumber || "").prop('hidden', false).prop('readonly', true);
+                        $('input[name="customerIdentifyCard"]').val(data.identifyCard || "").prop('hidden', false).prop('readonly', true);
+
+                        $('input[name="visitorName"]').val("").prop('hidden', true).prop('required', false);
+                        $('input[name="visitorPhoneNum"]').val("").prop('hidden', true).prop('required', false);
+                        $('input[name="identifyCard"]').val("").prop('hidden', true).prop('required', false);
                     }else {
                         $('#customerSelect').val("").trigger('change');
                         $('input[name="type"]').val(data.type || "");
                         $('input[name="ticketPrice"]').val(data.price || "").prop('readonly', true);
-                        $('input[name="visitorName"]').val("").prop('readonly', false);
-                        $('input[name="visitorPhoneNum"]').val("").prop('readonly', false);
-                        $('input[name="identifyCard"]').val("").prop('readonly', false);
+
+                        $('input[name="customerName"]').val("").prop('hidden', true);
+                        $('input[name="customerPhoneNum"]').val("").prop('hidden', true);
+                        $('input[name="customerIdentifyCard"]').val("").prop('hidden', true);
+
+                        $('input[name="visitorName"]').val("").prop('hidden', false).prop('required', true);
+                        $('input[name="visitorPhoneNum"]').val("").prop('hidden', false).prop('required', true);
+                        $('input[name="identifyCard"]').val("").prop('hidden', false).prop('required', true);
                     }
 
                     // Cập nhật ảnh check-in license
@@ -439,6 +452,22 @@
         }
     });
 
+    $(document).ready(function () {
+        // Khi nhấn nút sửa
+        $('.edit-card-btn').on('click', function () {
+            const cardId = $(this).data('card-id'); // Lấy cardId từ button đã chọn
+
+            $('#modal-xl').modal('hide');
+
+            // Set giá trị cho select
+            $('#cardSelect').val(cardId).trigger('change');
+
+            // Nếu bạn muốn cuộn đến thẻ select
+            $('html, body').animate({
+                scrollTop: $('#cardSelect').offset().top - 100
+            }, 500);
+        });
+    });
 
     // Hàm preview ảnh khi chọn ảnh từ input file
     function previewLicenseImage() {

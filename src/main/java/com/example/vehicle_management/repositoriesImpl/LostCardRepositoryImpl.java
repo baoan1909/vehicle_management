@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class LostCardRepositoryImpl implements ILostCardRepository {
     private static final String SELECT_ALL_LOST_CARDS = "SELECT lostCardId, customerId, cardId, notificationTime, timeOfLost, ticketPrice, lostCardFee, checkInLicensePhoto, checkInCustomerPhoto, visitorName, visitorPhoneNum, identifyCard, registrationLicense, note FROM LostCard;";
     private static final String SELECT_LOST_CARD_BY_ID = "SELECT lostCardId, customerId, cardId, notificationTime, timeOfLost, ticketPrice, lostCardFee, checkInLicensePhoto, checkInCustomerPhoto, visitorName, visitorPhoneNum, identifyCard, registrationLicense, note FROM LostCard WHERE lostCardId = ?;";
@@ -15,6 +16,9 @@ public class LostCardRepositoryImpl implements ILostCardRepository {
     private static final String UPDATE_LOST_CARD = "UPDATE LostCard SET customerId = ?, cardId = ?, notificationTime = ?, timeOfLost = ?, ticketPrice = ?, lostCardFee = ?, checkInLicensePhoto = ?, checkInCustomerPhoto = ?, visitorName = ?, visitorPhoneNum = ?, identifyCard = ?, registrationLicense = ?, note = ? WHERE lostCardId = ?;";
     private static final String DELETE_LOST_CARD = "DELETE FROM LostCard WHERE lostCardId = ?;";
 
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.trim().isEmpty();
+    }
     @Override
     public boolean insert(LostCard lostCard) {
         try (Connection conn = DBConnectionPool.getConnection();
@@ -35,11 +39,21 @@ public class LostCardRepositoryImpl implements ILostCardRepository {
             stmt.setTimestamp(4, Timestamp.valueOf(lostCard.getTimeOfLost()));
             stmt.setDouble(5, lostCard.getTicketPrice());
             stmt.setDouble(6, lostCard.getLostCardFee());
-            stmt.setString(7, lostCard.getCheckInLicensePhoto());
+
+            if (lostCard.getCustomerId() != null) {
+                if (lostCard.getCheckInLicensePhoto() != null && !lostCard.getCheckInLicensePhoto().isEmpty()) {
+                    stmt.setString(7, lostCard.getCheckInLicensePhoto());
+                } else {
+                    stmt.setNull(7, java.sql.Types.VARCHAR);
+                }
+            }else {
+                stmt.setString(7, lostCard.getCheckInLicensePhoto());
+            }
+
             stmt.setString(8, lostCard.getCheckInCustomerPhoto());
-            stmt.setString(9, lostCard.getVisitorName());
-            stmt.setString(10, lostCard.getVisitorPhoneNum());
-            stmt.setString(11, lostCard.getIdentifyCard());
+            stmt.setString(9, isNullOrEmpty(lostCard.getVisitorName()) ? null : lostCard.getVisitorName());
+            stmt.setString(10, isNullOrEmpty(lostCard.getVisitorPhoneNum()) ? null : lostCard.getVisitorPhoneNum());
+            stmt.setString(11, isNullOrEmpty(lostCard.getIdentifyCard()) ? null : lostCard.getIdentifyCard());
             stmt.setString(12, lostCard.getRegistrationLicense());
             stmt.setString(13, lostCard.getNote());
 
@@ -70,11 +84,23 @@ public class LostCardRepositoryImpl implements ILostCardRepository {
             stmt.setTimestamp(4, Timestamp.valueOf(lostCard.getTimeOfLost()));
             stmt.setDouble(5, lostCard.getTicketPrice());
             stmt.setDouble(6, lostCard.getLostCardFee());
-            stmt.setString(7, lostCard.getCheckInLicensePhoto());
+
+            if (lostCard.getCustomerId() != null) {
+                if (lostCard.getCheckInLicensePhoto() != null && !lostCard.getCheckInLicensePhoto().isEmpty()) {
+                    stmt.setString(7, lostCard.getCheckInLicensePhoto());
+                } else {
+                    stmt.setNull(7, java.sql.Types.VARCHAR);
+                }
+            }else {
+                stmt.setString(7, lostCard.getCheckInLicensePhoto());
+            }
+
+
+
             stmt.setString(8, lostCard.getCheckInCustomerPhoto());
-            stmt.setString(9, lostCard.getVisitorName());
-            stmt.setString(10, lostCard.getVisitorPhoneNum());
-            stmt.setString(11, lostCard.getIdentifyCard());
+            stmt.setString(9, isNullOrEmpty(lostCard.getVisitorName()) ? null : lostCard.getVisitorName());
+            stmt.setString(10, isNullOrEmpty(lostCard.getVisitorPhoneNum()) ? null : lostCard.getVisitorPhoneNum());
+            stmt.setString(11, isNullOrEmpty(lostCard.getIdentifyCard()) ? null : lostCard.getIdentifyCard());
             stmt.setString(12, lostCard.getRegistrationLicense());
             stmt.setString(13, lostCard.getNote());
             stmt.setInt(14, lostCard.getLostCardId());

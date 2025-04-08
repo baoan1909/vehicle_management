@@ -178,10 +178,19 @@ public class LostcardServlet extends HttpServlet {
         double lostCardFee = request.getParameter("lostCardFee").isEmpty() ? 0 : Double.parseDouble(request.getParameter("lostCardFee"));
 
         String checkInLicensePhoto = request.getParameter("checkInLicensePhoto");
+        checkInLicensePhoto = (checkInLicensePhoto != null && !checkInLicensePhoto.trim().isEmpty()) ? checkInLicensePhoto : null;
+
         String checkInCustomerPhoto = request.getParameter("checkInCustomerPhoto");
+
         String visitorName = request.getParameter("visitorName");
+        visitorName = (visitorName != null && !visitorName.trim().isEmpty()) ? visitorName : null;
+
         String visitorPhoneNum = request.getParameter("visitorPhoneNum");
+        visitorPhoneNum = (visitorPhoneNum != null && !visitorPhoneNum.trim().isEmpty()) ? visitorPhoneNum : null;
+
         String identifyCard = request.getParameter("identifyCard");
+        identifyCard = (identifyCard != null && !identifyCard.trim().isEmpty()) ? identifyCard : null;
+
         String registrationLicense = request.getParameter("registrationLicense");
         String note = request.getParameter("note");
 
