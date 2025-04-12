@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Parking Fee Of Visitor</title>
@@ -63,12 +64,11 @@
                                                 <div class="form-group">
                                                     <select class="form-control select2" style="width: 100%;">
                                                         <option selected="selected">Loại xe</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
+                                                        <c:forEach var="vehicleType" items="${vehicleTypeList}">
+                                                            <option value="${vehicleType.vehicleTypeId}">
+                                                                    ${vehicleType.vehicleTypeName}
+                                                            </option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/parkingFeeOfVisitor/parkingFeeOfVisitor-detail?page=parkingFeeOfVisitor-detail" class="btn btn-info btn-block">
+                                        <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/add" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
@@ -111,81 +111,30 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>Xe máy</td>
-                                            <td>15,000 VNĐ</td>
-                                            <td>01/03/2025</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
+                                        <c:forEach var="pfv" items="${parkingFeeOfVisitorDTOList}" varStatus="loop">
+                                            <tr>
+                                                <td>${loop.index + 1}</td>
+                                                <td>${pfv.feeVisitorId}</td>
+                                                <td>${pfv.vehicleTypeName}</td>
+                                                <td>${pfv.parkingFeeOfVisitor}</td>
+                                                <td>${pfv.startDate}</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/edit?id=${pfv.feeVisitorId}" class="btn btn-info btn-block">
+                                                                <i class="fas fa-pen-square"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/delete?id=${pfv.feeVisitorId}" class="btn btn-outline-warning btn-block" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>2</td>
-                                            <td>Ô tô</td>
-                                            <td>30,000 VNĐ</td>
-                                            <td>15/03/2025</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>3</td>
-                                            <td>Xe tải</td>
-                                            <td>50,000 VNĐ</td>
-                                            <td>20/03/2025</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+
                                         </tbody>
                                         <tfoot>
                                         <tr>

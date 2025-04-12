@@ -12,9 +12,11 @@ import java.util.List;
 public class VehicleTypeRepositoryImpl implements IVehicleTypeRepository {
     private static final String SELECT_ALL_VEHICLE_TYPE = "SELECT vehicleTypeId, vehicleTypeName, description FROM VehicleType;";
     private static final String SELECT_VEHICLE_TYPE_BY_ID = "SELECT vehicleTypeId, vehicleTypeName, description FROM VehicleType WHERE vehicleTypeId = ?;";
+    private static final String SELECT_VEHICLE_TYPE_BY_NAME = "SELECT vehicleTypeId FROM VehicleType WHERE vehicleTypeName= ?;";
     private static final String INSERT_VEHICLE_TYPE = "INSERT INTO VehicleType(vehicleTypeName, description) VALUES (?, ?);";
     private static final String UPDATE_VEHICLE_TYPE = "UPDATE VehicleType SET vehicleTypeName = ?, description = ? WHERE vehicleTypeId = ?;";
     private static final String DELETE_VEHICLE_TYPE = "DELETE FROM VehicleType WHERE vehicleTypeId = ?;";
+
 
     @Override
     public boolean insert(VehicleType vehicleType) {
@@ -106,4 +108,5 @@ public class VehicleTypeRepositoryImpl implements IVehicleTypeRepository {
     private LocalDateTime convertToLocalDateTime(Timestamp timestamp) {
         return (timestamp != null) ? timestamp.toLocalDateTime() : null;
     }
+
 }

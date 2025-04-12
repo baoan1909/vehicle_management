@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<meta charset="UTF-8">
 <html>
 <head>
     <title>Parking Fee Of Customer</title>
@@ -18,14 +21,14 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0">Quản lý phí khách đăng ký</h1>
-                    </div><!-- /.col -->
+                    </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
                             <li class="breadcrumb-item active">Phí khách đăng ký</li>
                         </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
+                    </div>
+                </div>
             </div>
 
             <!-- Content Wrapper. Contains page content -->
@@ -44,7 +47,6 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <!-- /.input group -->
                                     </div>
                                     <div class="col-12 callout callout-info">
                                         <div class="row">
@@ -61,14 +63,13 @@
                                             </div>
                                             <div class="col-md-2 mt-3">
                                                 <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Loại xe</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
+                                                    <select class="form-control select2" name="vehicleTypeId" style="width: 100%;">
+                                                        <option value="">Loại xe</option>
+                                                        <c:forEach var="vehicleType" items="${vehicleTypeList}">
+                                                            <option value="${vehicleType.vehicleTypeId}">
+                                                                    ${vehicleType.vehicleTypeName}
+                                                            </option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
@@ -76,17 +77,14 @@
                                                 <div class="form-group">
                                                     <select class="form-control select2" style="width: 100%;">
                                                         <option selected="selected">Loại vé</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
+                                                        <c:forEach var="ticketType" items="${ticketTypeList}">
+                                                            <option value="${ticketType.ticketTypeId}">
+                                                                    ${ticketType.ticketTypeName}
+                                                            </option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
-                                          
-                                            <!-- /.col -->
                                             <div class="col-md-1 mt-3 ml-auto">
                                                 <button type="button" class="btn btn-block btn-info">Đặt lại</button>
                                             </div>
@@ -95,22 +93,21 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/parkingFeeOfCustomer/parkingFeeOfCustomer-detail?page=parkingFeeOfCustomer-detail" class="btn btn-info btn-block">
+                                        <a href="<%= request.getContextPath() %>/admin/parkingFeeOfCustomer/add" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            <!-- /.info-box -->
                         </div>
                     </div>
+                    <!-- Table -->
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Bảng quản lý thông tin phí khách đăng ký</h3>
                                 </div>
-                                <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
@@ -125,84 +122,34 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>Vé tháng</td>
-                                            <td>Xe máy</td>
-                                            <td>200,000 VNĐ</td>
-                                            <td>01/03/2025</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>2</td>
-                                            <td>Vé năm</td>
-                                            <td>Ô tô</td>
-                                            <td>5,000,000 VNĐ</td>
-                                            <td>15/03/2025</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
+                                        <c:forEach var="pfc" items="${parkingFeeOfCustomerDTOList}" varStatus="loop">
+                                            <tr>
+                                                <td>${loop.count}</td>
+                                                <td>${pfc.feeCustomerId}</td>
+                                                <td>${pfc.ticketTypeName}</td>
+                                                <td>${pfc.vehicleTypeName}</td>
+                                                <td>${pfc.price}</td>
+                                                <td>${pfc.startDate}</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <a href="${pageContext.request.contextPath}/admin/parkingFeeOfCustomer/edit?id=${pfc.feeCustomerId}" class="btn btn-info btn-block">
+                                                                        <i class="fas fa-pen-square"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <a href="${pageContext.request.contextPath}/admin/parkingFeeOfCustomer/delete?id=${pfc.feeCustomerId}" class="btn btn-outline-warning btn-block">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>3</td>
-                                            <td>Vé quý</td>
-                                            <td>Xe tải</td>
-                                            <td>1,800,000 VNĐ</td>
-                                            <td>20/03/2025</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                         <tfoot>
                                         <tr>
@@ -217,9 +164,7 @@
                                         </tfoot>
                                     </table>
                                 </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
                         </div>
                     </div>
                 </div>

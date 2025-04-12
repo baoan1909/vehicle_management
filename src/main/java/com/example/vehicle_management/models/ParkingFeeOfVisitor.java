@@ -20,6 +20,21 @@ public class ParkingFeeOfVisitor {
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
+//Constructor add
+    public ParkingFeeOfVisitor(double price, int vehicleTypeId, LocalDate startDate) {
+        this.price = price;
+        this.vehicleTypeId = vehicleTypeId;
+        this.startDate = startDate;
+    }
+    //Constructor Update
+
+
+    public ParkingFeeOfVisitor(int feeVisitorId, double price, int vehicleTypeId, LocalDate startDate) {
+        this.feeVisitorId = feeVisitorId;
+        this.price = price;
+        this.vehicleTypeId = vehicleTypeId;
+        this.startDate = startDate;
+    }
 
     public ParkingFeeOfVisitor(){
 

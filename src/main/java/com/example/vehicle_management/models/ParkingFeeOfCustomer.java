@@ -8,21 +8,37 @@ public class ParkingFeeOfCustomer {
     private int ticketTypeId;
     private int vehicleTypeId;
     private double price;
-    private String description;
     private LocalDate startDate;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
     // Constructor
-    public ParkingFeeOfCustomer(int feeCustomerId, int ticketTypeId, int vehicleTypeId, double price, String description, LocalDate startDate, LocalDateTime createDate, LocalDateTime updateDate) {
+    public ParkingFeeOfCustomer(int feeCustomerId, int ticketTypeId, int vehicleTypeId, double price, LocalDate startDate, LocalDateTime createDate, LocalDateTime updateDate) {
         this.feeCustomerId = feeCustomerId;
         this.ticketTypeId = ticketTypeId;
         this.vehicleTypeId = vehicleTypeId;
         this.price = price;
-        this.description = description;
         this.startDate = startDate;
         this.createDate = createDate;
         this.updateDate = updateDate;
+    }
+//Constructor add
+    public ParkingFeeOfCustomer( int ticketTypeId, int vehicleTypeId, double price, LocalDate startDate) {
+
+        this.ticketTypeId = ticketTypeId;
+        this.vehicleTypeId = vehicleTypeId;
+        this.price = price;
+        this.startDate = startDate;
+    }
+    //Constructor Update
+
+
+    public ParkingFeeOfCustomer(int feeCustomerId, int ticketTypeId, int vehicleTypeId, double price, LocalDate startDate) {
+        this.feeCustomerId = feeCustomerId;
+        this.ticketTypeId = ticketTypeId;
+        this.vehicleTypeId = vehicleTypeId;
+        this.price = price;
+        this.startDate = startDate;
     }
 
     // No-args constructor
@@ -59,14 +75,6 @@ public class ParkingFeeOfCustomer {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public LocalDate getStartDate() {

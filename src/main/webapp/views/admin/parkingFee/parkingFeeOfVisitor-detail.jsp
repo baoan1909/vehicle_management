@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <title>Parking Fee Of Visitor Detail</title>
@@ -39,20 +41,25 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form action="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/save" method="post">
                                     <div class="card-body">
+                                        <c:if test="${not empty parkingFeeOfVisitorDTO.feeVisitorId}">
+                                            <input type="hidden" name="id" value="${parkingFeeOfVisitorDTO.feeVisitorId}" />
+                                        </c:if>
                                         <div class="form-group">
                                             <label>Loại xe:</label>
-                                            <select class="form-control select2">
-                                                <option selected="selected">Xe máy</option>
-                                                <option>Ô tô</option>
-                                                <option>Xe tải</option>
+                                            <select class="form-control select2" name="vehicleTypeId">
+                                                <c:forEach var="vehicleType" items="${vehicleTypeList}">
+                                                    <option value="${vehicleType.vehicleTypeId}" ${parkingFeeOfVisitorDTO.vehicleTypeName==vehicleType.vehicleTypeName ? "selected" : ""}>
+                                                            ${vehicleType.vehicleTypeName}
+                                                    </option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Giá vé:</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="15000">
+                                                <input type="text" name="price" class="form-control" value="${parkingFeeOfVisitorDTO.parkingFeeOfVisitor}">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg-cyan">VNĐ</span>
                                                 </div>
@@ -61,7 +68,11 @@
                                         <div class="form-group">
                                             <label>Ngày áp dụng:</label>
                                             <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="01/01/2025"/>
+                                                <fmt:formatDate value="${formattedStartDate}" pattern="MM/dd/yyyy" var="formattedStartDateStr" />
+                                                <input name="startDate" type="text" class="form-control datetimepicker-input"
+                                                       data-target="#reservationdate"
+                                                       value="${formattedStartDateStr}" />
+
                                                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                                     <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                 </div>

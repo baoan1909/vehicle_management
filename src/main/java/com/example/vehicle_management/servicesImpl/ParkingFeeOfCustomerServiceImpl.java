@@ -14,26 +14,26 @@ public class ParkingFeeOfCustomerServiceImpl implements IParkingFeeOfCustomerSer
 
     @Override
     public boolean insertParkingFeeOfCustomer(ParkingFeeOfCustomer parkingFeeOfCustomer) {
-        return false;
+        return parkingFeeOfCustomerRepository.insert(parkingFeeOfCustomer);
     }
 
     @Override
     public boolean updateParkingFeeOfCustomer(ParkingFeeOfCustomer parkingFeeOfCustomer) {
-        return false;
+        return parkingFeeOfCustomerRepository.update(parkingFeeOfCustomer);
     }
 
     @Override
     public boolean deleteParkingFeeOfCustomer(int id) {
-        return false;
+        return parkingFeeOfCustomerRepository.delete(id);
     }
 
     @Override
     public ParkingFeeOfCustomer getParkingFeeOfCustomerById(int id) {
-        return null;
+        return parkingFeeOfCustomerRepository.getById(id);
     }
 
     @Override
     public List<ParkingFeeOfCustomer> getAllParkingFeeOfCustomers() {
-        return List.of();
+        return parkingFeeOfCustomerRepository.getAll();
     }
 }
