@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Plate Detection</title>
+</head>
+<body>
+    <h1>Upload an Image to Detect License Plate</h1>
+    <form action="/detect_license_plate" method="POST" enctype="multipart/form-data">
+        <label for="image">Select an image file:</label>
+        <input type="file" name="image" id="image" required><br><br>
+        <input type="submit" value="Upload and Detect">
+    </form>
+
+    <h2>Detected License Plate</h2>
+    <div id="result">
+        <!-- The result will be displayed here -->
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            
+            const response = await fetch('/detect_license_plate', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            
+            if (data.license_plate) {
+                resultDiv.innerHTML = `<p>Detected License Plate: ${data.license_plate}</p><p>Image Name: ${data.image_name}</p>`;
+            } else {
+                resultDiv.innerHTML = `<p>Error: ${data.error}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

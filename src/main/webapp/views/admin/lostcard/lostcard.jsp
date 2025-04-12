@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/lostcard/add" class="btn btn-info btn-block">
+                                        <a href="<%= request.getContextPath() %>/admin/lost/add" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
@@ -147,12 +147,12 @@
                                                         <div class="col-md-12">
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <a href="${pageContext.request.contextPath}/admin/lostcard/edit?id=${lostCard.lostCardId}" class="btn btn-info btn-block">
+                                                                    <a href="${pageContext.request.contextPath}/admin/lost/edit?id=${lostCard.lostCardId}" class="btn btn-info btn-block">
                                                                         <i class="fas fa-pen-square"></i>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <a href="${pageContext.request.contextPath}/admin/lostcard/delete?id=${lostCard.lostCardId}" class="btn btn-outline-warning btn-block" onclick="return confirm('Bạn có chắc muốn xóa?')">
+                                                                    <a href="${pageContext.request.contextPath}/admin/lost/delete?id=${lostCard.lostCardId}" class="btn btn-outline-warning btn-block" onclick="return confirm('Bạn có chắc muốn xóa?')">
                                                                         <i class="fas fa-trash-alt"></i>
                                                                     </a>
                                                                 </div>

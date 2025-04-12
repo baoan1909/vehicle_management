@@ -14,9 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet({"/","/admin/dashboard"})
+@WebServlet({"/admin/dashboard"})
 public class DashboardServlet extends HttpServlet {
-
     private IDashboardService dashboardService;
 
     @Override
@@ -26,7 +25,7 @@ public class DashboardServlet extends HttpServlet {
     }
 
     @Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     DashboardDTO dashboardData = dashboardService.getDashboardData();
     
     // In dữ liệu ra để kiểm tra
@@ -71,5 +70,5 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     request.setAttribute("cardStats", dashboardData.getCardStats());
     
     request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
-}
+    }
 }

@@ -129,9 +129,11 @@ public class CardSwipeRepositoryImpl implements ICardSwipeRepository {
                 if (resultSet.next()) {
                     // Nếu tìm thấy bản ghi
                     CardSwipe cardSwipe = new CardSwipe();
+                    cardSwipe.setCardSwipeId(resultSet.getInt("cardSwipeId"));
                     cardSwipe.setCardId(resultSet.getInt("cardId"));
                     cardSwipe.setCheckInImagePath(resultSet.getString("checkInImagePath"));
                     cardSwipe.setPrice(resultSet.getDouble("price"));
+                    cardSwipe.setLicensePlate(resultSet.getString("licensePlate"));
                     cardSwipe.setCheckInTime(resultSet.getTimestamp("checkInTime").toLocalDateTime());
 
                     return cardSwipe;

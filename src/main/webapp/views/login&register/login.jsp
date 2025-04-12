@@ -21,17 +21,20 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">Đăng nhập để thỏa sức khám phá</p>
 
-            <form action="" method="post">
+            <form action="<%= request.getContextPath() %>/login" method="post">
+                <% String error = (String) request.getAttribute("error"); if (error != null) { %>
+                <div class="alert alert-danger mt-2"><%= error %></div>
+                <% } %>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="text" name="username" class="form-control" placeholder="Tên tài khoản" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-user"></span>
                         </div>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Mật khẩu">
+                    <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -41,16 +44,14 @@
                 <div class="row">
                     <div class="col-8">
                         <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">
-                                Ghi nhớ mật khẩu
-                            </label>
+                            <input type="checkbox" name="remember" id="remember">
+                            <label for="remember">Ghi nhớ mật khẩu</label>
                         </div>
                     </div>
                     <!-- /.col -->
                 </div>
                 <div class="col-12 mt-4">
-                    <a href="<%= request.getContextPath() %>/admin/dashboard?page=dashboard" class="btn btn-primary btn-block">Đăng nhập</a>
+                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                 </div>
                 <!-- /.col -->
             </form>

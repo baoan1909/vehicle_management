@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/admin/lostcard", "/admin/lostcard/edit", "/admin/lostcard/add", "/admin/lostcard/delete", "/admin/lostcard/save", "/admin/lostcard/getcustomer"})
+@WebServlet({"/admin/lost", "/admin/lost/edit", "/admin/lost/add", "/admin/lost/delete", "/admin/lost/save", "/admin/lost/getcustomer"})
 public class LostcardServlet extends HttpServlet {
     private ILostCardService lostCardService;
     private ICardService cardService;
@@ -155,7 +155,7 @@ public class LostcardServlet extends HttpServlet {
         } else if (uri.contains("delete")) {
             int lostCardId = Integer.parseInt(request.getParameter("id"));
             lostCardService.deleteLostCard(lostCardId);
-            response.sendRedirect(request.getContextPath() + "/admin/lostcard");
+            response.sendRedirect(request.getContextPath() + "/admin/lost");
         } else {
             List<LostCard> lostCards = lostCardService.getAllLostCards();
             List<LostCardDTO> lstLostCards = LostCardMapper.toDTOList(lostCards, cardService, customerService, vehicleTypeService);
@@ -242,6 +242,6 @@ public class LostcardServlet extends HttpServlet {
             lostCardService.updateLostCard(lostCard);
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/lostcard");
+        response.sendRedirect(request.getContextPath() + "/admin/lost");
     }
 }

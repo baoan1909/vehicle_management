@@ -32,15 +32,16 @@
                 </li>
                 <li class="nav-item sidebar-divider mb-2"></li>
                 <li class="nav-item">
-                    <a href="<%= request.getContextPath() %>/admin/card-swipe?page=card-swipe" class="nav-link <%=("card-swipe".equals(request.getParameter("page")) || "swipe-out".equals(request.getParameter("page")) || "swipe-in".equals(request.getParameter("page"))) ? "active" : "" %>">
+                    <a href="<%=request.getContextPath()%>/admin/swipe"
+                       class="nav-link <%= (request.getRequestURI().contains("/admin/swipe") || request.getRequestURI().contains("/admin/swipe/swipein") || request.getRequestURI().contains("/admin/swipe/swipeout") || request.getRequestURI().contains("/admin/swipe/delete") || request.getRequestURI().contains("/admin/swipe/save")) ? "active" : "" %>">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý vào ra
                         </p>
                     </a>
                 </li>
-                <li class="nav-item <%= (request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save") || request.getRequestURI().contains("/admin/lostcard") || request.getRequestURI().contains("/admin/lostcard/edit") || request.getRequestURI().contains("/admin/lostcard/add") || request.getRequestURI().contains("/admin/lostcard/delete") || request.getRequestURI().contains("/admin/lostcard/save")) ? "menu-open" : "" %>">
-                    <a href="#" class="nav-link <%= (request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save") || request.getRequestURI().contains("/admin/lostcard") || request.getRequestURI().contains("/admin/lostcard/edit") || request.getRequestURI().contains("/admin/lostcard/add") || request.getRequestURI().contains("/admin/lostcard/delete") || request.getRequestURI().contains("/admin/lostcard/save")) ? "active" : "" %>">
+                <li class="nav-item <%= (request.getRequestURI().contains("/admin/lost") || request.getRequestURI().contains("/admin/lost/edit") || request.getRequestURI().contains("/admin/lost/add") || request.getRequestURI().contains("/admin/lost/delete") || request.getRequestURI().contains("/admin/lost/save") || request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save")) ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= (request.getRequestURI().contains("/admin/lost") || request.getRequestURI().contains("/admin/lost/edit") || request.getRequestURI().contains("/admin/lost/add") || request.getRequestURI().contains("/admin/lost/delete") || request.getRequestURI().contains("/admin/lost/save") || request.getRequestURI().contains("/admin/card") || request.getRequestURI().contains("/admin/card/edit") || request.getRequestURI().contains("/admin/card/add") || request.getRequestURI().contains("/admin/card/delete") || request.getRequestURI().contains("/admin/card/save")) ? "active" : "" %>">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Quản lý thẻ
@@ -56,8 +57,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/lostcard"
-                               class="nav-link <%=(request.getRequestURI().contains("/admin/lostcard") || request.getRequestURI().contains("/admin/lostcard/edit") || request.getRequestURI().contains("/admin/lostcard/add") || request.getRequestURI().contains("/admin/lostcard/delete") || request.getRequestURI().contains("/admin/lostcard/save")) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/lost"
+                               class="nav-link <%=(request.getRequestURI().contains("/admin/lost") || request.getRequestURI().contains("/admin/lost/edit") || request.getRequestURI().contains("/admin/lost/add") || request.getRequestURI().contains("/admin/lost/delete") || request.getRequestURI().contains("/admin/lost/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thẻ bị mất</p>
                             </a>
@@ -69,7 +70,7 @@
                                     ? "menu-open" : "" %>">
                     <a href="#" class="nav-link <%= (request.getRequestURI().contains("/admin/ticket") || request.getRequestURI().contains("/admin/ticket/edit") || request.getRequestURI().contains("/admin/ticket/add") || request.getRequestURI().contains("/admin/ticket/delete") || request.getRequestURI().contains("/admin/ticket/save")
                                                 || request.getRequestURI().contains("/admin/vehicle") || request.getRequestURI().contains("/admin/vehicle/edit") || request.getRequestURI().contains("/admin/vehicle/add") || request.getRequestURI().contains("/admin/vehicle/delete") || request.getRequestURI().contains("/admin/vehicle/save"))
-                                                 ? "active" : "" %>">
+                                                 ? "active" : ""%>">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Vé & Phương tiện

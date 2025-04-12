@@ -36,4 +36,9 @@ public class AccountServiceImpl implements IAccountService {
     public List<Account> getAllAccounts() {
         return List.of();
     }
+
+    @Override
+    public Account getAccountByUsername(String username) {
+        return accountRepository.getAccountByUsername(username);
+    }
 }

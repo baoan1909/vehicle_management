@@ -13,5 +13,10 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/assets/*</url-pattern>
     </servlet-mapping>
+    <context-param>
+        <param-name>licensePlateApiUrl</param-name>
+        <param-value>http://127.0.0.1:5000/detect_license_plate</param-value>
+    </context-param>
+
 
 </web-app>

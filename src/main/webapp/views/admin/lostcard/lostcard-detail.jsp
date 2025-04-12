@@ -53,7 +53,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="${pageContext.request.contextPath}/admin/lostcard/save" method="post">
+                            <form action="${pageContext.request.contextPath}/admin/lost/save" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div id="cardMessage" class="alert alert-danger" style="display: none"></div>
@@ -262,7 +262,7 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/lostcard">Thoát</a>
+                                    <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/lost">Thoát</a>
                                     <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Lưu</button>
                                 </div>
                             </form>
@@ -384,7 +384,7 @@
         console.log("Thẻ đã chọn:", selectedValue);
 
         if (selectedValue) {
-            fetch("${pageContext.request.contextPath}/admin/lostcard/getcustomer?cardId=" + selectedValue)
+            fetch("${pageContext.request.contextPath}/admin/lost/getcustomer?cardId=" + selectedValue)
                 .then(response => response.json())
                 .then(data => {
                     console.log("Dữ liệu thẻ:", data);
@@ -452,6 +452,7 @@
         }
     });
 
+    //Chọn cardId từ form tìm kiếm
     $(document).ready(function () {
         // Khi nhấn nút sửa
         $('.edit-card-btn').on('click', function () {
@@ -517,7 +518,6 @@
             reader.readAsDataURL(file);
         }
     }
-
 </script>
 </body>
 </html>

@@ -17,7 +17,7 @@ public class CardRepositoryImpl implements ICardRepository {
     private static final String INSERT_CARD = "INSERT INTO Card(cardNumber, type, vehicleTypeId, isCreated, isUsed) VALUES (?, ?, ?, ?, ?);";
     private static final String UPDATE_CARD = "UPDATE Card SET cardNumber = ?, type = ?, vehicleTypeId = ?, isCreated = ?, isUsed = ? WHERE cardId = ?;";
     private static final String DELETE_CARD = "DELETE FROM Card WHERE cardId = ?;";
-    private static final String GET_PARKING_FEE_VISITOR_BY_CARD_ID = "SELECT pf.price FROM ParkingFeeOfVisitor pf JOIN VehicleType vt ON pf.vehicleTypeId = vt.vehicleTypeId JOIN Card c ON c.vehicleTypeId = vt.vehicleTypeId JOIN LostCard lc ON lc.cardId = c.cardId WHERE c.cardId = ? ORDER BY pf.startDate DESC LIMIT 1;";
+    private static final String GET_PARKING_FEE_VISITOR_BY_CARD_ID_IN_LOST_CARD = "SELECT pf.price FROM ParkingFeeOfVisitor pf JOIN VehicleType vt ON pf.vehicleTypeId = vt.vehicleTypeId JOIN Card c ON c.vehicleTypeId = vt.vehicleTypeId JOIN LostCard lc ON lc.cardId = c.cardId WHERE c.cardId = ? ORDER BY pf.startDate DESC LIMIT 1;";
     private static final String GET_CUSTOMER_ID_BY_CARD_ID = "SELECT customerId FROM CustomerRegisterTicket WHERE cardId = ? AND effectiveDate <= CURRENT_DATE AND CURRENT_DATE <= expirationDate ";
 
     @Override
@@ -139,7 +139,7 @@ public class CardRepositoryImpl implements ICardRepository {
     public double getParkingFeeVisitorByCardId(int cardId) {
         double price = 0.0;
         try (Connection conn = DBConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(GET_PARKING_FEE_VISITOR_BY_CARD_ID)) {
+             PreparedStatement stmt = conn.prepareStatement(GET_PARKING_FEE_VISITOR_BY_CARD_ID_IN_LOST_CARD)) {
 
             // Thiết lập giá trị cho tham số cardId
             stmt.setInt(1, cardId);
