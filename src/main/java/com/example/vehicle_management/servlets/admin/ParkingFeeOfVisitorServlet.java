@@ -64,10 +64,68 @@ public class ParkingFeeOfVisitorServlet extends HttpServlet {
             parkingFeeOfVisitorService.deleteParkingFeeOfVisitor(feeVisitorId);
             request.getRequestDispatcher("/admin/parkingFeeOfVisitor").forward(request, response);
         }else {
-            List<ParkingFeeOfVisitor> parkingFeeOfVisitorList=parkingFeeOfVisitorService.getAllParkingFeeOfVisitors();
-            List<ParkingFeeOfVisitorDTO> parkingFeeOfVisitorDTOList=ParkingFeeOfVisitorMapper.toDTOList(parkingFeeOfVisitorList,vehicleTypeService);
-            request.setAttribute("parkingFeeOfVisitorDTOList", parkingFeeOfVisitorDTOList);
-            request.getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfVisitor.jsp").forward(request,response);
+            String search = request.getParameter("search");
+            String vehicleTypeIdStr = request.getParameter("vehicleTypeId");
+            String dateRange = request.getParameter("dateRange");
+
+            if(search != null && search.isEmpty()){
+                request.setAttribute("search", search);
+            }else {
+                request.setAttribute("search", "");
+            }
+            System.out.println("từ khóa"+search);
+
+
+
+            Integer vehicleTypeId = null;
+            if (vehicleTypeIdStr != null && !vehicleTypeIdStr.isEmpty()) {
+                vehicleTypeId = Integer.parseInt(vehicleTypeIdStr);
+                int vehicleType= vehicleTypeService.getVehicleTypeById(vehicleTypeId).getVehicleTypeId();
+                request.setAttribute("vehicleType",vehicleType);
+            }else{
+                request.setAttribute("vehicleType","");
+            }
+
+            final Integer finalVehicleTypeId = vehicleTypeId;
+
+
+            LocalDate startDate = null;
+            LocalDate endDate = null;
+            if (dateRange != null && !dateRange.isEmpty()) {
+                try {
+                    String[] dates = dateRange.split(" - ");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                    startDate = LocalDate.parse(dates[0], formatter);
+                    endDate = LocalDate.parse(dates[1], formatter);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            final LocalDate finalStartDate = startDate;
+            final LocalDate finalEndDate = endDate;
+            request.setAttribute("startDate", startDate);
+            request.setAttribute("endDate", endDate);
+
+            // Lấy danh sách và lọc theo điều kiện
+            List<ParkingFeeOfVisitor> parkingFeeOfVisitorList = parkingFeeOfVisitorService.getAllParkingFeeOfVisitors();
+
+            List<ParkingFeeOfVisitorDTO> filteredList = parkingFeeOfVisitorList.stream()
+                    .filter(p -> (search == null || search.isEmpty() || String.valueOf(p.getPrice()).contains(search) ) )
+                    .filter(p -> (finalVehicleTypeId == null || p.getVehicleTypeId() == finalVehicleTypeId))
+
+                    .filter(p -> {
+                        if (finalStartDate != null && finalEndDate != null) {
+                            return (p.getStartDate() != null &&
+                                    (p.getStartDate().isEqual(finalStartDate) || p.getStartDate().isAfter(finalStartDate)) &&
+                                    (p.getStartDate().isEqual(finalEndDate) || p.getStartDate().isBefore(finalEndDate)));
+                        }
+                        return true;
+                    })
+                    .map(p -> ParkingFeeOfVisitorMapper.toDTO(p, vehicleTypeService))
+                    .toList();
+
+            request.setAttribute("parkingFeeOfVisitorDTOList", filteredList);
+            request.getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfVisitor.jsp").forward(request, response);
         }
 
     }

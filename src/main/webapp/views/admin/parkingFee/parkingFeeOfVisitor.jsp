@@ -32,65 +32,54 @@
             <!-- Content Wrapper. Contains page content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 mt-4">
-                            <div class="card shadow">
-                                <div class="card-body">
-                                    <div class="form-group col-md-4 ml-auto">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control float-right" id="daterange-btn">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-cyan">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
-                                    <div class="col-12 callout callout-info">
-                                        <div class="row">
-                                            <!--Search -->
-                                            <div class="col-md-4 mt-3">
-                                                <div class="input-group">
-                                                    <input type="search" class="form-control" placeholder="Giá vé">
-                                                    <div class="input-group-append">
-                                                        <button class="bg-cyan btn btn-sidebar">
-                                                            <i class="fa fa-search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Loại xe</option>
-                                                        <c:forEach var="vehicleType" items="${vehicleTypeList}">
-                                                            <option value="${vehicleType.vehicleTypeId}">
-                                                                    ${vehicleType.vehicleTypeName}
-                                                            </option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>
-                                            </div>
+                    <form method="get" action="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor">
+                        <div class="row">
 
-                                            <!-- /.col -->
-                                            <div class="col-md-1 mt-3 ml-auto">
-                                                <button type="button" class="btn btn-block btn-info">Đặt lại</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/add" class="btn btn-info btn-block">
-                                            <i class="fas fa-plus-circle"></i> Thêm mới
-                                        </a>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="dateRange" id="daterange-btn" value="${startDate}-${endDate}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-cyan">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                            <!-- /.info-box -->
+
+
+                            <!-- Input tìm kiếm theo giá vé -->
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input name="search" type="search" class="form-control" placeholder="Giá vé..." value="${search}">
+                                    <div class="input-group-append">
+                                        <button class="bg-cyan btn btn-sidebar" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lọc theo loại xe -->
+                            <div class="col-md-3">
+                                <select name="vehicleTypeId" class="form-control select2">
+                                    <option value="" ${(1==1) ? "selected" : ""}>Loại xe</option>
+                                    <c:forEach var="vehicleType" items="${vehicleTypeList}">
+                                        <option value="${vehicleType.vehicleTypeId}" >
+                                                ${vehicleType.vehicleTypeName}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+
+                            <!-- Nút đặt lại -->
+                            <div class="col-md-2">
+                                <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor" class="btn btn-info btn-block">
+                                    Đặt lại
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -159,5 +148,11 @@
     </div>
 </div>
 <jsp:include page="/views/library/_script.jsp" />
+<script>
+    document.querySelector('select[name="vehicleTypeId"]').addEventListener('change', function () {
+        this.form.submit();
+    });
+</script>
+
 </body>
 </html>
