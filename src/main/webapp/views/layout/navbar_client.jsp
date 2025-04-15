@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
         <a href="#" class="navbar-brand">
@@ -31,14 +32,54 @@
 
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            <li class="nav-item">
-                <div class="col-md-12">
-                    <ol class="breadcrumb bg-white">
-                        <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/login?page=login">Đăng nhập</a></li>
-                        <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/register?page=register">Đăng ký</a></li>
-                    </ol>
-                </div>
-            </li>
+            <c:choose>
+                <c:when test="${empty sessionScope.account}">
+                    <!-- Chưa đăng nhập -->
+                    <li class="nav-item">
+                        <div class="col-md-12">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/login?page=login">Đăng nhập</a></li>
+                                <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/register?page=register">Đăng ký</a></li>
+                            </ol>
+                        </div>
+                    </li>
+                </c:when>
+                <c:when test="${not empty sessionScope.account and sessionScope.account.roleId == 2}">
+                    <!-- Đã đăng nhập với roleId == 2 -->
+                    <li class="nav-item dropdown">
+                        <div class="user-panel d-flex h-100" data-toggle="dropdown">
+                            <div class="image">
+                                <img src="<%= request.getContextPath() %>/assets/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                            </div>
+                            <div class="info">
+                                <a href="#" class="d-block"><i class="fas fa-sort-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <div class="dropdown-item dropdown-header">
+                                <div class="image">
+                                    <img src="<%= request.getContextPath() %>/assets/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2 mt-3" style="width: 60px" alt="User Image">
+                                </div>
+                                <div class="info">
+                                    <span class="d-block mt-3"><h5>${sessionScope.account.userName}</h5></span>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="<%= request.getContextPath() %>/customerTicket/customer-infor-detail" class="dropdown-item">
+                                <i class="fas fa-user-circle mr-2"></i> Thông tin tài khoản
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-question-circle mr-2"></i> Trợ giúp
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="<%= request.getContextPath() %>/logout" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Đăng xuất
+                            </a>
+                        </div>
+                    </li>
+                </c:when>
+            </c:choose>
         </ul>
     </div>
 </nav>

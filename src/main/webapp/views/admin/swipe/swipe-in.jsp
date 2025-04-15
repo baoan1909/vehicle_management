@@ -55,7 +55,7 @@
                                     <div class="card-body">
                                         <div class="col-lx-12">
                                             <div class="position-relative" id="checkInImagePathPreview" style="min-height: 400px;">
-                                                <img id="checkInImagePath" src="<%=request.getContextPath()%>/assets/admin/api/License-Plate-Recognition-YOLOv7-and-CNN-Model/data/test/images/${fileName}" alt="Check-In Image Path" class="img-fluid">
+                                                <img id="checkInImagePath" src="" alt="Check-In Image Path" class="img-fluid">
                                             </div>
                                         </div>
                                     </div>
@@ -97,6 +97,19 @@
                                         <input type="hidden" name="id" value="${cardSwipe.cardSwipeId}" />
                                         <div class="form-group">
                                             <div id="cardMessage" class="alert alert-danger" style="display: none"></div>
+                                            <c:if test="${not empty sessionScope.message}">
+                                                <div id="successAlert" class="alert alert-success">
+                                                        ${sessionScope.message}
+                                                </div>
+
+                                                <script>
+                                                    setTimeout(function () {
+                                                        $('#successAlert').fadeOut('slow');
+                                                    }, 2000);
+                                                </script>
+
+                                                <c:remove var="message" scope="session"/>
+                                            </c:if>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -153,8 +166,10 @@
                                             <!-- /.form group -->
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <a href="#" class="btn btn-outline-warning">Hủy</a>
-                                                    <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Lưu</button>
+                                                    <a href="<%= request.getContextPath() %>/admin/swipe/swipein" class="btn btn-outline-warning">Hủy</a>
+                                                    <button type="submit" class="btn btn-info float-right">
+                                                        <i class="fas fa-save"></i> Lưu
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -176,6 +191,7 @@
     $(function () {
         bsCustomFileInput.init();
     });
+
 
     async function scanLicensePlate() {
         const fileInput = document.getElementById("checkInImagePathFile");
@@ -207,7 +223,7 @@
             document.getElementById("fileNameInput").value = result.image_name;
             document.getElementById("checkInImagePathInput").value = result.image_name;
 
-            const imgPath = "<%=request.getContextPath()%>/assets/admin/api/License-Plate-Recognition-YOLOv7-and-CNN-Model/data/test/images/" + result.image_name;
+            const imgPath = "<%=request.getContextPath()%>/assets/admin/dist/img/checkInLicensePhoto/" + result.image_name;
             document.getElementById("checkInImagePath").src = imgPath;
 
         } catch (error) {

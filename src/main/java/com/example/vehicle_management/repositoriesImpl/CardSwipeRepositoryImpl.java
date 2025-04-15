@@ -15,6 +15,7 @@ public class CardSwipeRepositoryImpl implements ICardSwipeRepository {
     private static final String SELECT_BY_ID = "SELECT * FROM CardSwipe WHERE cardSwipeId = ?";
     private static final String SELECT_ALL = "SELECT * FROM CardSwipe";
     private static final String SELECT_CARD_SWIPE_BY_CARD_ID = "SELECT * FROM CardSwipe WHERE cardId = ? AND checkOutTime IS NULL ORDER BY checkInTime DESC LIMIT 1;";
+    private static final String SELECT_FEE_VISITOR_BY_VEHICLE_ID_IN_CARD_SWIPE = "SELECT pf.price FROM ParkingFeeOfVisitor pf JOIN CardSwipe cs ON pf.vehicleTypeId = cs.vehicleTypeId WHERE cs.cardSwipeId = ? AND pf.startDate <= DATE(cs.checkInTime) ORDER BY pf.startDate DESC LIMIT 1;";
 
     @Override
     public boolean insert(CardSwipe cardSwipe) {
@@ -146,5 +147,24 @@ public class CardSwipeRepositoryImpl implements ICardSwipeRepository {
             // Xử lý lỗi nếu có (hoặc ném exception)
             return null;
         }
+    }
+
+    @Override
+    public double getParkingFeeVisitorByVehicleIdInCardSwipe(int cardSwipeId) {
+        try (Connection conn = DBConnectionPool.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SELECT_FEE_VISITOR_BY_VEHICLE_ID_IN_CARD_SWIPE)) {
+
+            ps.setInt(1, cardSwipeId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble("price");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0.0;
     }
 }

@@ -93,33 +93,37 @@ public class CardSwipeServlet extends HttpServlet {
             if (cardIdStr != null) {
                 int cardId = Integer.parseInt(cardIdStr);
                 Card card = cardService.getCardById(cardId);
-//                double cardSwipePriceVisitor = parkingFeeOfVisitorService;
                 int customerByCardId = cardService.getCustomerIdByCardId(cardId);
                 CardSwipe cardSwipe = cardSwipeService.getCardSwipeByCardId(cardId);
 
                 if(cardSwipe != null && card != null) {
                     VehicleType vehicleType = vehicleTypeService.getVehicleTypeById(card.getVehicleTypeId());
+                    double cardSwipePriceVisitor = cardSwipeService.getParkingFeeVisitorByVehicleIdInCardSwipe(cardSwipe.getCardSwipeId());
+                    java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
+                    String checkInTimeStr = (cardSwipe.getCheckInTime() != null) ? cardSwipe.getCheckInTime().format(formatter) : "";
 
                     if(customerByCardId != 0) {
                         jsonBuilder.append(String.format(
-                                " \"cardSwipeId\":\"%s\", \"type\":\"%s\", \"vehicleTypeName\":\"%s\", \"licensePlate\":\"%s\", \"checkInTime\":\"%s\", \"checkInImagePath\":\"%s\"",
+                                " \"cardSwipeId\":\"%s\", \"type\":\"%s\", \"vehicleTypeName\":\"%s\", \"vehicleTypeId\":\"%s\", \"licensePlate\":\"%s\", \"checkInTime\":\"%s\", \"checkInImagePath\":\"%s\"",
                                 cardSwipe.getCardSwipeId(),
                                 card.getType(),
                                 vehicleType.getVehicleTypeName(),
+                                vehicleType.getVehicleTypeId(),
                                 cardSwipe.getLicensePlate(),
-                                cardSwipe.getCheckInTime(),
+                                checkInTimeStr,
                                 cardSwipe.getCheckInImagePath()
                         ));
                     }else {
                         jsonBuilder.append(String.format(
-                                " \"cardSwipeId\":\"%s\", \"type\":\"%s\", \"vehicleTypeName\":\"%s\", \"licensePlate\":\"%s\", \"checkInTime\":\"%s\", \"checkInImagePath\":\"%s\", \"price\":\"%s\"",
+                                " \"cardSwipeId\":\"%s\", \"type\":\"%s\", \"vehicleTypeName\":\"%s\", \"vehicleTypeId\":\"%s\", \"licensePlate\":\"%s\", \"checkInTime\":\"%s\", \"checkInImagePath\":\"%s\", \"price\":\"%s\"",
                                 cardSwipe.getCardSwipeId(),
                                 card.getType(),
                                 vehicleType.getVehicleTypeName(),
+                                vehicleType.getVehicleTypeId(),
                                 cardSwipe.getLicensePlate(),
-                                cardSwipe.getCheckInTime(),
-                                cardSwipe.getCheckInImagePath()
-//                                cardSwipePriceVisitor
+                                checkInTimeStr,
+                                cardSwipe.getCheckInImagePath(),
+                                cardSwipePriceVisitor
                         ));
                     }
                 }else {
@@ -215,18 +219,21 @@ public class CardSwipeServlet extends HttpServlet {
             price = Double.parseDouble(request.getParameter("price"));
         }
 
-        int vehicleTypeId =Integer.parseInt(request.getParameter("vehicleTypeId"));
+        int vehicleTypeId = Integer.parseInt(request.getParameter("vehicleTypeId"));
 
 
         CardSwipe cardSwipe = new CardSwipe(cardSwipeId, licensePlate, cardId, checkInTime, checkOutTime, checkInImagePath, imagePathOut, price, vehicleTypeId);
 
+        HttpSession session = request.getSession();
         if (cardSwipeId == 0) {
             cardSwipeService.insertCardSwipe(cardSwipe);
+            session.setAttribute("message", "Quẹt thẻ vào THÀNH CÔNG");
+            response.sendRedirect(request.getContextPath() + "/admin/swipe/swipein");
         } else {
             cardSwipeService.updateCardSwipe(cardSwipe);
+            session.setAttribute("message", "Quẹt thẻ ra THÀNH CÔNG");
+            response.sendRedirect(request.getContextPath() + "/admin/swipe/swipeout");
         }
-
-        response.sendRedirect(request.getContextPath() + "/admin/swipe");
     }
 
 }

@@ -41,4 +41,9 @@ public class CardSwipeServiceImpl implements ICardSwipeService {
     public CardSwipe getCardSwipeByCardId(int cardId) {
         return cardSwipeRepository.getCardSwipeByCardId(cardId);
     }
+
+    @Override
+    public double getParkingFeeVisitorByVehicleIdInCardSwipe(int cardSwipeId) {
+        return cardSwipeRepository.getParkingFeeVisitorByVehicleIdInCardSwipe(cardSwipeId);
+    }
 }

@@ -34,139 +34,141 @@
             <!-- Content Wrapper. Contains page content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 mt-4">
-                            <div class="card shadow">
-                                <div class="card-body">
-                                    <div class="form-group col-md-4 ml-auto">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control float-right" id="daterange-btn">
-                                            <div class="input-group-prepend">
+
+                        <div class="row">
+                            <div class="col-12 mt-4">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="form-group col-md-4 ml-auto">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control float-right" id="daterange-btn">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text bg-cyan">
                                                     <i class="far fa-calendar-alt"></i>
                                                 </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 callout callout-info">
-                                        <div class="row">
-                                            <!--Search -->
-                                            <div class="col-md-4 mt-3">
-                                                <div class="input-group">
-                                                    <input type="search" class="form-control" placeholder="Giá vé">
-                                                    <div class="input-group-append">
-                                                        <button class="bg-cyan btn btn-sidebar">
-                                                            <i class="fa fa-search"></i>
-                                                        </button>
+                                        <div class="col-12 callout callout-info">
+                                            <div class="row">
+                                                <!--Search -->
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="input-group">
+                                                        <input type="search" class="form-control" placeholder="Giá vé">
+                                                        <div class="input-group-append">
+                                                            <button class="bg-cyan btn btn-sidebar">
+                                                                <i class="fa fa-search"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                <div class="form-group">
-                                                    <select class="form-control select2" name="vehicleTypeId" style="width: 100%;">
-                                                        <option value="">Loại xe</option>
-                                                        <c:forEach var="vehicleType" items="${vehicleTypeList}">
-                                                            <option value="${vehicleType.vehicleTypeId}">
-                                                                    ${vehicleType.vehicleTypeName}
-                                                            </option>
-                                                        </c:forEach>
-                                                    </select>
+                                                <div class="col-md-2 mt-3">
+                                                    <div class="form-group">
+                                                        <select class="form-control select2" name="vehicleTypeId" style="width: 100%;">
+                                                            <option value="">Loại xe</option>
+                                                            <c:forEach var="vehicleType" items="${vehicleTypeList}">
+                                                                <option value="${vehicleType.vehicleTypeId}">
+                                                                        ${vehicleType.vehicleTypeName}
+                                                                </option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Loại vé</option>
-                                                        <c:forEach var="ticketType" items="${ticketTypeList}">
-                                                            <option value="${ticketType.ticketTypeId}">
-                                                                    ${ticketType.ticketTypeName}
-                                                            </option>
-                                                        </c:forEach>
-                                                    </select>
+                                                <div class="col-md-2 mt-3">
+                                                    <div class="form-group">
+                                                        <select class="form-control select2" style="width: 100%;">
+                                                            <option selected="selected">Loại vé</option>
+                                                            <c:forEach var="ticketType" items="${ticketTypeList}">
+                                                                <option value="${ticketType.ticketTypeId}">
+                                                                        ${ticketType.ticketTypeName}
+                                                                </option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-1 mt-3 ml-auto">
-                                                <button type="button" class="btn btn-block btn-info">Đặt lại</button>
+                                                <div class="col-md-1 mt-3 ml-auto">
+                                                    <button type="button" class="btn btn-block btn-info">Đặt lại</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/parkingFeeOfCustomer/add" class="btn btn-info btn-block">
-                                            <i class="fas fa-plus-circle"></i> Thêm mới
-                                        </a>
+                                    <div class="row">
+                                        <div class="form-group col-2 ml-auto mr-3">
+                                            <a href="<%= request.getContextPath() %>/admin/parkingFeeOfCustomer/add" class="btn btn-info btn-block">
+                                                <i class="fas fa-plus-circle"></i> Thêm mới
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Table -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Bảng quản lý thông tin phí khách đăng ký</h3>
-                                </div>
-                                <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>ID phí vé</th>
-                                            <th>Loại vé</th>
-                                            <th>Loại xe</th>
-                                            <th>Giá vé</th>
-                                            <th>Ngày áp dụng</th>
-                                            <th style="width: 100px">Chức năng</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach var="pfc" items="${parkingFeeOfCustomerDTOList}" varStatus="loop">
+                        <!-- Table -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Bảng quản lý thông tin phí khách đăng ký</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
                                             <tr>
-                                                <td>${loop.count}</td>
-                                                <td>${pfc.feeCustomerId}</td>
-                                                <td>${pfc.ticketTypeName}</td>
-                                                <td>${pfc.vehicleTypeName}</td>
-                                                <td>${pfc.price}</td>
-                                                <td>${pfc.startDate}</td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <a href="${pageContext.request.contextPath}/admin/parkingFeeOfCustomer/edit?id=${pfc.feeCustomerId}" class="btn btn-info btn-block">
-                                                                        <i class="fas fa-pen-square"></i>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <a href="${pageContext.request.contextPath}/admin/parkingFeeOfCustomer/delete?id=${pfc.feeCustomerId}" class="btn btn-outline-warning btn-block">
-                                                                        <i class="fas fa-trash-alt"></i>
-                                                                    </a>
+                                                <th>STT</th>
+                                                <th>ID phí vé</th>
+                                                <th>Loại vé</th>
+                                                <th>Loại xe</th>
+                                                <th>Giá vé</th>
+                                                <th>Ngày áp dụng</th>
+                                                <th style="width: 100px">Chức năng</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach var="pfc" items="${parkingFeeOfCustomerDTOList}" varStatus="loop">
+                                                <tr>
+                                                    <td>${loop.count}</td>
+                                                    <td>${pfc.feeCustomerId}</td>
+                                                    <td>${pfc.ticketTypeName}</td>
+                                                    <td>${pfc.vehicleTypeName}</td>
+                                                    <td>${pfc.price}</td>
+                                                    <td>${pfc.startDate}</td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <a href="${pageContext.request.contextPath}/admin/parkingFeeOfCustomer/edit?id=${pfc.feeCustomerId}" class="btn btn-info btn-block">
+                                                                            <i class="fas fa-pen-square"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <a href="${pageContext.request.contextPath}/admin/parkingFeeOfCustomer/delete?id=${pfc.feeCustomerId}" class="btn btn-outline-warning btn-block">
+                                                                            <i class="fas fa-trash-alt"></i>
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </td>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>ID phí vé</th>
+                                                <th>Loại vé</th>
+                                                <th>Loại xe</th>
+                                                <th>Giá vé</th>
+                                                <th>Ngày áp dụng</th>
+                                                <th style="width: 100px">Chức năng</th>
                                             </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>ID phí vé</th>
-                                            <th>Loại vé</th>
-                                            <th>Loại xe</th>
-                                            <th>Giá vé</th>
-                                            <th>Ngày áp dụng</th>
-                                            <th style="width: 100px">Chức năng</th>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
                 </div>
             </section>
         </div>

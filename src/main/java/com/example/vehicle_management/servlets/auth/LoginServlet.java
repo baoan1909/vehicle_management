@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
         if (account.getRoleId() == 1) {
             response.sendRedirect(request.getContextPath() + "/admin/dashboard");
         } else if (account.getRoleId() == 2) {
-            response.sendRedirect(request.getContextPath() + "/customer-infor");
+            response.sendRedirect(request.getContextPath() + "/customerTicket/customer-infor");
         } else {
             request.setAttribute("error", "Không xác định vai trò người dùng");
             request.getRequestDispatcher("/views/login&register/login.jsp").forward(request, response);

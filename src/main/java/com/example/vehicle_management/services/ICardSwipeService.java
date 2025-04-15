@@ -11,4 +11,5 @@ public interface ICardSwipeService {
     CardSwipe getCardSwipeById(int id);
     List<CardSwipe> getAllCardSwipes();
     CardSwipe getCardSwipeByCardId(int cardId);
+    double getParkingFeeVisitorByVehicleIdInCardSwipe(int cardSwipeId);
 }
