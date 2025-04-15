@@ -32,58 +32,72 @@
             <!-- Content Wrapper. Contains page content -->
             <section class="content">
                 <div class="container-fluid">
-                    <form method="get" action="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor">
-                        <div class="row">
+                    <div class="row">
+                        <div class="col-12 mt-4">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <form  method="get" action="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor">
+                                        <!-- Chọn khoảng thời gian -->
+                                        <div class="form-group col-md-4 ml-auto">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="dateRange" id="daterange-btn"
+                                                       value="${startDate}-${endDate}">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text bg-cyan">
+                                                        <i class="far fa-calendar-alt"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 callout callout-info">
+                                            <div class="row form-group mt-4">
+                                                <!-- Tìm kiếm theo giá vé -->
+                                                <div class="col-md-3">
+                                                    <div class="input-group">
+                                                        <input name="search" type="search" class="form-control" placeholder="Giá vé..."
+                                                               value="${search}">
+                                                        <div class="input-group-append">
+                                                            <button class="bg-cyan btn btn-sidebar" type="submit">
+                                                                <i class="fa fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                            <!-- Chọn khoảng thời gian -->
-                            <div class="col-md-4">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="dateRange" id="daterange-btn"
-                                           value="${startDate}-${endDate}">
-                                    <div class="input-group-prepend">
-                    <span class="input-group-text bg-cyan">
-                        <i class="far fa-calendar-alt"></i>
-                    </span>
-                                    </div>
+                                                <!-- Lọc theo loại xe -->
+                                                <div class="col-md-3">
+                                                    <select name="vehicleTypeId" class="form-control select2" style="width: 100%;">
+                                                        <option value="">Tất cả loại xe</option>
+                                                        <c:forEach var="vehicleType" items="${vehicleTypeList}">
+                                                            <option value="${vehicleType.vehicleTypeId}"
+                                                                    <c:if test="${vehicleType.vehicleTypeId == vehicleTypeFilter}">selected</c:if>>
+                                                                    ${vehicleType.vehicleTypeName}
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Nút đặt lại -->
+                                                <div class="col-md-2 ml-auto">
+                                                    <button href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor" class="btn btn-info btn-block">
+                                                        Đặt lại
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-2 ml-auto">
+                                                <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/add" class="btn btn-info btn-block">
+                                                    <i class="fas fa-plus-circle"></i> Thêm mới
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-
-                            <!-- Tìm kiếm theo giá vé -->
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <input name="search" type="search" class="form-control" placeholder="Giá vé..."
-                                           value="${search}">
-                                    <div class="input-group-append">
-                                        <button class="bg-cyan btn btn-sidebar" type="submit">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Lọc theo loại xe -->
-                            <div class="col-md-3">
-                                <select name="vehicleTypeId" class="form-control select2">
-                                    <option value="">Tất cả loại xe</option>
-                                    <c:forEach var="vehicleType" items="${vehicleTypeList}">
-                                        <option value="${vehicleType.vehicleTypeId}"
-                                                <c:if test="${vehicleType.vehicleTypeId == vehicleTypeFilter}">selected</c:if>>
-                                                ${vehicleType.vehicleTypeName}
-                                        </option>
-                                    </c:forEach>
-                                </select>
-
-                            </div>
-
-                            <!-- Nút đặt lại -->
-                            <div class="col-md-2">
-                                <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor" class="btn btn-info btn-block">
-                                    Đặt lại
-                                </a>
-                            </div>
-
                         </div>
-                    </form>
+                    </div>
+                    <!-- Nút thêm mới -->
 
 
                     <div class="row">
