@@ -22,6 +22,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -64,10 +65,71 @@ public class ParkingFeeOfVisitorServlet extends HttpServlet {
             parkingFeeOfVisitorService.deleteParkingFeeOfVisitor(feeVisitorId);
             request.getRequestDispatcher("/admin/parkingFeeOfVisitor").forward(request, response);
         }else {
-            List<ParkingFeeOfVisitor> parkingFeeOfVisitorList=parkingFeeOfVisitorService.getAllParkingFeeOfVisitors();
-            List<ParkingFeeOfVisitorDTO> parkingFeeOfVisitorDTOList=ParkingFeeOfVisitorMapper.toDTOList(parkingFeeOfVisitorList,vehicleTypeService);
-            request.setAttribute("parkingFeeOfVisitorDTOList", parkingFeeOfVisitorDTOList);
-            request.getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfVisitor.jsp").forward(request,response);
+
+            String search = request.getParameter("search");
+            String vehicleTypeId = request.getParameter("vehicleTypeId");
+            String dateRange = request.getParameter("dateRange");
+
+            HttpSession session = request.getSession();
+            session.setAttribute("search", search != null ? search : "");
+            session.setAttribute("vehicleTypeId", vehicleTypeId != null ? vehicleTypeId : "");
+
+
+            // Truyền xuống JSP qua request
+            request.setAttribute("search", session.getAttribute("search"));
+            request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
+
+
+
+            LocalDate startDate = null;
+            LocalDate endDate = null;
+            if (dateRange != null && !dateRange.isEmpty()) {
+                try {
+                    String[] dates = dateRange.split(" - ");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                    startDate = LocalDate.parse(dates[0], formatter);
+                    endDate = LocalDate.parse(dates[1], formatter);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            final LocalDate finalStartDate = startDate;
+            final LocalDate finalEndDate = endDate;
+
+            session.setAttribute("startDateFilter", startDate);
+            session.setAttribute("endDateFilter", endDate);
+
+            request.setAttribute("startDate", session.getAttribute("startDateFilter"));
+            request.setAttribute("endDate", session.getAttribute("endDateFilter"));
+
+
+            // Lấy danh sách và lọc theo điều kiện
+            List<ParkingFeeOfVisitor> parkingFeeOfVisitorList = parkingFeeOfVisitorService.getAllParkingFeeOfVisitors();
+
+            List<ParkingFeeOfVisitorDTO> filteredList = parkingFeeOfVisitorList.stream()
+                    .filter(p -> (search == null || search.isEmpty() || String.valueOf(p.getPrice()).contains(search) ) )
+                    .filter(p -> {
+                        if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
+                        try {
+                            return p.getVehicleTypeId() == Integer.parseInt(vehicleTypeId);
+                        } catch (NumberFormatException e) {
+                            return true;
+                        }
+                    })
+
+                    .filter(p -> {
+                        if (finalStartDate != null && finalEndDate != null) {
+                            return (p.getStartDate() != null &&
+                                    (p.getStartDate().isEqual(finalStartDate) || p.getStartDate().isAfter(finalStartDate)) &&
+                                    (p.getStartDate().isEqual(finalEndDate) || p.getStartDate().isBefore(finalEndDate)));
+                        }
+                        return true;
+                    })
+                    .map(p -> ParkingFeeOfVisitorMapper.toDTO(p, vehicleTypeService))
+                    .toList();
+
+            request.setAttribute("parkingFeeOfVisitorDTOList", filteredList);
+            request.getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfVisitor.jsp").forward(request, response);
         }
 
     }
