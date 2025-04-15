@@ -35,22 +35,24 @@
                     <form method="get" action="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor">
                         <div class="row">
 
+                            <!-- Chọn khoảng thời gian -->
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="dateRange" id="daterange-btn" value="${startDate}-${endDate}">
+                                    <input type="text" class="form-control" name="dateRange" id="daterange-btn"
+                                           value="${startDate}-${endDate}">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-cyan">
-                                            <i class="far fa-calendar-alt"></i>
-                                        </span>
+                    <span class="input-group-text bg-cyan">
+                        <i class="far fa-calendar-alt"></i>
+                    </span>
                                     </div>
                                 </div>
                             </div>
 
-
-                            <!-- Input tìm kiếm theo giá vé -->
+                            <!-- Tìm kiếm theo giá vé -->
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input name="search" type="search" class="form-control" placeholder="Giá vé..." value="${search}">
+                                    <input name="search" type="search" class="form-control" placeholder="Giá vé..."
+                                           value="${search}">
                                     <div class="input-group-append">
                                         <button class="bg-cyan btn btn-sidebar" type="submit">
                                             <i class="fa fa-search"></i>
@@ -62,13 +64,15 @@
                             <!-- Lọc theo loại xe -->
                             <div class="col-md-3">
                                 <select name="vehicleTypeId" class="form-control select2">
-                                    <option value="" ${(1==1) ? "selected" : ""}>Loại xe</option>
+                                    <option value="">Tất cả loại xe</option>
                                     <c:forEach var="vehicleType" items="${vehicleTypeList}">
-                                        <option value="${vehicleType.vehicleTypeId}" >
+                                        <option value="${vehicleType.vehicleTypeId}"
+                                                <c:if test="${vehicleType.vehicleTypeId == vehicleTypeFilter}">selected</c:if>>
                                                 ${vehicleType.vehicleTypeName}
                                         </option>
                                     </c:forEach>
                                 </select>
+
                             </div>
 
                             <!-- Nút đặt lại -->
@@ -77,8 +81,10 @@
                                     Đặt lại
                                 </a>
                             </div>
+
                         </div>
                     </form>
+
 
                     <div class="row">
                         <div class="col-12">

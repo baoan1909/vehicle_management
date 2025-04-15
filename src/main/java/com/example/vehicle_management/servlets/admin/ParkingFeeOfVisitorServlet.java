@@ -22,6 +22,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -64,29 +65,20 @@ public class ParkingFeeOfVisitorServlet extends HttpServlet {
             parkingFeeOfVisitorService.deleteParkingFeeOfVisitor(feeVisitorId);
             request.getRequestDispatcher("/admin/parkingFeeOfVisitor").forward(request, response);
         }else {
+
             String search = request.getParameter("search");
-            String vehicleTypeIdStr = request.getParameter("vehicleTypeId");
+            String vehicleTypeId = request.getParameter("vehicleTypeId");
             String dateRange = request.getParameter("dateRange");
 
-            if(search != null && search.isEmpty()){
-                request.setAttribute("search", search);
-            }else {
-                request.setAttribute("search", "");
-            }
-            System.out.println("từ khóa"+search);
+            HttpSession session = request.getSession();
+            session.setAttribute("search", search != null ? search : "");
+            session.setAttribute("vehicleTypeId", vehicleTypeId != null ? vehicleTypeId : "");
 
 
+            // Truyền xuống JSP qua request
+            request.setAttribute("search", session.getAttribute("search"));
+            request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
 
-            Integer vehicleTypeId = null;
-            if (vehicleTypeIdStr != null && !vehicleTypeIdStr.isEmpty()) {
-                vehicleTypeId = Integer.parseInt(vehicleTypeIdStr);
-                int vehicleType= vehicleTypeService.getVehicleTypeById(vehicleTypeId).getVehicleTypeId();
-                request.setAttribute("vehicleType",vehicleType);
-            }else{
-                request.setAttribute("vehicleType","");
-            }
-
-            final Integer finalVehicleTypeId = vehicleTypeId;
 
 
             LocalDate startDate = null;
@@ -103,15 +95,27 @@ public class ParkingFeeOfVisitorServlet extends HttpServlet {
             }
             final LocalDate finalStartDate = startDate;
             final LocalDate finalEndDate = endDate;
-            request.setAttribute("startDate", startDate);
-            request.setAttribute("endDate", endDate);
+
+            session.setAttribute("startDateFilter", startDate);
+            session.setAttribute("endDateFilter", endDate);
+
+            request.setAttribute("startDate", session.getAttribute("startDateFilter"));
+            request.setAttribute("endDate", session.getAttribute("endDateFilter"));
+
 
             // Lấy danh sách và lọc theo điều kiện
             List<ParkingFeeOfVisitor> parkingFeeOfVisitorList = parkingFeeOfVisitorService.getAllParkingFeeOfVisitors();
 
             List<ParkingFeeOfVisitorDTO> filteredList = parkingFeeOfVisitorList.stream()
                     .filter(p -> (search == null || search.isEmpty() || String.valueOf(p.getPrice()).contains(search) ) )
-                    .filter(p -> (finalVehicleTypeId == null || p.getVehicleTypeId() == finalVehicleTypeId))
+                    .filter(p -> {
+                        if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
+                        try {
+                            return p.getVehicleTypeId() == Integer.parseInt(vehicleTypeId);
+                        } catch (NumberFormatException e) {
+                            return true;
+                        }
+                    })
 
                     .filter(p -> {
                         if (finalStartDate != null && finalEndDate != null) {

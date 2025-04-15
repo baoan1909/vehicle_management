@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerRepositoryImpl implements ICustomerRepository {
-    private static final String SELECT_ALL_CUSTOMERS = "SELECT customerId, fullName, dateOfBirth, gender, phoneNumber, address, email, identifyCard, createDate, updateDate FROM Customer;";
-    private static final String SELECT_CUSTOMER_BY_ID = "SELECT customerId, fullName, dateOfBirth, gender, phoneNumber, address, email, identifyCard, createDate, updateDate FROM Customer WHERE customerId = ?;";
+    private static final String SELECT_ALL_CUSTOMERS = "SELECT c.CustomerId, c.fullName, c.dateOfBirth, c.gender, c.phoneNumber, c.address, c.email, c.identifyCard, crt.CardId, crt.FeeCustomerId  FROM  CustomerRegisterTicket crt, Customer c, Card card, ParkingFeeOfCustomer pfc, VehicleType vt, TicketType tt";
+    private static final String SELECT_CUSTOMER_BY_ID = "SELECT customerId, fullName, dateOfBirth, gender, phoneNumber, address, email, identifyCard FROM Customer WHERE customerId = ?;";
     private static final String INSERT_CUSTOMER = "INSERT INTO Customer(fullName, dateOfBirth, gender, phoneNumber, address, email, identifyCard) VALUES (?, ?, ?, ?, ?, ?, ?);";
     private static final String UPDATE_CUSTOMER = "UPDATE Customer SET fullName = ?, dateOfBirth = ?, gender = ?, phoneNumber = ?, address = ?, email = ?, identifyCard = ? WHERE customerId = ?;";
     private static final String DELETE_CUSTOMER = "DELETE FROM Customer WHERE customerId = ?;";
