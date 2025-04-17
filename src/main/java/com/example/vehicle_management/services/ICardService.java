@@ -13,4 +13,5 @@ public interface ICardService {
     boolean isExistsCardNumber(String cardNumber);
     double getParkingFeeVisitorByCardId(int cardId);
     int getCustomerIdByCardId(int cardId);
+    int getCardIdByCardNumber(String cardNumber);
 }

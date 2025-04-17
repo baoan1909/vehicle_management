@@ -1,33 +1,21 @@
 package com.example.vehicle_management.models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Customer {
     private int customerId;
     private String fullName;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String gender;
     private String phoneNumber;
     private String address;
     private String email;
     private String identifyCard;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 
-    public Customer(int customerId, String fullName, String dateOfBirth, String gender, String phoneNumber, String address, String email, String identifyCard, LocalDateTime createDate, LocalDateTime updateDate) {
-        this.customerId = customerId;
-        this.fullName = fullName;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.email = email;
-        this.identifyCard = identifyCard;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-    }
 
-    public Customer(int customerId, String fullName, String dateOfBirth, String gender, String phoneNumber, String address, String email, String identifyCard) {
+
+    public Customer( int customerId ,String fullName, LocalDate dateOfBirth, String gender, String phoneNumber, String address, String email, String identifyCard) {
         this.customerId = customerId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -60,11 +48,11 @@ public class Customer {
         this.fullName = fullName;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -106,21 +94,5 @@ public class Customer {
 
     public void setIdentifyCard(String identifyCard) {
         this.identifyCard = identifyCard;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
     }
 }
