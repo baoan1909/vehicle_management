@@ -14,31 +14,36 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public boolean insertAccount(Account account) {
-        return false;
+        return accountRepository.insert(account);
     }
 
     @Override
     public boolean updateAccount(Account account) {
-        return false;
+        return accountRepository.update(account);
     }
 
     @Override
     public boolean deleteAccount(int id) {
-        return false;
+        return accountRepository.delete(id);
     }
 
     @Override
     public Account getAccountById(int id) {
-        return null;
+        return accountRepository.getById(id);
     }
 
     @Override
     public List<Account> getAllAccounts() {
-        return List.of();
+        return accountRepository.getAll();
     }
 
     @Override
     public Account getAccountByUsername(String username) {
         return accountRepository.getAccountByUsername(username);
+    }
+
+    @Override
+    public Account getAccountByEmail(String email) {
+        return accountRepository.getAccountByEmail(email);
     }
 }

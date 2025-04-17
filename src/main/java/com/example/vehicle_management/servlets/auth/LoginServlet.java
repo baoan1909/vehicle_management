@@ -4,6 +4,7 @@ import com.example.vehicle_management.models.Account;
 import com.example.vehicle_management.repositoriesImpl.*;
 import com.example.vehicle_management.services.IAccountService;
 import com.example.vehicle_management.servicesImpl.*;
+import com.example.vehicle_management.utils.PasswordUtil;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -65,7 +66,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        if (!account.getHashPassword().equals(password)) {
+        if (!PasswordUtil.checkPassword(password, account.getHashPassword())) {
             request.setAttribute("error", "Sai mật khẩu");
             request.getRequestDispatcher("/views/login&register/login.jsp").forward(request, response);
             return;

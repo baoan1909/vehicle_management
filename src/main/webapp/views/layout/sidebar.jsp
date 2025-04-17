@@ -131,8 +131,8 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item ">
-                            <a href="<%= request.getContextPath() %>/admin/account?page=account"
-                               class="nav-link <%= ("account".equals(request.getParameter("page")) || "account-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/account"
+                               class="nav-link <%= (request.getRequestURI().contains("/admin/account") || request.getRequestURI().contains("/admin/account/edit") || request.getRequestURI().contains("/admin/account/add") || request.getRequestURI().contains("/admin/account/delete") || request.getRequestURI().contains("/admin/account/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tài khoản</p>
                             </a>

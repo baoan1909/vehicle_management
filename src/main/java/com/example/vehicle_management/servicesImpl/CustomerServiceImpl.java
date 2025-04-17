@@ -8,6 +8,7 @@ import java.util.List;
 
 public class CustomerServiceImpl implements ICustomerService {
     private final ICustomerRepository customerRepository;
+
     public CustomerServiceImpl(ICustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
@@ -35,5 +36,10 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public List<Customer> getAllCustomers() {
         return customerRepository.getAll();
+    }
+
+    @Override
+    public List<Customer> getAllOnlyCustomer() {
+        return customerRepository.getAllOnlyCustomer();
     }
 }

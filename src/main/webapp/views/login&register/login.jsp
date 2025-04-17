@@ -26,7 +26,8 @@
                 <div class="alert alert-danger mt-2"><%= error %></div>
                 <% } %>
                 <div class="input-group mb-3">
-                    <input type="text" name="username" class="form-control" placeholder="Tên tài khoản" required>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Tên tài khoản" required>
+
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -34,7 +35,8 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Mật khẩu" required>
+
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>

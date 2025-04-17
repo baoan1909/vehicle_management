@@ -12,5 +12,6 @@ public interface IAccountService {
     Account getAccountById(int id);
     List<Account> getAllAccounts();
     Account getAccountByUsername(String username);
+    Account getAccountByEmail(String email);
 
 }
