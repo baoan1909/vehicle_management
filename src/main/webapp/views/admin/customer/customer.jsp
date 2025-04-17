@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Customer</title>
@@ -69,26 +70,25 @@
                                             <div class="col-md-2 mt-3">
                                                 <div class="form-group">
                                                     <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Loại xe</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
+                                                        <c:forEach var="vehicleType" items="${vehicleTypeList}">
+                                                            <option value="${vehicleType.vehicleTypeId}"
+                                                                    <c:if test="${vehicleType.vehicleTypeId == vehicleTypeFilter}">selected</c:if>>
+                                                                    ${vehicleType.vehicleTypeName}
+                                                            </option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mt-3">
                                                 <div class="form-group">
                                                     <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Loại vé</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
+                                                        <option value="">Tất cả loại vé</option>
+                                                        <c:forEach var="ticketType" items="${ticketTypeList}">
+                                                            <option value="${ticketType.ticketTypeId}"
+                                                                    <c:if test="${ticketType.ticketTypeId == ticketTypeFilter}">selected</c:if>>
+                                                                    ${ticketType.ticketTypeName}
+                                                            </option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/customer/customer-detail?page=customer-detail" class="btn btn-info btn-block">
+                                        <a href="<%= request.getContextPath() %>/admin/customer/add" class="btn btn-info btn-block">
                                             <i class="fas fa-plus-circle"></i> Thêm mới
                                         </a>
                                     </div>
@@ -122,6 +122,7 @@
                                         <thead>
                                         <tr>
                                             <th>STT</th>
+                                            <th>Số thẻ</th>
                                             <th>ID Khách hàng</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
@@ -135,106 +136,44 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td> 4</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td> 4</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
+                                        <c:forEach var="customer" items="${customerDTOList}" varStatus="loop">
+                                            <tr>
+                                                <td>${loop.count}</td>
+                                                <td>${customer.cardNumber}</td>
+                                                <td>${customer.customerId}</td>
+                                                <td>${customer.customerName}</td>
+                                                <td>${customer.customerPhoneNumber}</td>
+                                                <td>${customer.customerEmail}</td>
+                                                <td>${customer.vehicleTypeName}</td>
+                                                <td>${customer.licensePlate}</td>
+                                                <td>${customer.ticketTypeName}</td>
+                                                <td>${customer.effectiveDate}</td>
+                                                <td>${customer.expirationDate}</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <a href="${pageContext.request.contextPath}/admin/customer/edit?id=${customer.customerRegisterTicketId}" class="btn btn-info btn-block">
+                                                                        <i class="fas fa-pen-square"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <a href="${pageContext.request.contextPath}/admin/customer/delete?id=${customer.customerRegisterTicketId}" class="btn btn-info btn-block">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td> 4</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>X</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-info btn-block">
-                                                                    <i class="fas fa-pen-square"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-outline-warning btn-block">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                         <tfoot>
                                         <tr>
                                             <th>STT</th>
+                                            <th>Số thẻ</th>
                                             <th>ID Khách hàng</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>

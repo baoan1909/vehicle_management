@@ -14,26 +14,26 @@ public class CustomerRegisterTicketServiceImpl implements ICustomerRegisterTicke
 
     @Override
     public boolean insertCustomerRegisterTicket(CustomerRegisterTicket customerRegisterTicket) {
-        return false;
+        return customerRegisterTicketRepository.insert(customerRegisterTicket);
     }
 
     @Override
     public boolean updateCustomerRegisterTicket(CustomerRegisterTicket customerRegisterTicket) {
-        return false;
+        return customerRegisterTicketRepository.update(customerRegisterTicket);
     }
 
     @Override
     public boolean deleteCustomerRegisterTicket(int id) {
-        return false;
+        return customerRegisterTicketRepository.delete(id);
     }
 
     @Override
     public CustomerRegisterTicket getCustomerRegisterTicketById(int id) {
-        return null;
+        return customerRegisterTicketRepository.getById(id);
     }
 
     @Override
     public List<CustomerRegisterTicket> getAllCustomerRegisterTickets() {
-        return List.of();
+        return customerRegisterTicketRepository.getAll();
     }
 }

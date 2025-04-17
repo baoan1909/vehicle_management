@@ -19,6 +19,7 @@ public class CardRepositoryImpl implements ICardRepository {
     private static final String DELETE_CARD = "DELETE FROM Card WHERE cardId = ?;";
     private static final String GET_PARKING_FEE_VISITOR_BY_CARD_ID_IN_LOST_CARD = "SELECT pf.price FROM ParkingFeeOfVisitor pf JOIN VehicleType vt ON pf.vehicleTypeId = vt.vehicleTypeId JOIN Card c ON c.vehicleTypeId = vt.vehicleTypeId JOIN LostCard lc ON lc.cardId = c.cardId WHERE c.cardId = ? ORDER BY pf.startDate DESC LIMIT 1;";
     private static final String GET_CUSTOMER_ID_BY_CARD_ID = "SELECT customerId FROM CustomerRegisterTicket WHERE cardId = ? AND effectiveDate <= CURRENT_DATE AND CURRENT_DATE <= expirationDate ";
+    private static final String GET_CARD_ID_BY_CARD_NUMBER = "SELECT cardId FROM CARD WHERE cardNumber = ? ";
 
     @Override
     public boolean insert(Card card) {
@@ -169,6 +170,24 @@ public class CardRepositoryImpl implements ICardRepository {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt("CustomerId");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int getCardIdByCardNumber(String cardNumber) {
+        try (Connection conn = DBConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(GET_CARD_ID_BY_CARD_NUMBER)) {
+
+            stmt.setString(1, cardNumber);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("CardId");
                 }
             }
         } catch (SQLException e) {

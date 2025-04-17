@@ -41,5 +41,6 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public List<Customer> getAllOnlyCustomer() {
         return customerRepository.getAllOnlyCustomer();
+
     }
 }

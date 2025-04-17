@@ -25,7 +25,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
              PreparedStatement stmt = conn.prepareStatement(INSERT_CUSTOMER)) {
 
             stmt.setString(1, customer.getFullName());
-            stmt.setString(2, customer.getDateOfBirth());
+            stmt.setDate(2, java.sql.Date.valueOf(customer.getDateOfBirth()));
             stmt.setString(3, customer.getGender());
             stmt.setString(4, customer.getPhoneNumber());
             stmt.setString(5, customer.getAddress());
@@ -44,7 +44,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
              PreparedStatement stmt = conn.prepareStatement(UPDATE_CUSTOMER)) {
 
             stmt.setString(1, customer.getFullName());
-            stmt.setString(2, customer.getDateOfBirth());
+            stmt.setDate(2, java.sql.Date.valueOf(customer.getDateOfBirth()));
             stmt.setString(3, customer.getGender());
             stmt.setString(4, customer.getPhoneNumber());
             stmt.setString(5, customer.getAddress());
@@ -108,7 +108,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
         return new Customer(
                 rs.getInt("customerId"),
                 rs.getString("fullName"),
-                rs.getString("dateOfBirth"),
+                rs.getTimestamp("dateOfBirth").toLocalDateTime().toLocalDate(),
                 rs.getString("gender"),
                 rs.getString("phoneNumber"),
                 rs.getString("address"),
