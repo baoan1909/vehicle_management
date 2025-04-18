@@ -1,15 +1,11 @@
 package com.example.vehicle_management.servlets.admin;
 
-import com.example.vehicle_management.dtos.CardDTO;
 import com.example.vehicle_management.dtos.CustomerDTO;
-import com.example.vehicle_management.mappers.CardMapper;
 import com.example.vehicle_management.mappers.CustomerMapper;
-import com.example.vehicle_management.mappers.CustomerRegisterTicketMapper;
 import com.example.vehicle_management.models.*;
 import com.example.vehicle_management.repositoriesImpl.*;
 import com.example.vehicle_management.services.*;
 import com.example.vehicle_management.servicesImpl.*;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,10 +16,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet({"/admin/customer","/admin/customer/add","/admin/customer/edit","/admin/customer/delete","/admin/customer/save", "/admin/customer/getCard", "/admin/customer/getFeeCustomer"})

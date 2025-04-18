@@ -125,14 +125,14 @@ public class CardServlet extends HttpServlet {
                                         return true;
                                     }
                                 })
-                            .filter(p -> {
-                                if (finalStartDate != null && finalEndDate != null) {
-                                    return (p.getCreateDate() != null &&
-                                            (p.getCreateDate().isEqual(finalStartDate) || p.getCreateDate().isAfter(finalStartDate)) &&
-                                            (p.getCreateDate().isEqual(finalEndDate) || p.getCreateDate().isBefore(finalEndDate)));
-                                }
-                                return true;
-                            })
+//                            .filter(p -> {
+//                                if (finalStartDate != null && finalEndDate != null) {
+//                                    return (p.getCreateDate() != null &&
+//                                            (p.getCreateDate().isEqual(finalStartDate) || p.getCreateDate().isAfter(finalStartDate)) &&
+//                                            (p.getCreateDate().isEqual(finalEndDate) || p.getCreateDate().isBefore(finalEndDate)));
+//                                }
+//                                return true;
+//                            })
                             .map(p ->CardMapper.toDTO(p, vehicleTypeService, ticketTypeService))
                             .toList();
             request.setAttribute("lstCards", lstCardFilter);
