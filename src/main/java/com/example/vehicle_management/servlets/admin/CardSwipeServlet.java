@@ -222,14 +222,14 @@ public class CardSwipeServlet extends HttpServlet {
                             return true;
                         }
                     })
-//                    .filter(p -> {
-//                        if (finalStartDate != null && finalEndDate != null) {
-//                            return (p.getCheckInTime() != null &&
-//                                    (p.getCheckInTime().isEqual(finalStartDate) || p.getCheckInTime().isAfter(finalStartDate)) &&
-//                                    (p.getCheckInTime().isEqual(finalEndDate) || p.getCheckInTime().isBefore(finalEndDate)));
-//                        }
-//                        return true;
-//                    })
+                    .filter(p -> {
+                        if (finalStartDate != null && finalEndDate != null) {
+                            return (p.getCheckInTime() != null &&
+                                    (p.getCheckInTime().isEqual(finalStartDate) || p.getCheckInTime().isAfter(finalStartDate)) &&
+                                    (p.getCheckInTime().isEqual(finalEndDate) || p.getCheckInTime().isBefore(finalEndDate)));
+                        }
+                        return true;
+                    })
                     .toList();
 
             request.setAttribute("lstCardSwipe", lstCardSwipeFiltered);
