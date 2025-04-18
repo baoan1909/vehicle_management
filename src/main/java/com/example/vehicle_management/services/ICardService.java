@@ -14,4 +14,5 @@ public interface ICardService {
     double getParkingFeeVisitorByCardId(int cardId);
     int getCustomerIdByCardId(int cardId);
     int getCardIdByCardNumber(String cardNumber);
+    List<Card> getCardIdByType();
 }

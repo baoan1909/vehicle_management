@@ -119,7 +119,7 @@ public class LostcardServlet extends HttpServlet {
             String name = lostCard.getVisitorName();
             String phone = lostCard.getVisitorPhoneNum();
             String cccd = lostCard.getIdentifyCard();
-            String type = "-- Loại xe --";
+            String type = "";
 
             if (lostCard.getCustomerId() != null && lostCard.getCustomerId() != 0) {
                 Customer customer = customerService.getCustomerById(lostCard.getCustomerId());

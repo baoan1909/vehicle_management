@@ -41,6 +41,15 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public List<Customer> getAllOnlyCustomer() {
         return customerRepository.getAllOnlyCustomer();
+    }
 
+    @Override
+    public int getCustomerIdByPhoneNumber(String phoneNumber) {
+        return customerRepository.getCustomerIdByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public int insertAndReturnId(Customer customer) {
+        return customerRepository.insertAndReturnId(customer);
     }
 }

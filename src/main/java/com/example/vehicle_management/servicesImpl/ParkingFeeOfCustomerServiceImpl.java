@@ -36,4 +36,9 @@ public class ParkingFeeOfCustomerServiceImpl implements IParkingFeeOfCustomerSer
     public List<ParkingFeeOfCustomer> getAllParkingFeeOfCustomers() {
         return parkingFeeOfCustomerRepository.getAll();
     }
+
+    @Override
+    public ParkingFeeOfCustomer findByTicketTypeAndVehicleType(int ticketTypeId, int vehicleTypeId) {
+        return parkingFeeOfCustomerRepository.findByTicketTypeAndVehicleType(ticketTypeId, vehicleTypeId);
+    }
 }

@@ -7,6 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.example.vehicle_management.models.Account" %>
+<%
+    Account account = (Account) session.getAttribute("account");
+%>
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
         <a href="#" class="navbar-brand">
@@ -33,7 +37,7 @@
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
             <c:choose>
-                <c:when test="${empty sessionScope.account}">
+                <c:when test="${empty account}">
                     <!-- Chưa đăng nhập -->
                     <li class="nav-item">
                         <div class="col-md-12">
@@ -44,7 +48,7 @@
                         </div>
                     </li>
                 </c:when>
-                <c:when test="${not empty sessionScope.account and sessionScope.account.roleId == 2}">
+                <c:when test="${not empty account}">
                     <!-- Đã đăng nhập với roleId == 2 -->
                     <li class="nav-item dropdown">
                         <div class="user-panel d-flex h-100" data-toggle="dropdown">
@@ -61,11 +65,17 @@
                                     <img src="<%= request.getContextPath() %>/assets/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2 mt-3" style="width: 60px" alt="User Image">
                                 </div>
                                 <div class="info">
-                                    <span class="d-block mt-3"><h5>${sessionScope.account.userName}</h5></span>
+                                    <span class="d-block mt-3"><h5>${account.getUserName}</h5></span>
                                 </div>
                             </div>
                             <div class="dropdown-divider"></div>
-                            <a href="<%= request.getContextPath() %>/customerTicket/customer-infor-detail" class="dropdown-item">
+                                <c:if test="${account.getRoleId() == 2}">
+                                    <a href="<%= request.getContextPath() %>/customerTicket/customer-infor-detail" class="dropdown-item">
+                                </c:if>
+                                <c:otherwise>
+                                    <a href="<%= request.getContextPath() %>/customerTicket/customer-infor-detail" class="dropdown-item">
+                                </c:otherwise>
+
                                 <i class="fas fa-user-circle mr-2"></i> Thông tin tài khoản
                             </a>
                             <div class="dropdown-divider"></div>

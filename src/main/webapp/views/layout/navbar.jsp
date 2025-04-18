@@ -6,6 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.example.vehicle_management.models.Account" %>
+<%
+    Account account = (Account) session.getAttribute("account");
+%>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -136,7 +141,13 @@
                         <img src="<%= request.getContextPath() %>/assets/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2 mt-3" style="width: 60px" alt="User Image">
                     </div>
                     <div class="info">
-                        <span class="d-block mt-3"><h5>Alexander Pierce</h5></span>
+                        <span class="d-block mt-3">
+                            <h5>
+                                <c:if test="${not empty account}">
+                                    ${account.getUserName()}
+                                </c:if>
+                            </h5>
+                        </span>
                     </div>
                 </div>
                 <div class="dropdown-divider"></div>

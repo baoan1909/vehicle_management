@@ -37,16 +37,6 @@
                             <div class="col-12">
                                 <div class="card card-cyan card-outline">
                                     <div class="card-body">
-                                        <div class="form-group col-md-4">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-cyan">
-                                                        <i class="far fa-calendar-alt"></i>
-                                                    </span>
-                                                </div>
-                                                <input type="text" class="form-control float-right" id="daterange-btn">
-                                            </div>
-                                        </div>
                                         <div class="col-10 mx-auto">
                                             <div class="row info-box d-flex justify-content-center align-items-center shadow">
                                                 <div class="col-md-4 text-center d-flex flex-column justify-content-center">

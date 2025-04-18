@@ -12,7 +12,6 @@ public class CustomerDTO {
     private String address;
     private LocalDate dateOfBirth;
     private  String customerPhoneNumber;
-    private String customerEmail;
     private String identifyCard;
     private int feeCustomerId;
     private int vehicleTypeId;
@@ -24,7 +23,7 @@ public class CustomerDTO {
     private LocalDate expirationDate;
     private double price;
 
-    public CustomerDTO(int customerRegisterTicketId, int cardId, String cardNumber,int customerId, String customerName, String gender, String address,LocalDate dateOfBirth, String customerEmail,String identifyCard, int feeCustomerId,String customerPhoneNumber, int vehicleTypeId, String vehicleTypeName, String licensePlate, int ticketTypeId, String ticketTypeName, LocalDate effectiveDate, LocalDate expirationDate, double price) {
+    public CustomerDTO(int customerRegisterTicketId, int cardId, String cardNumber,int customerId, String customerName, String gender, String address,LocalDate dateOfBirth,String identifyCard, int feeCustomerId,String customerPhoneNumber, int vehicleTypeId, String vehicleTypeName, String licensePlate, int ticketTypeId, String ticketTypeName, LocalDate effectiveDate, LocalDate expirationDate, double price) {
         this.customerRegisterTicketId = customerRegisterTicketId;
         this.cardId = cardId;
         this.cardNumber = cardNumber;
@@ -33,7 +32,6 @@ public class CustomerDTO {
         this.gender = gender;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
-        this.customerEmail = customerEmail;
         this.identifyCard = identifyCard;
         this.feeCustomerId = feeCustomerId;
         this.customerPhoneNumber = customerPhoneNumber;
@@ -88,10 +86,6 @@ public class CustomerDTO {
 
     public String getCustomerPhoneNumber() {
         return customerPhoneNumber;
-    }
-
-    public String getCustomerEmail() {
-        return customerEmail;
     }
 
     public String getIdentifyCard() {

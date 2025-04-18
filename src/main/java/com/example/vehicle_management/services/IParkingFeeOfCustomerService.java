@@ -10,4 +10,5 @@ public interface IParkingFeeOfCustomerService {
     boolean deleteParkingFeeOfCustomer(int id);
     ParkingFeeOfCustomer getParkingFeeOfCustomerById(int id);
     List<ParkingFeeOfCustomer> getAllParkingFeeOfCustomers();
+    ParkingFeeOfCustomer findByTicketTypeAndVehicleType (int ticketTypeId, int vehicleTypeId);
 }

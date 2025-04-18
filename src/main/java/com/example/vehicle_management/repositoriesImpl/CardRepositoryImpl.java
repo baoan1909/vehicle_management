@@ -20,6 +20,7 @@ public class CardRepositoryImpl implements ICardRepository {
     private static final String GET_PARKING_FEE_VISITOR_BY_CARD_ID_IN_LOST_CARD = "SELECT pf.price FROM ParkingFeeOfVisitor pf JOIN VehicleType vt ON pf.vehicleTypeId = vt.vehicleTypeId JOIN Card c ON c.vehicleTypeId = vt.vehicleTypeId JOIN LostCard lc ON lc.cardId = c.cardId WHERE c.cardId = ? ORDER BY pf.startDate DESC LIMIT 1;";
     private static final String GET_CUSTOMER_ID_BY_CARD_ID = "SELECT customerId FROM CustomerRegisterTicket WHERE cardId = ? AND effectiveDate <= CURRENT_DATE AND CURRENT_DATE <= expirationDate ";
     private static final String GET_CARD_ID_BY_CARD_NUMBER = "SELECT cardId FROM CARD WHERE cardNumber = ? ";
+    private static final String SELECT_CARD_BY_TYPE = "SELECT c.cardId FROM Card c WHERE c.type = 'Đăng ký' AND ( c.cardId NOT IN ( SELECT crt.cardId FROM CustomerRegisterTicket crt ) OR c.cardId IN ( SELECT crt.cardId FROM CustomerRegisterTicket crt WHERE crt.expirationDate < CURRENT_DATE ) );";
 
     @Override
     public boolean insert(Card card) {
@@ -194,5 +195,25 @@ public class CardRepositoryImpl implements ICardRepository {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public List<Card> getCardIdByType() {
+        List<Card> cards = new ArrayList<>();
+        try (Connection conn = DBConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_CARD_BY_TYPE);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("cardId");
+                Card card = getById(id); // lấy thông tin đầy đủ của Card
+                if (card != null) {
+                    cards.add(card);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cards;
     }
 }

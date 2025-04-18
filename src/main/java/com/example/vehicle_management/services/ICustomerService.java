@@ -11,5 +11,7 @@ public interface ICustomerService {
     Customer getCustomerById(int id);
     List<Customer> getAllCustomers();
     List<Customer> getAllOnlyCustomer();
+    int getCustomerIdByPhoneNumber(String phoneNumber);
+    int insertAndReturnId(Customer customer);
 
 }

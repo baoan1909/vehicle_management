@@ -126,7 +126,6 @@
                                             <th>ID Khách hàng</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Email</th>
                                             <th>Loại xe</th>
                                             <th>Biển số</th>
                                             <th>Loại vé</th>
@@ -143,7 +142,6 @@
                                                 <td>${customer.customerId}</td>
                                                 <td>${customer.customerName}</td>
                                                 <td>${customer.customerPhoneNumber}</td>
-                                                <td>${customer.customerEmail}</td>
                                                 <td>${customer.vehicleTypeName}</td>
                                                 <td>${customer.licensePlate}</td>
                                                 <td>${customer.ticketTypeName}</td>
@@ -177,7 +175,6 @@
                                             <th>ID Khách hàng</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Email</th>
                                             <th>Loại xe</th>
                                             <th>Biển số</th>
                                             <th>Loại vé</th>
