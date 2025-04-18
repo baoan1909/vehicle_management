@@ -10,5 +10,6 @@ public interface ICustomerService {
     boolean deleteCustomer(int id);
     Customer getCustomerById(int id);
     List<Customer> getAllCustomers();
-    int getCustomerByEmail(String email);
+    List<Customer> getAllOnlyCustomer();
+
 }

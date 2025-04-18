@@ -7,24 +7,51 @@ public class Account {
     private String userName;
     private String hashPassword;
     private int customerId;
+    private String email;
     private int roleId;
-    private boolean status;
+    private int status;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-    public Account(int accountId, String userName, String hashPassword, int customerId, int roleId, boolean status, LocalDateTime createDate, LocalDateTime updateDate) {
+    public Account(int accountId, String userName, String hashPassword, int customerId, String email, int roleId, int status, LocalDateTime createDate, LocalDateTime updateDate) {
         this.accountId = accountId;
         this.userName = userName;
         this.hashPassword = hashPassword;
         this.customerId = customerId;
+        this.email = email;
         this.roleId = roleId;
         this.status = status;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
+    public Account(int accountId, String userName, String hashPassword, int customerId, String email, int roleId, int status) {
+        this.accountId = accountId;
+        this.userName = userName;
+        this.hashPassword = hashPassword;
+        this.customerId = customerId;
+        this.email = email;
+        this.roleId = roleId;
+        this.status = status;
+    }
 
     public Account() {
 
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getAccountId() {
@@ -65,14 +92,6 @@ public class Account {
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     public LocalDateTime getCreateDate() {

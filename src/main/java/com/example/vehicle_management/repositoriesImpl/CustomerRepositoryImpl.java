@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerRepositoryImpl implements ICustomerRepository {
-    private static final String SELECT_ALL_CUSTOMERS = "SELECT CustomerId, FullName, DateOfBirth, Gender, PhoneNumber, Address, Email, IdentifyCard FROM Customer ";
-    private static final String SELECT_CUSTOMER_BY_ID = "SELECT CustomerId, FullName, DateOfBirth, Gender, PhoneNumber, Address, Email, IdentifyCard FROM Customer WHERE customerId = ?;";
-    private static final String SELECT_CUSTOMER_BY_EMAIL = "SELECT CustomerId FROM Customer WHERE Email = ?;";
-    private static final String INSERT_CUSTOMER = "INSERT INTO Customer(fullName, dateOfBirth, gender, phoneNumber, address, email) VALUES (?, ?, ?, ?, ?, ?);";
-    private static final String UPDATE_CUSTOMER = "UPDATE Customer SET fullName = ?, dateOfBirth = ?, gender = ?, phoneNumber = ?, address = ?, email = ? WHERE customerId = ?;";
+    private static final String SELECT_ALL_CUSTOMERS = "SELECT c.CustomerId, c.fullName, c.dateOfBirth, c.gender, c.phoneNumber, c.address, c.identifyCard, crt.CardId, crt.FeeCustomerId  FROM  CustomerRegisterTicket crt, Customer c, Card card, ParkingFeeOfCustomer pfc, VehicleType vt, TicketType tt";
+    private static final String SELECT_CUSTOMER_BY_ID = "SELECT customerId, fullName, dateOfBirth, gender, phoneNumber, address, identifyCard FROM Customer WHERE customerId = ?;";
+    private static final String INSERT_CUSTOMER = "INSERT INTO Customer(fullName, dateOfBirth, gender, phoneNumber, address, identifyCard) VALUES (?, ?, ?, ?, ?, ?);";
+    private static final String UPDATE_CUSTOMER = "UPDATE Customer SET fullName = ?, dateOfBirth = ?, gender = ?, phoneNumber = ?, address = ?, identifyCard = ? WHERE customerId = ?;";
     private static final String DELETE_CUSTOMER = "DELETE FROM Customer WHERE customerId = ?;";
+    private static final String SELECT_ALL_ONLY_CUSTOMER = "SELECT * FROM Customer;";
 
     @Override
     public boolean insert(Customer customer) {
@@ -29,7 +29,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
             stmt.setString(3, customer.getGender());
             stmt.setString(4, customer.getPhoneNumber());
             stmt.setString(5, customer.getAddress());
-            stmt.setString(6, customer.getEmail());
+            stmt.setString(6, customer.getIdentifyCard());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -48,7 +48,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
             stmt.setString(3, customer.getGender());
             stmt.setString(4, customer.getPhoneNumber());
             stmt.setString(5, customer.getAddress());
-            stmt.setString(6, customer.getEmail());
+            stmt.setString(6, customer.getIdentifyCard());
             stmt.setInt(7, customer.getCustomerId());
 
             return stmt.executeUpdate() > 0;
@@ -103,22 +103,6 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
         }
         return customers;
     }
-    @Override
-    public int getByEmail(String email) {
-        try (Connection conn = DBConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(SELECT_CUSTOMER_BY_EMAIL)) {
-
-            stmt.setString(1, email);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("CustomerId");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
 
     private Customer mapResultSetToCustomer(ResultSet rs) throws SQLException {
         return new Customer(
@@ -128,11 +112,23 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
                 rs.getString("gender"),
                 rs.getString("phoneNumber"),
                 rs.getString("address"),
-                rs.getString("email"),
                 rs.getString("identifyCard")
-
         );
     }
 
+    @Override
+    public List<Customer> getAllOnlyCustomer() {
+        List<Customer> customers = new ArrayList<>();
+        try (Connection conn = DBConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_ONLY_CUSTOMER);
+             ResultSet rs = stmt.executeQuery()) {
 
+            while (rs.next()) {
+                customers.add(mapResultSetToCustomer(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customers;
+    }
 }

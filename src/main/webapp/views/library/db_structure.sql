@@ -19,7 +19,6 @@ CREATE TABLE Customer (
     Gender NVARCHAR(50) NOT NULL,
     PhoneNumber VARCHAR(15) UNIQUE NOT NULL,
     Address NVARCHAR(150) NULL,
-    Email VARCHAR(100) UNIQUE NOT NULL,
     IdentifyCard VARCHAR(20) UNIQUE NOT NULL,
     CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
     UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -39,6 +38,7 @@ CREATE TABLE Account (
     UserName NVARCHAR(100) NOT NULL UNIQUE,
     HashPassword VARCHAR(255) NOT NULL,
     CustomerId INT NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
     RoleId INT NOT NULL,
     Status TINYINT(1) NOT NULL DEFAULT 1,
     CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -96,6 +96,7 @@ CREATE TABLE Card (
 
 -- 9. Tạo bảng CustomerRegisterTicket
 CREATE TABLE CustomerRegisterTicket (
+    CustomerRegisterTicketId INT AUTO_INCREMENT PRIMARY KEY,
     CardId INT NOT NULL,
     CustomerId INT NOT NULL,
     FeeCustomerId INT NOT NULL,
@@ -108,7 +109,6 @@ CREATE TABLE CustomerRegisterTicket (
     Price DECIMAL(10,2) NOT NULL,
     CreateDate DATETIME DEFAULT CURRENT_TIMESTAMP,
     UpdateDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (CardId, CustomerId), 
     FOREIGN KEY (CardId) REFERENCES Card(CardId),
     FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
     FOREIGN KEY (FeeCustomerId) REFERENCES ParkingFeeOfCustomer(FeeCustomerId),

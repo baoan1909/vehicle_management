@@ -10,19 +10,29 @@ public class Customer {
     private String gender;
     private String phoneNumber;
     private String address;
-    private String email;
     private String identifyCard;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
 
-
-
-    public Customer( int customerId ,String fullName, LocalDate dateOfBirth, String gender, String phoneNumber, String address, String email, String identifyCard) {
+    public Customer(int customerId, String fullName, LocalDate dateOfBirth, String gender, String phoneNumber, String address, String identifyCard, LocalDateTime createDate, LocalDateTime updateDate) {
         this.customerId = customerId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.email = email;
+        this.identifyCard = identifyCard;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
+
+    public Customer( int customerId ,String fullName, LocalDate dateOfBirth, String gender, String phoneNumber, String address, String identifyCard) {
+        this.customerId = customerId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
         this.identifyCard = identifyCard;
     }
 
@@ -78,14 +88,6 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getIdentifyCard() {

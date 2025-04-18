@@ -39,7 +39,8 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public int getCustomerByEmail(String email) {
-        return customerRepository.getByEmail(email);
+    public List<Customer> getAllOnlyCustomer() {
+        return customerRepository.getAllOnlyCustomer();
+
     }
 }

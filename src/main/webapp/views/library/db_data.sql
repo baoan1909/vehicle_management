@@ -6,19 +6,19 @@ INSERT INTO VehicleType (VehicleTypeName, Description) VALUES
 ('Xe hơi', 'Dùng cho cá nhân hoặc dịch vụ');
 
 -- Thêm dữ liệu cho Customer
-INSERT INTO Customer (FullName, DateOfBirth, Gender, PhoneNumber, Address, Email, IdentifyCard) VALUES
-('Nguyễn Văn A', '1990-05-15', 'Nam', '0987654321', 'Hà Nội', 'a@gmail.com', '123456789'),
-('Trần Thị B', '1985-08-22', 'Nữ', '0912345678', 'TP.HCM', 'b@gmail.com', '987654321'),
-('Lê Văn C', '1995-12-10', 'Nam', '0909090909', 'Đà Nẵng', 'c@gmail.com', '567890123');
+INSERT INTO Customer (FullName, DateOfBirth, Gender, PhoneNumber, Address, IdentifyCard) VALUES
+('Nguyễn Văn A', '1990-05-15', 'Nam', '0987654321', 'Hà Nội',  '123456789'),
+('Trần Thị B', '1985-08-22', 'Nữ', '0912345678', 'TP.HCM', '987654321'),
+('Lê Văn C', '1995-12-10', 'Nam', '0909090909', 'Đà Nẵng', '567890123');
 
 -- Thêm dữ liệu cho Role
 INSERT INTO Role (RoleName) VALUES ('Admin'), ('User');
 
 -- Thêm dữ liệu cho Account
-INSERT INTO Account (UserName, HashPassword, CustomerId, RoleId, Status) VALUES
-('nguyenvana', 'hashedpass1', 1, 1, 1),
-('tranthib', 'hashedpass2', 2, 2, 1),
-('levanc', 'hashedpass3', 3, 2, 1);
+INSERT INTO Account (UserName, HashPassword, CustomerId,Email, RoleId, Status) VALUES
+('nguyenvana', 'hashedpass1', 1, 'a@gmail.com', 1, 1),
+('tranthib', 'hashedpass2', 2,'b@gmail.com', 2, 1),
+('levanc', 'hashedpass3', 3, 'c@gmail.com', 2, 1);
 
 -- Thêm dữ liệu cho TicketType
 INSERT INTO TicketType (TicketTypeName, Description) VALUES
@@ -46,9 +46,9 @@ INSERT INTO Card (CardNumber, Type, VehicleTypeId, IsCreated, IsUsed) VALUES
 
 -- Thêm dữ liệu cho CustomerRegisterTicket
 INSERT INTO CustomerRegisterTicket (CardId, CustomerId, FeeCustomerId, EffectiveDate, ExpirationDate, LicensePlate, VehicleTypeId, CardReceiptDate, TicketTypeId, Price) VALUES
-(1, 1, 1, '2025-01-01', '2025-12-31', '29A-12345', 1, '2024-01-01', 1, 84000),
-(2, 2, 2, '2025-01-01', '2025-12-31', '59B-67890', 2, '2024-01-01', 1, 140000),
-(3, 3, 3, '2025-01-01', '2025-12-31', '43C-11223', 3, '2024-01-01', 1, 840000);
+(1, 1, 1, '2024-01-01', '2024-12-31', '29A-12345', 1, '2024-01-01', 1, 84000),
+(2, 2, 2, '2024-01-01', '2024-12-31', '59B-67890', 2, '2024-01-01', 1, 140000),
+(3, 3, 3, '2024-01-01', '2024-12-31', '43C-11223', 3, '2024-01-01', 1, 840000);
 
 -- Thêm dữ liệu cho LostCard
 INSERT INTO LostCard (CustomerId, CardId, NotificationTime, TimeOfLost, TicketPrice, LostCardFee, CheckInLicensePhoto, CheckInCustomerPhoto, VisitorName, VisitorPhoneNum, IdentifyCard, RegistrationLicense, Note) VALUES
