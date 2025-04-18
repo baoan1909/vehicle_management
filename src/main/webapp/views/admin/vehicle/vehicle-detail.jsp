@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Vehicle Detail</title>
+    <link rel="icon" href="<c:url value='/assets/admin/dist/img/AdminLTELogo.png' />" type="image/png" />
     <jsp:include page="/views/library/_css.jsp" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
