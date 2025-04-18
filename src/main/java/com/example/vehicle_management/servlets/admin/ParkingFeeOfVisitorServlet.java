@@ -30,7 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-@WebServlet({"/admin/parkingFeeOfVisitor","/admin/parkingFeeOfVisitor/add","/admin/parkingFeeOfVisitor/edit","/admin/parkingFeeOfVisitor/delete","/admin/parkingFeeOfVisitor/save"})
+@WebServlet({"/admin/visitorParkingFee","/admin/visitorParkingFee/add","/admin/visitorParkingFee/edit","/admin/visitorParkingFee/delete","/admin/visitorParkingFee/save"})
 public class ParkingFeeOfVisitorServlet extends HttpServlet {
     private IParkingFeeOfVisitorService parkingFeeOfVisitorService;
     private IVehicleTypeService vehicleTypeService;
@@ -59,11 +59,11 @@ public class ParkingFeeOfVisitorServlet extends HttpServlet {
                 java.util.Date formattedStartDate = java.sql.Date.valueOf(parkingFeeOfVisitorService.getParkingFeeOfVisitorById(feeVisitorId).getStartDate());
                 request.setAttribute("formattedStartDate", formattedStartDate);
             }
-            request.getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfVisitor-detail.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/admin/parkingFee/visitorParkingFee-detail.jsp").forward(request, response);
         }else if (uri.contains("delete")) {
             int feeVisitorId=Integer.parseInt(request.getParameter("id"));
             parkingFeeOfVisitorService.deleteParkingFeeOfVisitor(feeVisitorId);
-            request.getRequestDispatcher("/admin/parkingFeeOfVisitor").forward(request, response);
+            request.getRequestDispatcher("/admin/visitorParkingFee").forward(request, response);
         }else {
             String vehicleTypeId = request.getParameter("vehicleTypeId");
             String dateRange = request.getParameter("dateRange");
@@ -124,7 +124,7 @@ public class ParkingFeeOfVisitorServlet extends HttpServlet {
                     .toList();
 
             request.setAttribute("parkingFeeOfVisitorDTOList", filteredList);
-            request.getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfVisitor.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/admin/parkingFee/visitorParkingFee.jsp").forward(request, response);
         }
 
     }
@@ -153,7 +153,7 @@ public class ParkingFeeOfVisitorServlet extends HttpServlet {
             parkingFeeOfVisitorService.updateParkingFeeOfVisitor(parkingFeeOfVisitor);
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/parkingFeeOfVisitor");
+        response.sendRedirect(request.getContextPath() + "/admin/visitorParkingFee");
 
     }
 }

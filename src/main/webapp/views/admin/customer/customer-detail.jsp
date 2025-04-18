@@ -38,19 +38,21 @@
                         <div class="col-md-10">
                             <div class="card card-cyan">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thêm/Sửa thông tin khách hàng</h3>
+                                    <h3 class="card-title">${customerDTO.customerId == 0 ? "Thêm thông tin Khách hàng" : "Chỉnh sửa thông tin Khách hàng"}</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form action="${pageContext.request.contextPath}/admin/customer/save" method="post">
                                     <div class="card-body">
-                                        <c:if test="${not empty customerDTO.customerRegisterTicketId}">
-                                            <input type="hidden" name="id" value="${customerDTO.customerRegisterTicketId}" />
-                                        </c:if>
-                                        <c:if test="${not empty customerDTO.customerId}">
-                                            <input type="hidden" name="customerId" value="${customerDTO.customerId}" />
-                                        </c:if>
-
+                                        <input type="hidden" name="id" value="${customerDTO.customerRegisterTicketId}" />
+                                        <input type="hidden" name="customerId" value="${customerDTO.customerId}" />
+                                        <div class="form-group">
+                                            <div id="cardMessage" class="alert alert-danger" style="display: none"></div>
+                                            <div id="feeMessage" class="alert alert-danger" style="display: none"></div>
+                                            <c:if test="${not empty error}">
+                                                <div class="alert alert-danger">${error}</div>
+                                            </c:if>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -75,10 +77,9 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Ngày sinh:</label>
-                                                    <fmt:formatDate value="${formattedDateOfBirth}" pattern="MM/dd/yyyy" var="formattedDateOfBirth"/>
                                                     <div class="input-group date" id="dateOfBirth" data-target-input="nearest">
                                                         <input name="dateOfBirth" type="text" class="form-control datetimepicker-input" data-target="#dateOfBirth"
-                                                               placeholder="01/01/2025" value="${formattedDateOfBirth}"/>
+                                                               placeholder="01/01/2025" value="${dateOfBirth}"/>
                                                         <div class="input-group-append" data-target="#dateOfBirth" data-toggle="datetimepicker">
                                                             <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                         </div>
@@ -96,7 +97,10 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Giới tính:</label>
-                                                    <input name="gender" type="text" class="form-control" placeholder="Nam..." value="${customerDTO.gender}">
+                                                    <select name="gender" class="form-control select2">
+                                                        <option value="Nam" ${customerDTO.gender == 'Nam' ? 'selected' : ''}>Nam</option>
+                                                        <option value="Nữ" ${customerDTO.gender == 'Nữ' ? 'selected' : ''}>Nữ</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -108,27 +112,18 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Email:</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text bg-cyan"><i class="fas fa-envelope"></i></span>
-                                                        </div>
-                                                        <input name="email" type="email" class="form-control" placeholder="Email" value="${customerDTO.customerEmail}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <c:if test="${not empty customerDTO.feeCustomerId}">
-                                                <input type="hidden" name="feeCustomerId" value="${customerDTO.feeCustomerId}" />
-                                            </c:if>
+                                            <input type="hidden" name="feeCustomerId" value="${customerDTO.feeCustomerId}" />
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Loại xe:</label>
-                                                    <select class="form-control select2" style="width: 100%;" name="vehicleTypeId">
-                                                        <c:forEach var="vehicleType" items="${vehicleTypes}">
-                                                            <option value="${vehicleType.vehicleTypeId}" ${customerDTO.vehicleTypeId==vehicleType.vehicleTypeId ? "selected" : ""}>
-                                                                    ${vehicleType.vehicleTypeName}
+                                                    <label>Mã số thẻ:</label>
+                                                    <select class="form-control select2" id="cardSelect" name="cardId" style="width: 100%;" required>
+                                                        <option value="">-- Chọn thẻ --</option>
+                                                        <c:forEach var="card" items="${cards}">
+                                                            <option value="${card.cardId}"
+                                                                    <c:if test="${not empty customerDTO.cardId && customerDTO.cardId == card.cardId}">
+                                                                        selected
+                                                                    </c:if>>
+                                                                (ID:${card.cardId})- ${card.cardNumber}
                                                             </option>
                                                         </c:forEach>
                                                     </select>
@@ -136,8 +131,18 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label>Loại xe</label>
+                                                        <input type="text" id="vehicleTypeName" name="vehicleTypeName" class="form-control" placeholder="-- Loại xe --" value="${displayVehicleName}" readonly/>
+                                                        <input id="vehicleTypeId" type="hidden" name="vehicleTypeId" class="form-control" placeholder="-- Loại xe --" value="${customerDTO.vehicleTypeId}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
                                                     <label>Loại vé:</label>
-                                                    <select class="form-control select2" style="width: 100%;" name="ticketTypeId">
+                                                    <select class="form-control select2" id="ticketTypeSelect" style="width: 100%;" name="ticketTypeId">
+                                                        <option value="">-- Loại vé --</option>
                                                         <c:forEach var="ticketType" items="${ticketTypes}">
                                                             <option value="${ticketType.ticketTypeId}" ${customerDTO.ticketTypeName==ticketType.ticketTypeName ? "selected" : ""}>
                                                                     ${ticketType.ticketTypeName}
@@ -146,38 +151,30 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Giá vé:</label>
+                                                    <input name="price" type="text" class="form-control" placeholder="Giá vé..." value="${customerDTO.price}" readonly>
+                                                </div>
+                                            </div>
                                         </div>
+
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Biển số xe:</label>
                                                     <input name="licensePlate" type="text" class="form-control" placeholder="59A-03979" value="${customerDTO.licensePlate}">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Mã số thẻ:</label>
-                                                    <input name="cardNumber" type="text" class="form-control" placeholder="Mã số thẻ..." value="${customerDTO.cardNumber}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Giá vé:</label>
-                                                    <input name="price" type="text" class="form-control" placeholder="Giá vé..." value="${customerDTO.price}">
-                                                </div>
-                                            </div>
-
                                         </div>
-
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Ngày đăng ký:</label>
-                                                    <div class="input-group date" id="reservationdateEffectiveDate" data-target-input="nearest">
-                                                        <fmt:formatDate value="${formattedEffectiveDate}" pattern="MM/dd/yyyy" var="formattedEffectiveDate"/>
-                                                       <input name="effectiveDate" type="text" class="form-control datetimepicker-input" data-target="#reservationdateEffectiveDate"
-                                                               placeholder="01/01/2025" value="${formattedEffectiveDate}"/>
-                                                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                    <div class="input-group date" id="EffectiveDate" data-target-input="nearest">
+                                                       <input name="effectiveDate" type="text" class="form-control datetimepicker-input" data-target="#EffectiveDate"
+                                                               placeholder="01/01/2025" value="${effectiveDate}"/>
+                                                        <div class="input-group-append" data-target="#EffectiveDate" data-toggle="datetimepicker">
                                                             <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
                                                         </div>
                                                     </div>
@@ -186,11 +183,12 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Ngày hết hạn:</label>
-                                                    <div class="input-group date" id="reservationdateExpirationDate" data-target-input="nearest">
-                                                         <fmt:formatDate value="${formattedExpirationDate}" pattern="MM/dd/yyyy" var="formattedExpirationDate"/>
-                                                            <input name="expirationDate" type="text" class="form-control datetimepicker-input" data-target="#reservationdateExpirationDate"
-                                                                   placeholder="01/01/2025" value="${formattedExpirationDate}"/>
-
+                                                    <div class="input-group date" id="ExpirationDate" data-target-input="nearest">
+                                                            <input name="expirationDate" type="text" class="form-control datetimepicker-input" data-target="#ExpirationDate"
+                                                                   placeholder="01/01/2025" value="${expirationDate}"/>
+                                                        <div class="input-group-append" data-target="#ExpirationDate" data-toggle="datetimepicker">
+                                                            <div class="input-group-text bg-cyan"><i class="fa fa-calendar"></i></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,12 +210,71 @@
     </div>
 </div>
 <jsp:include page="/views/library/_script.jsp" />
+<c:if test="${not empty insertedCustomerId}">
+    <script>
+        console.log("Customer ID vừa insert là: ${insertedCustomerId}");
+    </script>
+</c:if>
 <script>
     $(function () {
-        $('#reservationdate1').datetimepicker({
+        $('#dateOfBirth, #EffectiveDate, #ExpirationDate').datetimepicker({
             format: 'MM/DD/YYYY',
         });
     });
+
+    function fetchFeeCustomer() {
+        const vehicleTypeId = $('input[name="vehicleTypeId"]').val();
+        const ticketTypeId = $('select[name="ticketTypeId"]').val();
+
+        console.log("vehicleTypeId:", vehicleTypeId);
+        console.log("ticketTypeId:", ticketTypeId);
+
+        if (vehicleTypeId && ticketTypeId) {
+            fetch(`${pageContext.request.contextPath}/admin/customer/getFeeCustomer?ticketTypeId=` + ticketTypeId + `&vehicleTypeId=` + vehicleTypeId)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        $('#feeMessage').text(data.message).show();
+                    } else {
+                        $('#feeMessage').hide();
+                    }
+
+                    $('input[name="price"]').val(data.price).prop('readonly', true);
+                    $('input[name="feeCustomerId"]').val(data.feeCustomerId);
+                })
+                .catch(err => {
+                    console.error("Lỗi khi lấy feeCustomer:", err);
+                });
+        }
+    }
+
+    $('#cardSelect').on('change', function () {
+        const selectedValue = $(this).val();
+        if (selectedValue) {
+            fetch(`${pageContext.request.contextPath}/admin/customer/getCard?cardId=` + selectedValue)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        $('#cardMessage').text(data.message).show();
+                    } else {
+                        $('#cardMessage').text("").hide();
+                    }
+
+                    $('input[name="vehicleTypeName"]').val(data.vehicleTypeName).prop('readonly', true);
+                    $('input[name="vehicleTypeId"]').val(data.vehicleTypeId);
+
+                    fetchFeeCustomer();
+                });
+        } else {
+            $('input[name="vehicleTypeName"]').val("");
+            $('input[name="vehicleTypeId"]').val("");
+        }
+    });
+
+    $('#ticketTypeSelect').on('change', function () {
+        fetchFeeCustomer();
+    });
+
 </script>
 </body>
 </html>

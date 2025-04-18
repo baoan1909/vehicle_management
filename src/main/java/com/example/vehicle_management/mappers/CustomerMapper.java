@@ -18,11 +18,8 @@ public class CustomerMapper {
         String fullName = (customer != null) ? customer.getFullName() : "";
         String gender = (customer != null) ? customer.getGender() : "";
         String address = (customer != null) ? customer.getAddress() : "";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateOfBirth = (customer != null) ? customer.getDateOfBirth() : null;
 
-
-        String email = (customer != null) ? "a@gmail.com" : "";
         String identifyCard = (customer != null) ? customer.getIdentifyCard() : "";
         String phoneNumber = (customer != null) ? customer.getPhoneNumber() : "";
 
@@ -43,7 +40,6 @@ public class CustomerMapper {
                 gender,
                 address,
                 dateOfBirth,
-                email,
                 identifyCard,
                 customerRegisterTicket.getFeeCustomerId(),
                 phoneNumber,

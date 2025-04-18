@@ -8,10 +8,7 @@ import com.example.vehicle_management.utils.PasswordUtil;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
@@ -72,6 +69,11 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
+        // Lưu account vào session nếu cần
+        HttpSession userSession = request.getSession();
+        userSession.setAttribute("account", account);
+
+
         // Ghi nhớ mật khẩu bằng Cookie nếu được chọn
         if (remember != null) {
             Cookie usernameCookie = new Cookie("username", username);
@@ -82,8 +84,6 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(passwordCookie);
         }
 
-        // Lưu account vào session nếu cần
-        request.getSession().setAttribute("account", account);
 
         // Điều hướng theo role
         if (account.getRoleId() == 1) {

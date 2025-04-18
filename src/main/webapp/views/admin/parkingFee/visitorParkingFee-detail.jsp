@@ -42,7 +42,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form action="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/save" method="post">
+                                <form action="${pageContext.request.contextPath}/admin/visitorParkingFee/save" method="post">
                                     <div class="card-body">
                                         <c:if test="${not empty parkingFeeOfVisitorDTO.feeVisitorId}">
                                             <input type="hidden" name="id" value="${parkingFeeOfVisitorDTO.feeVisitorId}" />
@@ -82,7 +82,7 @@
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
-                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/parkingFeeOfVisitor?page=parkingFeeOfVisitor">Thoát</a>
+                                        <a class="btn btn-default" href="<%= request.getContextPath() %>/admin/visitorParkingFee">Thoát</a>
                                         <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Lưu</button>
                                     </div>
                                 </form>

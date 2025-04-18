@@ -95,8 +95,12 @@
                     </ul>
                 </li>
                 <li class="nav-item sidebar-divider mb-2"></li>
-                <li class="nav-item <%= ("parkingFeeOfVisitor".equals(request.getParameter("page")) || "parkingFeeOfCustomer".equals(request.getParameter("page")) || "parkingFeeOfVisitor-detail".equals(request.getParameter("page")) || "parkingFeeOfCustomer-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
-                    <a href="#" class="nav-link <%= ("parkingFeeOfVisitor".equals(request.getParameter("page")) || "parkingFeeOfCustomer".equals(request.getParameter("page")) || "parkingFeeOfVisitor-detail".equals(request.getParameter("page")) || "parkingFeeOfCustomer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                <li class="nav-item <%= (request.getRequestURI().contains("/admin/visitorParkingFee") || request.getRequestURI().contains("/admin/visitorParkingFee/edit") || request.getRequestURI().contains("/admin/visitorParkingFee/add") || request.getRequestURI().contains("/admin/visitorParkingFee/delete") || request.getRequestURI().contains("/admin/visitorParkingFee/save")
+                                    || request.getRequestURI().contains("/admin/parkingFeeOfCustomer") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/edit") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/add") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/delete") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/save"))
+                                    ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= (request.getRequestURI().contains("/admin/visitorParkingFee") || request.getRequestURI().contains("/admin/visitorParkingFee/edit") || request.getRequestURI().contains("/admin/visitorParkingFee/add") || request.getRequestURI().contains("/admin/visitorParkingFee/delete") || request.getRequestURI().contains("/admin/visitorParkingFee/save")
+                                    || request.getRequestURI().contains("/admin/parkingFeeOfCustomer") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/edit") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/add") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/delete") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/save"))
+                                    ? "active" : "" %>">
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
                         <p>
                             Bảng giá
@@ -105,28 +109,31 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/parkingFeeOfVisitor?page=parkingFeeOfVisitor"
-                               class="nav-link <%= ("parkingFeeOfVisitor".equals(request.getParameter("page")) || "parkingFeeOfVisitor-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/visitorParkingFee"
+                               class="nav-link <%= (request.getRequestURI().contains("/admin/visitorParkingFee") || request.getRequestURI().contains("/admin/visitorParkingFee/edit") || request.getRequestURI().contains("/admin/visitorParkingFee/add") || request.getRequestURI().contains("/admin/visitorParkingFee/delete") || request.getRequestURI().contains("/admin/visitorParkingFee/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phí vãng lai</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/parkingFeeOfCustomer?page=parkingFeeOfCustomer"
-                               class="nav-link <%= ("parkingFeeOfCustomer".equals(request.getParameter("page")) || "parkingFeeOfCustomer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/parkingFeeOfCustomer"
+                               class="nav-link <%= (request.getRequestURI().contains("/admin/parkingFeeOfCustomer") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/edit") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/add") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/delete") || request.getRequestURI().contains("/admin/parkingFeeOfCustomer/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phí đăng ký</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item <%= ("customer".equals(request.getParameter("page")) || "customer-detail".equals(request.getParameter("page"))) ? "menu-open" : "" %>">
-                    <a href="#" class="nav-link <%= ("customer".equals(request.getParameter("page")) || "customer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                <li class="nav-item <%= (request.getRequestURI().contains("/admin/account") || request.getRequestURI().contains("/admin/account/edit") || request.getRequestURI().contains("/admin/account/add") || request.getRequestURI().contains("/admin/account/delete") || request.getRequestURI().contains("/admin/account/save")
+                                    || request.getRequestURI().contains("/admin/customer") || request.getRequestURI().contains("/admin/customer/edit") || request.getRequestURI().contains("/admin/customer/add") || request.getRequestURI().contains("/admin/customer/delete") || request.getRequestURI().contains("/admin/customer/save"))
+                                    ? "menu-open" : "" %>">
+                    <a href="#" class="nav-link <%= (request.getRequestURI().contains("/admin/account") || request.getRequestURI().contains("/admin/account/edit") || request.getRequestURI().contains("/admin/account/add") || request.getRequestURI().contains("/admin/account/delete") || request.getRequestURI().contains("/admin/account/save")
+                                    || request.getRequestURI().contains("/admin/customer") || request.getRequestURI().contains("/admin/customer/edit") || request.getRequestURI().contains("/admin/customer/add") || request.getRequestURI().contains("/admin/customer/delete") || request.getRequestURI().contains("/admin/customer/save"))
+                                    ? "active" : "" %>">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Thành viên
                             <i class="fas fa-angle-left right"></i>
-                            <span class= "badge right <%= ("customer".equals(request.getParameter("page")) || "customer-detail".equals(request.getParameter("page"))) ? "badge-light" : "badge-info" %>">6</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -138,8 +145,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<%= request.getContextPath() %>/admin/customer?page=customer"
-                               class="nav-link <%= ("customer".equals(request.getParameter("page")) || "customer-detail".equals(request.getParameter("page"))) ? "active" : "" %>">
+                            <a href="<%= request.getContextPath() %>/admin/customer"
+                               class="nav-link <%= (request.getRequestURI().contains("/admin/customer") || request.getRequestURI().contains("/admin/customer/edit") || request.getRequestURI().contains("/admin/customer/add") || request.getRequestURI().contains("/admin/customer/delete") || request.getRequestURI().contains("/admin/customer/save")) ? "active" : "" %>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Khách hàng</p>
                             </a>

@@ -63,6 +63,7 @@ public class ParkingFeeOfCustomerRepositoryImpl implements IParkingFeeOfCustomer
 
     private static final String DELETE_PARKING_FEE_OF_CUSTOMER =
             "DELETE FROM ParkingFeeOfCustomer WHERE FeeCustomerId = ?;";
+    private static final String SELECT_FEE_CUSTOMER_ID_AND_PRICE = "SELECT FeeCustomerId, Price FROM ParkingFeeOfCustomer WHERE TicketTypeId = ? AND VehicleTypeId = ? ORDER BY StartDate DESC LIMIT 1";
 
     @Override
     public boolean insert(ParkingFeeOfCustomer parkingFeeOfCustomer) {
@@ -156,5 +157,25 @@ public class ParkingFeeOfCustomerRepositoryImpl implements IParkingFeeOfCustomer
                 rs.getTimestamp("CreateDate").toLocalDateTime(),
                 rs.getTimestamp("UpdateDate").toLocalDateTime()
         );
+    }
+
+    @Override
+    public ParkingFeeOfCustomer findByTicketTypeAndVehicleType(int ticketTypeId, int vehicleTypeId) {
+        try (Connection conn = DBConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_FEE_CUSTOMER_ID_AND_PRICE)) {
+            stmt.setInt(1, ticketTypeId);
+            stmt.setInt(2, vehicleTypeId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    ParkingFeeOfCustomer fee = new ParkingFeeOfCustomer();
+                    fee.setFeeCustomerId(rs.getInt("FeeCustomerId"));
+                    fee.setPrice(rs.getDouble("Price"));
+                    return fee;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

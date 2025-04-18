@@ -127,7 +127,6 @@
                                             <th>ID Khách hàng</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Email</th>
                                             <th>Loại xe</th>
                                             <th>Biển số</th>
                                             <th>Loại vé</th>
@@ -144,7 +143,6 @@
                                                 <td>${customer.customerId}</td>
                                                 <td>${customer.customerName}</td>
                                                 <td>${customer.customerPhoneNumber}</td>
-                                                <td>${customer.customerEmail}</td>
                                                 <td>${customer.vehicleTypeName}</td>
                                                 <td>${customer.licensePlate}</td>
                                                 <td>${customer.ticketTypeName}</td>
@@ -160,7 +158,7 @@
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <a href="${pageContext.request.contextPath}/admin/customer/delete?id=${customer.customerRegisterTicketId}" class="btn btn-info btn-block">
+                                                                    <a href="${pageContext.request.contextPath}/admin/customer/delete?id=${customer.customerRegisterTicketId}&customerId=${customer.customerId}" class="btn btn-info btn-block" onclick="return confirm('Bạn có chắc muốn xóa?')">
                                                                         <i class="fas fa-trash-alt"></i>
                                                                     </a>
                                                                 </div>
@@ -178,7 +176,6 @@
                                             <th>ID Khách hàng</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Email</th>
                                             <th>Loại xe</th>
                                             <th>Biển số</th>
                                             <th>Loại vé</th>
