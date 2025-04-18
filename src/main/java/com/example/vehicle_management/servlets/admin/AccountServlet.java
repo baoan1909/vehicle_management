@@ -1,7 +1,9 @@
 package com.example.vehicle_management.servlets.admin;
 
 import com.example.vehicle_management.dtos.AccountDTO;
+import com.example.vehicle_management.dtos.CardDTO;
 import com.example.vehicle_management.mappers.AccountMapper;
+import com.example.vehicle_management.mappers.CardMapper;
 import com.example.vehicle_management.models.Account;
 import com.example.vehicle_management.models.Customer;
 import com.example.vehicle_management.models.Role;
@@ -20,8 +22,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet({"/admin/account", "/admin/account/edit", "/admin/account/add", "/admin/account/delete", "/admin/account/save", "/admin/account/infor"})
@@ -61,9 +67,61 @@ public class AccountServlet extends HttpServlet {
 
         } else {
             String isActive = request.getParameter("isActive");
+            String dateRange= request.getParameter("dateRange");
+
+            HttpSession session = request.getSession();
+            session.setAttribute("isActive", isActive);
+
+
+            // Truyền xuống JSP qua request
+            request.setAttribute("isActive", session.getAttribute("isActive"));
+
+
+
+            LocalDateTime startDate = null;
+            LocalDateTime endDate = null;
+            if (dateRange != null && !dateRange.isEmpty()) {
+                try {
+                    String[] dates = dateRange.split(" - ");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                    startDate = LocalDate.parse(dates[0], formatter).atTime(00, 00, 01);
+                    endDate = LocalDate.parse(dates[1], formatter).atTime(23, 59, 59);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            final LocalDateTime finalStartDate = startDate;
+            final LocalDateTime finalEndDate = endDate;
+
+
+            session.setAttribute("startDateFilter", startDate);
+            session.setAttribute("endDateFilter", endDate);
+
+            request.setAttribute("startDate", session.getAttribute("startDateFilter"));
+            request.setAttribute("endDate", session.getAttribute("endDateFilter"));
 
             List<Account> accounts = accountService.getAllAccounts();
-            List<AccountDTO> lstAccount = AccountMapper.toDTOList(accounts, roleService, customerService);
+            //List<AccountDTO> lstAccount = AccountMapper.toDTOList(accounts, roleService, customerService);
+            List<AccountDTO> lstAccount= accounts.stream()
+                    .filter(p -> {
+                        if (isActive == null || isActive.isEmpty() || isActive.equals("2")) return true;
+                        try {
+                            return p.getStatus() == Integer.parseInt(isActive);
+                        } catch (NumberFormatException e) {
+                            return true;
+                        }
+                    })
+//                    .filter(p -> {
+//                                if (finalStartDate != null && finalEndDate != null) {
+//                                    return (p.getCreateDate() != null &&
+//                                            (p.getCreateDate().isEqual(finalStartDate) || p.getCreateDate().isAfter(finalStartDate)) &&
+//                                            (p.getCreateDate().isEqual(finalEndDate) || p.getCreateDate().isBefore(finalEndDate)));
+//                                }
+//                                return true;
+//                            })
+                            .map(p -> AccountMapper.toDTO(p, roleService, customerService))
+                             .toList();
+            
             request.setAttribute("lstAccount", lstAccount);
             request.getRequestDispatcher("/views/admin/account/account.jsp").forward(request, response);
         }

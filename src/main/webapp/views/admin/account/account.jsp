@@ -57,15 +57,15 @@
                                                 <div class="col-md-2 mt-3">
                                                     <div class="form-group">
                                                         <select name="isActive" class="form-control select2" style="width: 100%;">
-                                                            <option value="">Tất cả loại thẻ</option>
+                                                            <option value="2">Tất cả</option>
                                                             <c:choose>
-                                                                <c:when test="${card.isCreated}">
+                                                                <c:when test="${isActive}">
                                                                     <option value="1" selected>Đang hoạt động </option>
                                                                     <option value="0">Đã bị khóa</option>
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <option value="1">Đang hoạt động</option>
-                                                                    <option value="0" selected>Chưa tạo thẻ</option>
+                                                                    <option value="0" selected>Đã bị khóa</option>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </select>
