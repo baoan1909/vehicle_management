@@ -36,7 +36,7 @@
                         <div class="col-12 mt-4">
                             <div class="card shadow">
                                 <div class="card-body">
-                                    <form  method="get" action="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor">
+                                    <form  method="get" action="${pageContext.request.contextPath}/admin/visitorParkingFee">
                                         <!-- Chọn khoảng thời gian -->
                                         <div class="form-group col-md-4 ml-auto">
                                             <div class="input-group">
@@ -79,7 +79,7 @@
 
                                                 <!-- Nút đặt lại -->
                                                 <div class="col-md-2 ml-auto">
-                                                    <button href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor" class="btn btn-info btn-block">
+                                                    <button href="${pageContext.request.contextPath}/admin/visitorParkingFee" class="btn btn-info btn-block">
                                                         Đặt lại
                                                     </button>
                                                 </div>
@@ -87,7 +87,7 @@
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-2 ml-auto">
-                                                <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/add" class="btn btn-info btn-block">
+                                                <a href="${pageContext.request.contextPath}/admin/visitorParkingFee/add" class="btn btn-info btn-block">
                                                     <i class="fas fa-plus-circle"></i> Thêm mới
                                                 </a>
                                             </div>
@@ -130,12 +130,12 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/edit?id=${pfv.feeVisitorId}" class="btn btn-info btn-block">
+                                                            <a href="${pageContext.request.contextPath}/admin/visitorParkingFee/edit?id=${pfv.feeVisitorId}" class="btn btn-info btn-block">
                                                                 <i class="fas fa-pen-square"></i>
                                                             </a>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/delete?id=${pfv.feeVisitorId}" class="btn btn-outline-warning btn-block" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                                            <a href="${pageContext.request.contextPath}/admin/visitorParkingFee/delete?id=${pfv.feeVisitorId}" class="btn btn-outline-warning btn-block" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </a>
                                                         </div>

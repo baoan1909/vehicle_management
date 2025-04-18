@@ -157,7 +157,7 @@
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <a href="${pageContext.request.contextPath}/admin/customer/delete?id=${customer.customerRegisterTicketId}" class="btn btn-info btn-block">
+                                                                    <a href="${pageContext.request.contextPath}/admin/customer/delete?id=${customer.customerRegisterTicketId}&customerId=${customer.customerId}" class="btn btn-info btn-block" onclick="return confirm('Bạn có chắc muốn xóa?')">
                                                                         <i class="fas fa-trash-alt"></i>
                                                                     </a>
                                                                 </div>

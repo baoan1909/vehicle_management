@@ -147,8 +147,10 @@ public class CustomerServlet extends HttpServlet {
             request.setAttribute("cards", cards);
             request.getRequestDispatcher("/views/admin/customer/customer-detail.jsp").forward(request, response);
         } else if (uri.contains("delete")) {
-            int cardId = Integer.parseInt(request.getParameter("id"));
-            cardService.deleteCard(cardId);
+            int customerRegisterTicketId = Integer.parseInt(request.getParameter("id"));
+            int customerId = Integer.parseInt(request.getParameter("customerId"));
+            customerRegisterTicketService.deleteCustomerRegisterTicket(customerRegisterTicketId);
+            customerService.deleteCustomer(customerId);
             response.sendRedirect(request.getContextPath() + "/admin/customer");
         } else {
             List<CustomerRegisterTicket> customerRegisterTickets = customerRegisterTicketService.getAllCustomerRegisterTickets();
