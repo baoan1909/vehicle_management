@@ -39,13 +39,14 @@
       <!-- Content Wrapper. Contains page content -->
       <section class="content">
         <div class="container-fluid">
+        <form  method="get" action="${pageContext.request.contextPath}/admin/swipe">
           <div class="row">
             <div class="col-12 mt-4">
               <div class="card shadow">
                 <div class="card-body">
                   <div class="form-group col-md-4 ml-auto">
                     <div class="input-group">
-                      <input type="text" class="form-control float-right" id="daterange-btn">
+                      <input name="dateRange" type="text" class="form-control float-right" id="daterange-btn" value="${startDate}-${endDate}">
                       <div class="input-group-prepend">
                       <span class="input-group-text bg-cyan">
                         <i class="far fa-calendar-alt"></i>
@@ -56,50 +57,38 @@
                   </div>
                   <div class="col-12 callout callout-info">
                     <div class="row">
-                      <!--Search -->
-                      <div class="col-md-4 mt-3">
+                      <div class="col-md-2 mt-3">
+                        <div class="form-group">
+                          <select name="vehicleTypeId" class="form-control select2" style="width: 100%;">
+                            <c:forEach var="vehicleType" items="${vehicleTypeList}">
+                              <option value="${vehicleType.vehicleTypeId}"
+                                      <c:if test="${vehicleType.vehicleTypeId == vehicleTypeFilter}">selected</c:if>>
+                                  ${vehicleType.vehicleTypeName}
+                              </option>
+                            </c:forEach>
+
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-2 mt-3">
                         <div class="input-group">
-                          <input type="search" class="form-control" placeholder="ID thẻ, Biển số...">
                           <div class="input-group-append">
-                            <button class="bg-cyan btn btn-sidebar">
-                              <i class="fa fa-search"></i>
+                            <button type="submit" class="bg-cyan btn btn-sidebar">
+                              <i class="fa fa-filter"></i> Lọc
                             </button>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-2 mt-3">
-                        <div class="form-group">
-                          <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">Loại xe</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-2 mt-3">
-                        <div class="form-group">
-                          <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">Loại thẻ</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                          </select>
-                        </div>
-                      </div>
+
                       <!-- /.col -->
                       <div class="col-md-1 mt-3 ml-auto">
-                        <button type="button" class="btn btn-block btn-info">Đặt lại</button>
+                        <button type="submit" class="btn btn-block btn-info">Đặt lại</button>
                       </div>
                     </div>
                   </div>
                 </div>
+
+
                 <div class="row">
                   <div class="form-group col-md-3 ml-auto mr-3">
                     <div class="row">
@@ -120,6 +109,7 @@
               <!-- /.info-box -->
             </div>
           </div>
+        </form>
           <div class="row">
             <div class="col-12">
               <div class="card">

@@ -41,30 +41,6 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 mt-4">
-                            <div class="card shadow">
-                                <div class="card-body">
-                                    <div class="col-12 callout callout-info">
-                                        <div class="row">
-                                            <!--Search -->
-                                            <div class="col-md-4 mt-3">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control float-right" id="daterange-btn">
-                                                    <div class="input-group-prepend">
-                                                <span class="input-group-text bg-cyan">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                </span>
-                                                    </div>
-                                                </div>
-                                                <!-- /.input group -->
-                                            </div>
-                                          
-                                            <!-- /.col -->
-                                            <div class="col-md-1 mt-3 ml-auto">
-                                                <button type="button" class="btn btn-block btn-info">Đặt lại</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
                                         <a href="${pageContext.request.contextPath}/admin/ticket/add" class="btn btn-info btn-block">

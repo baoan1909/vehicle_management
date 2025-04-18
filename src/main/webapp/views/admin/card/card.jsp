@@ -39,13 +39,14 @@
             <!-- Content Wrapper. Contains page content -->
             <section class="content">
                 <div class="container-fluid">
+                    <form  method="get" action="${pageContext.request.contextPath}/admin/card">
                     <div class="row">
                         <div class="col-12 mt-4">
                             <div class="card shadow">
                                 <div class="card-body">
                                     <div class="form-group col-md-4 ml-auto">
                                         <div class="input-group">
-                                            <input type="text" class="form-control float-right" id="daterange-btn">
+                                            <input name="dateRange" type="text" class="form-control float-right" id="daterange-btn" value="${startDate} - ${endDate}">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-cyan">
                                                     <i class="far fa-calendar-alt"></i>
@@ -56,43 +57,58 @@
                                     </div>
                                     <div class="col-12 callout callout-info">
                                         <div class="row">
-                                            <!--Search -->
-                                            <div class="col-md-4 mt-3">
+
+                                            <div class="col-md-2 mt-3">
+                                                <div class="form-group">
+                                                    <select name="vehicleTypeId" class="form-control select2" style="width: 100%;">
+                                                        <option value="">Tất cả loại xe</option>
+                                                        <c:forEach var="vehicleType" items="${vehicleTypeList}">
+                                                            <option value="${vehicleType.vehicleTypeId}"
+                                                                    <c:if test="${vehicleType.vehicleTypeId == vehicleTypeFilter}">selected</c:if>>
+                                                                    ${vehicleType.vehicleTypeName}
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mt-3">
+                                                <div class="form-group">
+                                                    <select name="ticketTypeName" class="form-control select2" style="width: 100%;">
+                                                        <option value="">Tất cả loại vé</option>
+                                                        <c:forEach var="ticketType" items="${ticketTypeList}">
+                                                            <option value="${ticketType.ticketTypeName}"
+                                                                    <c:if test="${ticketType.ticketTypeId == ticketTypeFilter}">selected</c:if>>
+                                                                    ${ticketType.ticketTypeName}
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mt-3">
+                                                <div class="form-group">
+                                                    <select name="isCreated" class="form-control select2" style="width: 100%;">
+                                                        <option value="">Tất cả loại thẻ</option>
+                                                        <c:choose>
+                                                            <c:when test="${card.isCreated}">
+                                                                <option value="1" selected>Đã tạo thẻ</option>
+                                                                <option value="0">Chưa tạo thẻ</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="1">Đã tạo thẻ</option>
+                                                                <option value="0" selected>Chưa tạo thẻ</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mt-3">
                                                 <div class="input-group">
-                                                    <input type="search" class="form-control" placeholder="Mã thẻ, Số thẻ">
                                                     <div class="input-group-append">
-                                                        <button class="bg-cyan btn btn-sidebar">
-                                                            <i class="fa fa-search"></i>
+                                                        <button class="bg-cyan btn btn-sidebar" type="submit">
+                                                            <i class="fa fa-filter"></i> Lọc
                                                         </button>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option value="">Loại xe</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Loại thẻ</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Đã tạo thẻ</option>
-                                                        <option>Chưa tạo thẻ</option>
-                                                    </select>
                                                 </div>
                                             </div>
                                             <!-- /.col -->
@@ -113,6 +129,7 @@
                             <!-- /.info-box -->
                         </div>
                     </div>
+                    </form>
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
