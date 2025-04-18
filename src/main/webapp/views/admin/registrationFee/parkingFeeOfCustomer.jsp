@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-2 ml-auto">
-                                                <a href="${pageContext.request.contextPath}/admin/parkingFeeOfVisitor/add" class="btn btn-info btn-block">
+                                                <a href="${pageContext.request.contextPath}/admin/parkingFeeOfCustomer/add" class="btn btn-info btn-block">
                                                     <i class="fas fa-plus-circle"></i> Thêm mới
                                                 </a>
                                             </div>

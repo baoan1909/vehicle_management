@@ -65,7 +65,7 @@ public class ParkingFeeOfCustomerServlet extends HttpServlet {
                 java.util.Date formattedStartDate = java.sql.Date.valueOf(parkingFeeOfCustomerService.getParkingFeeOfCustomerById(feeCustomerId).getStartDate());
                 request.setAttribute("formattedStartDate", formattedStartDate);
             }
-            request.getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfCustomer-detail.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/admin/registrationFee/parkingFeeOfCustomer-detail.jsp").forward(request, response);
         }else if (uri.contains("delete")) {
             int feeCustomerId=Integer.parseInt(request.getParameter("id"));
             parkingFeeOfCustomerService.deleteParkingFeeOfCustomer(feeCustomerId);
@@ -141,7 +141,7 @@ public class ParkingFeeOfCustomerServlet extends HttpServlet {
                     .toList();
             request.setAttribute("parkingFeeOfCustomerDTOList", filteredList);
 
-            request.getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfCustomer.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/admin/registrationFee/parkingFeeOfCustomer.jsp").forward(request, response);
         }
 
 
@@ -158,7 +158,7 @@ public class ParkingFeeOfCustomerServlet extends HttpServlet {
             if (price == 0.0 || price==null)
             {
                 request.setAttribute("error", "Giá vé không được để trống!");
-                request.getRequestDispatcher("/views/admin/parkingFee/parkingFeeOfCustomer-detail.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/admin/registrationFee/parkingFeeOfCustomer-detail.jsp").forward(request, response);
 
             }
 

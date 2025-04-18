@@ -158,7 +158,7 @@
                           <td>${cardSwipe.checkInTime}</td>
                           <td>${cardSwipe.checkOutTime}</td>
                           <td>${cardSwipe.vehicleTypeName}</td>
-                          <td>${cardSwipe.ticketTypeName}</td>
+                          <td>${cardSwipe.type}</td>
                           <td>${cardSwipe.price}</td>
                         </tr>
                       </c:forEach>
