@@ -16,9 +16,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
@@ -46,6 +48,10 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
+        List<VehicleType> vehicleTypeList= vehicleTypeService.getAllVehicleTypes();
+        request.setAttribute("vehicleTypeList", vehicleTypeList);
+        List<TicketType> ticketTypeList= ticketTypeService.getAllTicketTypes();
+        request.setAttribute("ticketTypeList", ticketTypeList);
 
         //Tự động lấy dữ liệu theo cardId khi chọn cardId
         if (uri.contains("getCard")) {
@@ -153,8 +159,68 @@ public class CustomerServlet extends HttpServlet {
             customerService.deleteCustomer(customerId);
             response.sendRedirect(request.getContextPath() + "/admin/customer");
         } else {
+            String vehicleTypeId= request.getParameter("vehicleTypeId");
+            String ticketTypeId= request.getParameter("ticketTypeId");
+            String dateRange= request.getParameter("dateRange");
+
+            HttpSession session = request.getSession();
+            session.setAttribute("vehicleTypeId", vehicleTypeId);
+            session.setAttribute("ticketTypeId", ticketTypeId);
+            request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
+            request.setAttribute("ticketTypeFilter",session.getAttribute("ticketTypeId") );
+
+
+
+            LocalDate startDate = null;
+            LocalDate endDate = null;
+            if (dateRange != null && !dateRange.isEmpty()) {
+                try {
+                    String[] dates = dateRange.split(" - ");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                    startDate = LocalDate.parse(dates[0], formatter);
+                    endDate = LocalDate.parse(dates[1], formatter);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            final LocalDate finalStartDate = startDate;
+            final LocalDate finalEndDate = endDate;
+
+            session.setAttribute("startDateFilter", startDate);
+            session.setAttribute("endDateFilter", endDate);
+
+            request.setAttribute("startDate", session.getAttribute("startDateFilter"));
+            request.setAttribute("endDate", session.getAttribute("endDateFilter"));
+
             List<CustomerRegisterTicket> customerRegisterTickets = customerRegisterTicketService.getAllCustomerRegisterTickets();
-            List<CustomerDTO> customerDTOList = CustomerMapper.toDTOList(customerRegisterTickets,customerService, cardService, parkingFeeOfCustomerService, vehicleTypeService, ticketTypeService );
+//            List<CustomerDTO> customerDTOList = CustomerMapper.toDTOList(customerRegisterTickets,customerService, cardService, parkingFeeOfCustomerService, vehicleTypeService, ticketTypeService );
+            List<CustomerDTO> customerDTOList = customerRegisterTickets.stream()
+                    .filter(p -> {
+                        if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
+                        try {
+                            return p.getVehicleTypeId() == Integer.parseInt(vehicleTypeId);
+                        } catch (NumberFormatException e) {
+                            return true;
+                        }
+                    })
+                    .filter(p -> {
+                        if (ticketTypeId == null || ticketTypeId.isEmpty()) return true;
+                        try {
+                            return p.getTicketTypeId() == Integer.parseInt(ticketTypeId);
+                        } catch (NumberFormatException e) {
+                            return true;
+                        }
+                    })
+                    .filter(p -> {
+                        if (finalStartDate != null && finalEndDate != null) {
+                            return (p.getEffectiveDate() != null &&
+                                    (p.getEffectiveDate().isEqual(finalStartDate) || p.getEffectiveDate().isAfter(finalStartDate)) &&
+                                    (p.getEffectiveDate().isEqual(finalEndDate) || p.getEffectiveDate().isBefore(finalEndDate)));
+                        }
+                        return true;
+                    })
+                    .map(p-> CustomerMapper.toDTO(p,customerService, cardService, parkingFeeOfCustomerService, vehicleTypeService, ticketTypeService) )
+                    .toList();
             request.setAttribute("customerDTOList", customerDTOList);
             request.getRequestDispatcher("/views/admin/customer/customer.jsp").forward(request, response);
         }
