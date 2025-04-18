@@ -65,19 +65,22 @@
                                     <img src="<%= request.getContextPath() %>/assets/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2 mt-3" style="width: 60px" alt="User Image">
                                 </div>
                                 <div class="info">
-                                    <span class="d-block mt-3"><h5>${account.getUserName}</h5></span>
+                                    <span class="d-block mt-3"><h5>${account.getUserName()}</h5></span>
                                 </div>
                             </div>
                             <div class="dropdown-divider"></div>
-                                <c:if test="${account.getRoleId() == 2}">
-                                    <a href="<%= request.getContextPath() %>/customerTicket/customer-infor-detail" class="dropdown-item">
-                                </c:if>
+                            <c:choose>
+                                <c:when test="${account.roleId == 2}">
+                                    <a href="${pageContext.request.contextPath}/customerTicket/customer-infor-detail" class="dropdown-item">
+                                        <i class="fas fa-user-circle mr-2"></i> Thông tin tài khoản
+                                    </a>
+                                </c:when>
                                 <c:otherwise>
-                                    <a href="<%= request.getContextPath() %>/customerTicket/customer-infor-detail" class="dropdown-item">
+                                    <a href="${pageContext.request.contextPath}/customerTicket/customer-infor-detail" class="dropdown-item">
+                                        <i class="fas fa-user-circle mr-2"></i> Thông tin tài khoản
+                                    </a>
                                 </c:otherwise>
-
-                                <i class="fas fa-user-circle mr-2"></i> Thông tin tài khoản
-                            </a>
+                            </c:choose>
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item">
                                 <i class="fas fa-question-circle mr-2"></i> Trợ giúp
