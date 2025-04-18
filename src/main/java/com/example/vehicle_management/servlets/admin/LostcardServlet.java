@@ -4,10 +4,8 @@ import com.example.vehicle_management.dtos.CardSwipeDTO;
 import com.example.vehicle_management.dtos.LostCardDTO;
 import com.example.vehicle_management.mappers.CardSwipeMapper;
 import com.example.vehicle_management.mappers.LostCardMapper;
-import com.example.vehicle_management.models.Card;
-import com.example.vehicle_management.models.CardSwipe;
-import com.example.vehicle_management.models.Customer;
-import com.example.vehicle_management.models.LostCard;
+import com.example.vehicle_management.mappers.ParkingFeeOfCustomerMapper;
+import com.example.vehicle_management.models.*;
 import com.example.vehicle_management.repositoriesImpl.*;
 import com.example.vehicle_management.services.*;
 import com.example.vehicle_management.servicesImpl.*;
@@ -17,8 +15,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet({"/admin/lost", "/admin/lost/edit", "/admin/lost/add", "/admin/lost/delete", "/admin/lost/save", "/admin/lost/getcustomer"})
@@ -28,6 +30,7 @@ public class LostcardServlet extends HttpServlet {
     private IVehicleTypeService vehicleTypeService;
     private ICustomerService customerService;
     private ICardSwipeService cardSwipeService;
+    private ITicketTypeService ticketTypeService;
 
     @Override
     public void init() throws ServletException {
@@ -36,11 +39,16 @@ public class LostcardServlet extends HttpServlet {
         vehicleTypeService = new VehicleTypeServiceImpl(new VehicleTypeRepositoryImpl());
         customerService = new CustomerServiceImpl(new CustomerRepositoryImpl());
         cardSwipeService = new CardSwipeServiceImpl(new CardSwipeRepositoryImpl());
+        ticketTypeService = new TicketTypeServiceImpl(new TicketTypeRepositoryImpl());
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
+        List<VehicleType> vehicleTypeList= vehicleTypeService.getAllVehicleTypes();
+        request.setAttribute("vehicleTypeList", vehicleTypeList);
+        List<TicketType> ticketTypesList= ticketTypeService.getAllTicketTypes();
+        request.setAttribute("ticketTypeList", ticketTypesList);
 
         if (uri.contains("getcustomer")) {
             String cardIdStr = request.getParameter("cardId");
@@ -114,7 +122,7 @@ public class LostcardServlet extends HttpServlet {
             List<Card> cards = cardService.getAllCards();
             List<Customer> customers = customerService.getAllCustomers();
             List<CardSwipe> cardSwipes = cardSwipeService.getAllCardSwipes();
-            List<CardSwipeDTO> lstCardSwipe = CardSwipeMapper.toDTOList(cardSwipes, cardService, vehicleTypeService);
+            List<CardSwipeDTO> lstCardSwipe = CardSwipeMapper.toDTOList(cardSwipes, cardService, vehicleTypeService, ticketTypeService);
 
             String name = lostCard.getVisitorName();
             String phone = lostCard.getVisitorPhoneNum();
@@ -157,10 +165,61 @@ public class LostcardServlet extends HttpServlet {
             lostCardService.deleteLostCard(lostCardId);
             response.sendRedirect(request.getContextPath() + "/admin/lost");
         } else {
+            String vehicleTypeId = request.getParameter("vehicleTypeId");
+            String dateRange = request.getParameter("dateRange");
+
+            HttpSession session = request.getSession();
+            session.setAttribute("vehicleTypeId", vehicleTypeId != null ? vehicleTypeId : "");
+
+
+            // Truyền xuống JSP qua request
+            request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
+
+            LocalDateTime startDate = null;
+            LocalDateTime endDate = null;
+            if (dateRange != null && !dateRange.isEmpty()) {
+                try {
+                    String[] dates = dateRange.split(" - ");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                    startDate = LocalDate.parse(dates[0], formatter).atTime(00, 00, 01);
+                    endDate = LocalDate.parse(dates[1], formatter).atTime(23, 59, 59);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            final LocalDateTime finalStartDate = startDate;
+            final LocalDateTime finalEndDate = endDate;
+
+
+            session.setAttribute("startDateFilter", startDate);
+            session.setAttribute("endDateFilter", endDate);
+
+            request.setAttribute("startDate", session.getAttribute("startDateFilter"));
+            request.setAttribute("endDate", session.getAttribute("endDateFilter"));
+
             List<LostCard> lostCards = lostCardService.getAllLostCards();
             List<LostCardDTO> lstLostCards = LostCardMapper.toDTOList(lostCards, cardService, customerService, vehicleTypeService);
+//
+            List<LostCardDTO> lstLostCardsFilter= lstLostCards.stream()
+                    .filter(p -> {
+                        if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
+                        try {
+                            return p.getVehicleId() == Integer.parseInt(vehicleTypeId);
+                        } catch (NumberFormatException e) {
+                            return true;
+                        }
+                    })
+                    .filter(p -> {
+                        if (finalStartDate != null && finalEndDate != null) {
+                            return (p.getNotificationTime() != null &&
+                                    (p.getNotificationTime().isEqual(finalStartDate) || p.getNotificationTime().isAfter(finalStartDate)) &&
+                                    (p.getNotificationTime().isEqual(finalEndDate) || p.getNotificationTime().isBefore(finalEndDate)));
+                        }
+                        return true;
+                    })
+                    .toList();
 
-            request.setAttribute("lstLostCards", lstLostCards);
+            request.setAttribute("lstLostCards", lstLostCardsFilter);
             request.getRequestDispatcher("/views/admin/lostcard/lostcard.jsp").forward(request, response);
         }
     }

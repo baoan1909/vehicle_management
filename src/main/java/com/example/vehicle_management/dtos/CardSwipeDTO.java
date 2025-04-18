@@ -13,9 +13,12 @@ public class CardSwipeDTO {
     private String imagePathOut;
     private double price;
     private String vehicleTypeName;
+    private int vehicleTypeId;
+    private int tickettypeId;
+    private String ticketTypeName;
 
     public CardSwipeDTO(int cardSwipeId, String licensePlate, int cardId, String type, LocalDateTime checkInTime, LocalDateTime checkOutTime,
-                        String checkInImagePath, String imagePathOut, double price, String vehicleTypeName) {
+                        String checkInImagePath, String imagePathOut, double price, String vehicleTypeName, int vehicleTypeId, int tickettypeId, String ticketTypeName) {
         this.cardSwipeId = cardSwipeId;
         this.licensePlate = licensePlate;
         this.cardId = cardId;
@@ -26,6 +29,9 @@ public class CardSwipeDTO {
         this.imagePathOut = imagePathOut;
         this.price = price;
         this.vehicleTypeName = vehicleTypeName;
+        this.vehicleTypeId = vehicleTypeId;
+        this.tickettypeId = tickettypeId;
+        this.ticketTypeName = ticketTypeName;
     }
 
     public int getCardSwipeId() {
@@ -66,5 +72,17 @@ public class CardSwipeDTO {
 
     public String getVehicleTypeName() {
         return vehicleTypeName;
+    }
+
+    public int getVehicleTypeId() {
+        return vehicleTypeId;
+    }
+
+    public int getTickettypeId() {
+        return tickettypeId;
+    }
+
+    public String getTicketTypeName() {
+        return ticketTypeName;
     }
 }

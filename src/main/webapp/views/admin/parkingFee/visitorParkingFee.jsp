@@ -51,18 +51,6 @@
                                         </div>
                                         <div class="col-12 callout callout-info">
                                             <div class="row form-group mt-4">
-                                                <!-- Tìm kiếm theo giá vé -->
-                                                <div class="col-md-3">
-                                                    <div class="input-group">
-                                                        <input name="search" type="search" class="form-control" placeholder="Giá vé..."
-                                                               value="${search}">
-                                                        <div class="input-group-append">
-                                                            <button class="bg-cyan btn btn-sidebar" type="submit">
-                                                                <i class="fa fa-search"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
                                                 <!-- Lọc theo loại xe -->
                                                 <div class="col-md-3">
@@ -75,6 +63,15 @@
                                                             </option>
                                                         </c:forEach>
                                                     </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="input-group">
+                                                        <div class="input-group-append">
+                                                            <button class="bg-cyan btn btn-sidebar" type="submit">
+                                                                <i class="fa fa-filter"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <!-- Nút đặt lại -->

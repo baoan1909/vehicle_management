@@ -60,6 +60,8 @@ public class AccountServlet extends HttpServlet {
             int accountId = request.getParameter("id") == null ? 0 : Integer.parseInt(request.getParameter("id"));
 
         } else {
+            String isActive = request.getParameter("isActive");
+
             List<Account> accounts = accountService.getAllAccounts();
             List<AccountDTO> lstAccount = AccountMapper.toDTOList(accounts, roleService, customerService);
             request.setAttribute("lstAccount", lstAccount);

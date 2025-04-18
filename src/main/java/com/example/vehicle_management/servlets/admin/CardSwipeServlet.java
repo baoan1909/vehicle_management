@@ -4,26 +4,21 @@ import com.example.vehicle_management.dtos.CardSwipeDTO;
 import com.example.vehicle_management.mappers.CardSwipeMapper;
 import com.example.vehicle_management.models.Card;
 import com.example.vehicle_management.models.CardSwipe;
+import com.example.vehicle_management.models.TicketType;
 import com.example.vehicle_management.models.VehicleType;
 import com.example.vehicle_management.repositories.IParkingFeeOfVisitorRepository;
-import com.example.vehicle_management.repositoriesImpl.CardRepositoryImpl;
-import com.example.vehicle_management.repositoriesImpl.CardSwipeRepositoryImpl;
-import com.example.vehicle_management.repositoriesImpl.ParkingFeeOfVisitorRepositoryImpl;
-import com.example.vehicle_management.repositoriesImpl.VehicleTypeRepositoryImpl;
-import com.example.vehicle_management.services.ICardService;
-import com.example.vehicle_management.services.ICardSwipeService;
-import com.example.vehicle_management.services.IParkingFeeOfVisitorService;
-import com.example.vehicle_management.services.IVehicleTypeService;
-import com.example.vehicle_management.servicesImpl.CardServiceImpl;
-import com.example.vehicle_management.servicesImpl.CardSwipeServiceImpl;
-import com.example.vehicle_management.servicesImpl.ParkingFeeOfVisitorServiceImpl;
-import com.example.vehicle_management.servicesImpl.VehicleTypeServiceImpl;
+import com.example.vehicle_management.repositoriesImpl.*;
+import com.example.vehicle_management.services.*;
+import com.example.vehicle_management.servicesImpl.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -39,6 +34,7 @@ public class CardSwipeServlet extends HttpServlet {
     private ICardService cardService;
     private IVehicleTypeService vehicleTypeService;
     private IParkingFeeOfVisitorService parkingFeeOfVisitorService;
+    private ITicketTypeService ticketTypeService;
 
     @Override
     public void init() throws ServletException {
@@ -46,12 +42,16 @@ public class CardSwipeServlet extends HttpServlet {
         cardService = new CardServiceImpl(new CardRepositoryImpl());
         vehicleTypeService = new VehicleTypeServiceImpl(new VehicleTypeRepositoryImpl());
         parkingFeeOfVisitorService = new ParkingFeeOfVisitorServiceImpl(new ParkingFeeOfVisitorRepositoryImpl());
+        ticketTypeService = new TicketTypeServiceImpl(new TicketTypeRepositoryImpl());
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-
+        List<VehicleType> vehicleTypeList= vehicleTypeService.getAllVehicleTypes();
+        request.setAttribute("vehicleTypeList", vehicleTypeList);
+        List<TicketType> ticketTypeList= ticketTypeService.getAllTicketTypes();
+        request.setAttribute("ticketTypeList", ticketTypeList);
         //Tự động lấy dữ liệu theo cardId khi chọn cardId
         if (uri.contains("getCardSwipeIn")) {
             String cardIdStr = request.getParameter("cardId");
@@ -165,10 +165,74 @@ public class CardSwipeServlet extends HttpServlet {
             cardSwipeService.deleteCardSwipe(cardSwipeId);
             response.sendRedirect(request.getContextPath() + "/admin/swipe");
         }else {
-            List<CardSwipe> cardSwipes = cardSwipeService.getAllCardSwipes();
-            List<CardSwipeDTO> lstCardSwipe = CardSwipeMapper.toDTOList(cardSwipes, cardService, vehicleTypeService);
+            //Bộ lọc
 
-            request.setAttribute("lstCardSwipe", lstCardSwipe);
+            String vehicleTypeId = request.getParameter("vehicleTypeId");
+            String ticketTypeId = request.getParameter("ticketTypeId");
+            String dateRange = request.getParameter("dateRange");
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("vehicleTypeId", vehicleTypeId != null ? vehicleTypeId : "");
+            session.setAttribute("ticketTypeId", ticketTypeId != null ? ticketTypeId : "");
+
+
+            request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
+            request.setAttribute("ticketTypeFilter",session.getAttribute("ticketTypeId") );
+
+
+
+            LocalDateTime startDate = null;
+            LocalDateTime endDate = null;
+            if (dateRange != null && !dateRange.isEmpty()) {
+                try {
+                    String[] dates = dateRange.split(" - ");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                    startDate = LocalDate.parse(dates[0], formatter).atTime(00, 00, 01);
+                    endDate = LocalDate.parse(dates[1], formatter).atTime(23, 59, 59);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            final LocalDateTime finalStartDate = startDate;
+            final LocalDateTime finalEndDate = endDate;
+
+            session.setAttribute("startDateFilter", startDate);
+            session.setAttribute("endDateFilter", endDate);
+
+            request.setAttribute("startDate", session.getAttribute("startDateFilter"));
+            request.setAttribute("endDate", session.getAttribute("endDateFilter"));
+
+            List<CardSwipe> cardSwipes= cardSwipeService.getAllCardSwipes();
+            List<CardSwipeDTO> lstCardSwipe = CardSwipeMapper.toDTOList(cardSwipes, cardService, vehicleTypeService, ticketTypeService);
+            List<CardSwipeDTO> lstCardSwipeFiltered = lstCardSwipe.stream()
+                    .filter(p -> {
+                        if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
+                        try {
+                            return p.getVehicleTypeId() == Integer.parseInt(vehicleTypeId);
+                        } catch (NumberFormatException e) {
+                            return true;
+                        }
+                    })
+                    .filter(p -> {
+                        if (ticketTypeId == null || ticketTypeId.isEmpty()) return true;
+                        try {
+                            return p.getTickettypeId() == Integer.parseInt(ticketTypeId);
+                        } catch (NumberFormatException e) {
+                            return true;
+                        }
+                    })
+//                    .filter(p -> {
+//                        if (finalStartDate != null && finalEndDate != null) {
+//                            return (p.getCheckInTime() != null &&
+//                                    (p.getCheckInTime().isEqual(finalStartDate) || p.getCheckInTime().isAfter(finalStartDate)) &&
+//                                    (p.getCheckInTime().isEqual(finalEndDate) || p.getCheckInTime().isBefore(finalEndDate)));
+//                        }
+//                        return true;
+//                    })
+                    .toList();
+
+            request.setAttribute("lstCardSwipe", lstCardSwipeFiltered);
             request.getRequestDispatcher("/views/admin/swipe/swipe.jsp").forward(request, response);
         }
     }

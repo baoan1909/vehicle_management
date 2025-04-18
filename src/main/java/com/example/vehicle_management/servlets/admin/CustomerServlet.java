@@ -227,6 +227,7 @@ public class CustomerServlet extends HttpServlet {
                     customerRegisterTicketId, cardId, newCustomerId, feeCustomerId,
                     effectiveDate, expirationDate, licensePlate, vehicleTypeId, ticketTypeId, price
             );
+
             customerRegisterTicketService.insertCustomerRegisterTicket(customerRegisterTicket);
         } else {
             CustomerRegisterTicket customerRegisterTicket = new CustomerRegisterTicket(
