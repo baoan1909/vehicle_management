@@ -71,19 +71,16 @@ public class ParkingFeeOfCustomerServlet extends HttpServlet {
             parkingFeeOfCustomerService.deleteParkingFeeOfCustomer(feeCustomerId);
             request.getRequestDispatcher("/admin/parkingFeeOfCustomer").forward(request, response);
         }else {
-            String search = request.getParameter("search");
             String vehicleTypeId = request.getParameter("vehicleTypeId");
             String ticketTypeId = request.getParameter("ticketTypeId");
             String dateRange = request.getParameter("dateRange");
 
             HttpSession session = request.getSession();
-            session.setAttribute("search", search != null ? search : "");
             session.setAttribute("vehicleTypeId", vehicleTypeId != null ? vehicleTypeId : "");
             session.setAttribute("ticketTypeId", ticketTypeId != null ? ticketTypeId : "");
 
 
             // Truyền xuống JSP qua request
-            request.setAttribute("search", session.getAttribute("search"));
             request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
             request.setAttribute("ticketTypeFilter",session.getAttribute("ticketTypeId") );
 
@@ -115,7 +112,6 @@ public class ParkingFeeOfCustomerServlet extends HttpServlet {
             List<ParkingFeeOfCustomer> parkingFeeOfCustomerList = parkingFeeOfCustomerService.getAllParkingFeeOfCustomers();
 
             List<ParkingFeeOfCustomerDTO> filteredList = parkingFeeOfCustomerList.stream()
-                    .filter(p -> (search == null || search.isEmpty() || String.valueOf(p.getPrice()).contains(search) ) )
                     .filter(p -> {
                         if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
                         try {

@@ -60,10 +60,26 @@
                       <div class="col-md-2 mt-3">
                         <div class="form-group">
                           <select name="vehicleTypeId" class="form-control select2" style="width: 100%;">
+                            <option value="">Tất cả xe</option>
                             <c:forEach var="vehicleType" items="${vehicleTypeList}">
+
                               <option value="${vehicleType.vehicleTypeId}"
                                       <c:if test="${vehicleType.vehicleTypeId == vehicleTypeFilter}">selected</c:if>>
                                   ${vehicleType.vehicleTypeName}
+                              </option>
+                            </c:forEach>
+
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <div class="form-group">
+                          <select name="ticketTypeId" class="form-control select2" style="width: 100%;">
+                            <option value="">Tất cả vé</option>
+                            <c:forEach var="ticketType" items="${ticketTypeList}">
+                              <option value="${ticketType.ticketTypeId}"
+                                      <c:if test="${ticketType.ticketTypeId == ticketTypeFilter}">selected</c:if>>
+                                  ${ticketType.ticketTypeName}
                               </option>
                             </c:forEach>
 
@@ -142,7 +158,7 @@
                           <td>${cardSwipe.checkInTime}</td>
                           <td>${cardSwipe.checkOutTime}</td>
                           <td>${cardSwipe.vehicleTypeName}</td>
-                          <td>${cardSwipe.type}</td>
+                          <td>${cardSwipe.ticketTypeName}</td>
                           <td>${cardSwipe.price}</td>
                         </tr>
                       </c:forEach>

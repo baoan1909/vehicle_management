@@ -1,7 +1,9 @@
 package com.example.vehicle_management.servlets.admin;
 
 import com.example.vehicle_management.dtos.CardDTO;
+import com.example.vehicle_management.dtos.CardSwipeDTO;
 import com.example.vehicle_management.mappers.CardMapper;
+import com.example.vehicle_management.mappers.CardSwipeMapper;
 import com.example.vehicle_management.models.Card;
 import com.example.vehicle_management.models.TicketType;
 import com.example.vehicle_management.models.VehicleType;
@@ -66,20 +68,18 @@ public class CardServlet extends HttpServlet {
         } else {
 
             String vehicleTypeId = request.getParameter("vehicleTypeId");
-            String ticketTypeName = request.getParameter("ticketTypeName");
+
             String dateRange = request.getParameter("dateRange");
             String isCreated =request.getParameter("isCreated")==null ? "" : request.getParameter("isCreated");
 
             HttpSession session = request.getSession();
             session.setAttribute("isCreated", isCreated);
             session.setAttribute("vehicleTypeId", vehicleTypeId != null ? vehicleTypeId : "");
-            session.setAttribute("ticketTypeId", ticketTypeName != null ? ticketTypeName : "");
 
 
             // Truyền xuống JSP qua request
             request.setAttribute("isCreated", session.getAttribute("isCreated"));
             request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
-            request.setAttribute("ticketTypeFilter",session.getAttribute("ticketTypeId") );
 
 
 
@@ -106,43 +106,36 @@ public class CardServlet extends HttpServlet {
             request.setAttribute("endDate", session.getAttribute("endDateFilter"));
 
             List<Card> cards = cardService.getAllCards();
+//            List<CardDTO> lstCards = CardMapper.toDTOList(cards, vehicleTypeService, ticketTypeService);
 
-            List<CardDTO> lstCards= cards.stream()
-//                            .filter(p->{
-//                                if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
-//                                try {
-//                                    return p.getVehicleTypeId() == Integer.parseInt(vehicleTypeId);
-//                                } catch (NumberFormatException e) {
-//                                    return true;
-//                                }
-//                            })
-//                            .filter(p->{
-//                                if (ticketTypeName == null || ticketTypeName.isEmpty()) return true;
-//                                try {
-//                                    return ticketTypeName.contains(p.getType());
-//                                } catch (NumberFormatException e) {
-//                                    return true;
-//                                }
-//                            })
-//                            .filter(p -> {
-//                                if (isCreated == null || isCreated.isEmpty()) return true;
-//                                try {
-//                                    return p.getIsCreated() == Integer.parseInt(isCreated);
-//                                }catch (NumberFormatException e) {
-//                                    return true;
-//                                }
-//                            })
-//                            .filter(p -> {
-//                                if (finalStartDate != null && finalEndDate != null) {
-//                                    return (p.getCreateDate() != null &&
-//                                            (p.getCreateDate().isEqual(finalStartDate) || p.getCreateDate().isAfter(finalStartDate)) &&
-//                                            (p.getCreateDate().isEqual(finalEndDate) || p.getCreateDate().isBefore(finalEndDate)));
-//                                }
-//                                return true;
-//                            })
-                            .map(p-> CardMapper.toDTO(p, vehicleTypeService))
+            List<CardDTO> lstCardFilter= cards.stream()
+                            .filter(p->{
+                                if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
+                                try {
+                                    return p.getVehicleTypeId() == Integer.parseInt(vehicleTypeId);
+                                } catch (NumberFormatException e) {
+                                    return true;
+                                }
+                            })
+                            .filter(p -> {
+                                if (isCreated == null || isCreated.isEmpty() || isCreated.equals("2")) return true;
+                                    try {
+                                        return p.getIsCreated() == Integer.parseInt(isCreated);
+                                    } catch (NumberFormatException e) {
+                                        return true;
+                                    }
+                                })
+                            .filter(p -> {
+                                if (finalStartDate != null && finalEndDate != null) {
+                                    return (p.getCreateDate() != null &&
+                                            (p.getCreateDate().isEqual(finalStartDate) || p.getCreateDate().isAfter(finalStartDate)) &&
+                                            (p.getCreateDate().isEqual(finalEndDate) || p.getCreateDate().isBefore(finalEndDate)));
+                                }
+                                return true;
+                            })
+                            .map(p ->CardMapper.toDTO(p, vehicleTypeService, ticketTypeService))
                             .toList();
-            request.setAttribute("lstCards", lstCards);
+            request.setAttribute("lstCards", lstCardFilter);
             request.getRequestDispatcher("/views/admin/card/card.jsp").forward(request, response);
         }
     }

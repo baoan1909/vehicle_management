@@ -50,6 +50,8 @@ public class CardSwipeServlet extends HttpServlet {
         String uri = request.getRequestURI();
         List<VehicleType> vehicleTypeList= vehicleTypeService.getAllVehicleTypes();
         request.setAttribute("vehicleTypeList", vehicleTypeList);
+        List<TicketType> ticketTypeList= ticketTypeService.getAllTicketTypes();
+        request.setAttribute("ticketTypeList", ticketTypeList);
         //Tự động lấy dữ liệu theo cardId khi chọn cardId
         if (uri.contains("getCardSwipeIn")) {
             String cardIdStr = request.getParameter("cardId");
@@ -166,14 +168,17 @@ public class CardSwipeServlet extends HttpServlet {
             //Bộ lọc
 
             String vehicleTypeId = request.getParameter("vehicleTypeId");
+            String ticketTypeId = request.getParameter("ticketTypeId");
             String dateRange = request.getParameter("dateRange");
 
             HttpSession session = request.getSession();
 
             session.setAttribute("vehicleTypeId", vehicleTypeId != null ? vehicleTypeId : "");
+            session.setAttribute("ticketTypeId", ticketTypeId != null ? ticketTypeId : "");
 
 
             request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
+            request.setAttribute("ticketTypeFilter",session.getAttribute("ticketTypeId") );
 
 
 
@@ -199,8 +204,8 @@ public class CardSwipeServlet extends HttpServlet {
             request.setAttribute("endDate", session.getAttribute("endDateFilter"));
 
             List<CardSwipe> cardSwipes= cardSwipeService.getAllCardSwipes();
-            //List<CardSwipeDTO> lstCardSwipeFiltered = CardSwipeMapper.toDTOList(cardSwipes, cardService, vehicleTypeService);
-            List<CardSwipeDTO> lstCardSwipeFiltered = cardSwipes.stream()
+            List<CardSwipeDTO> lstCardSwipe = CardSwipeMapper.toDTOList(cardSwipes, cardService, vehicleTypeService, ticketTypeService);
+            List<CardSwipeDTO> lstCardSwipeFiltered = lstCardSwipe.stream()
                     .filter(p -> {
                         if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
                         try {
@@ -210,14 +215,21 @@ public class CardSwipeServlet extends HttpServlet {
                         }
                     })
                     .filter(p -> {
-                        if (finalStartDate != null && finalEndDate != null) {
-                            return (p.getCheckInTime() != null &&
-                                    (p.getCheckInTime().isEqual(finalStartDate) || p.getCheckInTime().isAfter(finalStartDate)) &&
-                                    (p.getCheckInTime().isEqual(finalEndDate) || p.getCheckInTime().isBefore(finalEndDate)));
+                        if (ticketTypeId == null || ticketTypeId.isEmpty()) return true;
+                        try {
+                            return p.getTickettypeId() == Integer.parseInt(ticketTypeId);
+                        } catch (NumberFormatException e) {
+                            return true;
                         }
-                        return true;
                     })
-                    .map(p -> CardSwipeMapper.toDTO(p, cardService, vehicleTypeService))
+//                    .filter(p -> {
+//                        if (finalStartDate != null && finalEndDate != null) {
+//                            return (p.getCheckInTime() != null &&
+//                                    (p.getCheckInTime().isEqual(finalStartDate) || p.getCheckInTime().isAfter(finalStartDate)) &&
+//                                    (p.getCheckInTime().isEqual(finalEndDate) || p.getCheckInTime().isBefore(finalEndDate)));
+//                        }
+//                        return true;
+//                    })
                     .toList();
 
             request.setAttribute("lstCardSwipe", lstCardSwipeFiltered);

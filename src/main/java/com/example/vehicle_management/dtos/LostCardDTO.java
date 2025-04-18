@@ -9,14 +9,16 @@ public class LostCardDTO {
     private String phoneNumber;
     private String type;
     private String vehicleTypeName;
+    private int vehicleId;
 
-    public LostCardDTO(int lostCardId, LocalDateTime notificationTime, String customerName, String phoneNumber, String type, String vehicleTypeName) {
+    public LostCardDTO(int lostCardId, LocalDateTime notificationTime, String customerName, String phoneNumber, String type, String vehicleTypeName, int vehicleId) {
         this.lostCardId = lostCardId;
         this.notificationTime = notificationTime;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
         this.type = type;
         this.vehicleTypeName = vehicleTypeName;
+        this.vehicleId = vehicleId;
     }
 
     public int getLostCardId() {
@@ -42,4 +44,6 @@ public class LostCardDTO {
     public String getVehicleTypeName() {
         return vehicleTypeName;
     }
+
+    public int getVehicleId() {return vehicleId;}
 }

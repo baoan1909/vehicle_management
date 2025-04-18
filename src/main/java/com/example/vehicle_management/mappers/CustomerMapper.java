@@ -22,7 +22,7 @@ public class CustomerMapper {
         LocalDate dateOfBirth = (customer != null) ? customer.getDateOfBirth() : null;
 
 
-        String email = (customer != null) ? customer.getEmail() : "";
+        String email = (customer != null) ? "a@gmail.com" : "";
         String identifyCard = (customer != null) ? customer.getIdentifyCard() : "";
         String phoneNumber = (customer != null) ? customer.getPhoneNumber() : "";
 

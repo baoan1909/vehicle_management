@@ -142,11 +142,12 @@ public class CustomerServlet extends HttpServlet {
 
         int cardId = cardService.getCardIdByCardNumber(cardNumber);
 
-        Customer customer=new Customer(customerId,fullName, dateOfBirth,gender,phoneNumber,address,email, identifyCard);
+        Customer customer=new Customer(customerId,fullName, dateOfBirth,gender,phoneNumber,address, identifyCard);
 
         if (feeCustomerId==0){
             customerService.insertCustomer(customer);
-            customerId=customerService.getCustomerByEmail(email);
+            //customerId=customerService.getCustomerByEmail(email);
+            customerId=1;
             CustomerRegisterTicket customerRegisterTicket = new CustomerRegisterTicket(customerRegisterTicketId,cardId,customerId,feeCustomerId,effectiveDate,expirationDate,licensePlate,vehicleTypeId,ticketTypeId,price);
             customerRegisterTicketService.insertCustomerRegisterTicket(customerRegisterTicket);
         }

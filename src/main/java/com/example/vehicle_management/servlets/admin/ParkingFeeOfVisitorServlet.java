@@ -65,18 +65,14 @@ public class ParkingFeeOfVisitorServlet extends HttpServlet {
             parkingFeeOfVisitorService.deleteParkingFeeOfVisitor(feeVisitorId);
             request.getRequestDispatcher("/admin/parkingFeeOfVisitor").forward(request, response);
         }else {
-
-            String search = request.getParameter("search");
             String vehicleTypeId = request.getParameter("vehicleTypeId");
             String dateRange = request.getParameter("dateRange");
 
             HttpSession session = request.getSession();
-            session.setAttribute("search", search != null ? search : "");
             session.setAttribute("vehicleTypeId", vehicleTypeId != null ? vehicleTypeId : "");
 
 
             // Truyền xuống JSP qua request
-            request.setAttribute("search", session.getAttribute("search"));
             request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
 
 
@@ -107,7 +103,6 @@ public class ParkingFeeOfVisitorServlet extends HttpServlet {
             List<ParkingFeeOfVisitor> parkingFeeOfVisitorList = parkingFeeOfVisitorService.getAllParkingFeeOfVisitors();
 
             List<ParkingFeeOfVisitorDTO> filteredList = parkingFeeOfVisitorList.stream()
-                    .filter(p -> (search == null || search.isEmpty() || String.valueOf(p.getPrice()).contains(search) ) )
                     .filter(p -> {
                         if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
                         try {

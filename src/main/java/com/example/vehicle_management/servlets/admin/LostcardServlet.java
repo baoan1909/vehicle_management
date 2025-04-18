@@ -122,7 +122,7 @@ public class LostcardServlet extends HttpServlet {
             List<Card> cards = cardService.getAllCards();
             List<Customer> customers = customerService.getAllCustomers();
             List<CardSwipe> cardSwipes = cardSwipeService.getAllCardSwipes();
-            List<CardSwipeDTO> lstCardSwipe = CardSwipeMapper.toDTOList(cardSwipes, cardService, vehicleTypeService);
+            List<CardSwipeDTO> lstCardSwipe = CardSwipeMapper.toDTOList(cardSwipes, cardService, vehicleTypeService, ticketTypeService);
 
             String name = lostCard.getVisitorName();
             String phone = lostCard.getVisitorPhoneNum();
@@ -166,19 +166,14 @@ public class LostcardServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/admin/lost");
         } else {
             String vehicleTypeId = request.getParameter("vehicleTypeId");
-            String ticketTypeId = request.getParameter("ticketTypeId");
             String dateRange = request.getParameter("dateRange");
 
             HttpSession session = request.getSession();
             session.setAttribute("vehicleTypeId", vehicleTypeId != null ? vehicleTypeId : "");
-            session.setAttribute("ticketTypeId", ticketTypeId != null ? ticketTypeId : "");
 
 
             // Truyền xuống JSP qua request
             request.setAttribute("vehicleTypeFilter",session.getAttribute("vehicleTypeId") );
-            request.setAttribute("ticketTypeFilter",session.getAttribute("ticketTypeId") );
-
-
 
             LocalDateTime startDate = null;
             LocalDateTime endDate = null;
@@ -203,39 +198,28 @@ public class LostcardServlet extends HttpServlet {
             request.setAttribute("endDate", session.getAttribute("endDateFilter"));
 
             List<LostCard> lostCards = lostCardService.getAllLostCards();
-            //List<LostCardDTO> lstLostCards = LostCardMapper.toDTOList(lostCards, cardService, customerService, vehicleTypeService);
-//            VehicleType vehicleType=vehicleTypeService.getVehicleTypeById(Integer.parseInt(vehicleTypeId));
-//            int vehicleTypeIdFilter=vehicleType.getVehicleTypeId();
-            List<LostCardDTO> lstLostCards= lostCards.stream()
-//                    .filter(p -> {
-//                        if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
-//                        try {
-//                            return p.get() == Integer.parseInt(vehicleTypeId);
-//                        } catch (NumberFormatException e) {
-//                            return true;
-//                        }
-//                    })
-//                    .filter(p -> {
-//                        if (ticketTypeId == null || ticketTypeId.isEmpty()) return true;
-//                        try {
-//                            return p.getTicketTypeId() == Integer.parseInt(ticketTypeId);
-//                        } catch (NumberFormatException e) {
-//                            return true;
-//                        }
-//                    })
+            List<LostCardDTO> lstLostCards = LostCardMapper.toDTOList(lostCards, cardService, customerService, vehicleTypeService);
 //
-//                    .filter(p -> {
-//                        if (finalStartDate != null && finalEndDate != null) {
-//                            return (p.getNotificationTime() != null &&
-//                                    (p.getNotificationTime().isEqual(finalStartDate) || p.getNotificationTime().isAfter(finalStartDate)) &&
-//                                    (p.getNotificationTime().isEqual(finalEndDate) || p.getNotificationTime().isBefore(finalEndDate)));
-//                        }
-//                        return true;
-//                    })
-                    .map(p -> LostCardMapper.toDTO(p, cardService, customerService, vehicleTypeService))
+            List<LostCardDTO> lstLostCardsFilter= lstLostCards.stream()
+                    .filter(p -> {
+                        if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
+                        try {
+                            return p.getVehicleId() == Integer.parseInt(vehicleTypeId);
+                        } catch (NumberFormatException e) {
+                            return true;
+                        }
+                    })
+                    .filter(p -> {
+                        if (finalStartDate != null && finalEndDate != null) {
+                            return (p.getNotificationTime() != null &&
+                                    (p.getNotificationTime().isEqual(finalStartDate) || p.getNotificationTime().isAfter(finalStartDate)) &&
+                                    (p.getNotificationTime().isEqual(finalEndDate) || p.getNotificationTime().isBefore(finalEndDate)));
+                        }
+                        return true;
+                    })
                     .toList();
 
-            request.setAttribute("lstLostCards", lstLostCards);
+            request.setAttribute("lstLostCards", lstLostCardsFilter);
             request.getRequestDispatcher("/views/admin/lostcard/lostcard.jsp").forward(request, response);
         }
     }

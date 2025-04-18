@@ -23,6 +23,7 @@ public class LostCardMapper {
         String phoneNumber = (customer != null) ? customer.getPhoneNumber() : lostCard.getVisitorPhoneNum();
         String type = (card != null) ? card.getType() : "Không xác định";
         String vehicleTypeName = (vehicleType != null) ? vehicleType.getVehicleTypeName() : "Không xác định";
+        int vehicleTypeId = (vehicleType != null) ? vehicleType.getVehicleTypeId() : 0;
 
         return new LostCardDTO(
                 lostCard.getLostCardId(),
@@ -30,7 +31,8 @@ public class LostCardMapper {
                 customerName,
                 phoneNumber,
                 type,
-                vehicleTypeName
+                vehicleTypeName,
+                vehicleTypeId
         );
     }
 

@@ -71,19 +71,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2 mt-3">
-                                                    <div class="form-group">
-                                                        <select name="ticketTypeId" class="form-control select2" style="width: 100%;">
-                                                            <option value="">Tất cả loại vé</option>
-                                                            <c:forEach var="ticketType" items="${ticketTypeList}">
-                                                                <option value="${ticketType.ticketTypeId}"
-                                                                        <c:if test="${ticketType.ticketTypeId == ticketTypeFilter}">selected</c:if>>
-                                                                        ${ticketType.ticketTypeName}
-                                                                </option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
+
                                                 <div class="col-md-2 mt-3">
                                                     <div class="input-group">
                                                         <div class="input-group-append">
