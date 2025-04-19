@@ -61,8 +61,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <input type="hidden" name="id" value="${lostCard.cardId}" />
-
+                                            <input type="hidden" name="id" value="${lostCard.lostCardId}" />
                                             <div class="form-group">
                                                 <label>ID thẻ:</label>
                                                 <select class="form-control select2" id="cardSelect" name="cardId" style="width: 100%;" required>

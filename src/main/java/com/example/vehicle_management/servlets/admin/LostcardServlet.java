@@ -199,7 +199,6 @@ public class LostcardServlet extends HttpServlet {
 
             List<LostCard> lostCards = lostCardService.getAllLostCards();
             List<LostCardDTO> lstLostCards = LostCardMapper.toDTOList(lostCards, cardService, customerService, vehicleTypeService);
-//
             List<LostCardDTO> lstLostCardsFilter= lstLostCards.stream()
                     .filter(p -> {
                         if (vehicleTypeId == null || vehicleTypeId.isEmpty()) return true;
