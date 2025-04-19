@@ -223,81 +223,130 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int customerRegisterTicketId = request.getParameter("id").isEmpty() ? 0 : Integer.parseInt(request.getParameter("id"));
-        int customerId = request.getParameter("customerId").isEmpty() ? 0 : Integer.parseInt(request.getParameter("customerId"));
-
-        String fullName = request.getParameter("fullName");
-        String dateOfBirthStr = request.getParameter("dateOfBirth");
-        String gender = request.getParameter("gender");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String address = request.getParameter("address");
-        String identifyCard = request.getParameter("identifyCard");
-
-        int cardId = request.getParameter("cardId").isEmpty() ? 0 : Integer.parseInt(request.getParameter("cardId"));
-        int feeCustomerId = (request.getParameter("feeCustomerId").isEmpty()) ? 0 : Integer.parseInt(request.getParameter("feeCustomerId"));
-        String effectiveDateStr = request.getParameter("effectiveDate");
-        String expirationDateStr = request.getParameter("expirationDate");
-        String licensePlate = request.getParameter("licensePlate");
-        int ticketTypeId = request.getParameter("ticketTypeId").isEmpty()? 0 : Integer.parseInt(request.getParameter("ticketTypeId"));
-        int vehicleTypeId = request.getParameter("vehicleTypeId").isEmpty() ? 0 : Integer.parseInt(request.getParameter("vehicleTypeId"));
-        double price =request.getParameter("price").isEmpty() ? 0.0 : Double.parseDouble(request.getParameter("price"));
-
-        // Định dạng ngày
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDate dateOfBirth = null;
-        LocalDate effectiveDate = null;
-        LocalDate expirationDate = null;
-
         try {
-            if (dateOfBirthStr != null && !dateOfBirthStr.isEmpty()) {
-                String cleanedDateOfBirth = dateOfBirthStr.split(" ")[0];
-                dateOfBirth = LocalDate.parse(cleanedDateOfBirth, dateFormatter);
+            // Lấy dữ liệu từ request
+            int customerRegisterTicketId = parseInt(request.getParameter("id"));
+            int customerId = parseInt(request.getParameter("customerId"));
+            String fullName = request.getParameter("fullName");
+            String gender = request.getParameter("gender");
+            String phoneNumber = request.getParameter("phoneNumber");
+            String address = request.getParameter("address");
+            String identifyCard = request.getParameter("identifyCard");
+            String licensePlate = request.getParameter("licensePlate");
+
+            int cardId = parseInt(request.getParameter("cardId"));
+            int feeCustomerId = parseInt(request.getParameter("feeCustomerId"));
+            int ticketTypeId = parseInt(request.getParameter("ticketTypeId"));
+            int vehicleTypeId = parseInt(request.getParameter("vehicleTypeId"));
+            double price = parseDouble(request.getParameter("price"));
+
+            // Xử lý ngày
+            LocalDate dateOfBirth = parseDate(request.getParameter("dateOfBirth"));
+            LocalDate effectiveDate = parseDate(request.getParameter("effectiveDate"));
+            LocalDate expirationDate = parseDate(request.getParameter("expirationDate"));
+
+            // Gán dữ liệu cho DTO để hiển thị lại nếu có lỗi
+            CustomerDTO customerDTO = new CustomerDTO(customerId, fullName, dateOfBirth, gender, phoneNumber, address, identifyCard,
+                    cardId, feeCustomerId, effectiveDate, expirationDate,
+                    licensePlate, ticketTypeId, vehicleTypeId, price);
+
+            // Kiểm tra trùng số điện thoại (trừ trường hợp của chính mình)
+            int existingId = customerService.getCustomerIdByPhoneNumber(phoneNumber);
+            if (existingId != 0 && existingId != customerId) {
+                setRequestAttributes(request, customerDTO, "Số điện thoại này đã có khách hàng sử dụng");
+                returnToForm(request, response);
+                return;
             }
 
-            if (effectiveDateStr != null && !effectiveDateStr.isEmpty()) {
-                String cleanedEffectiveDate = effectiveDateStr.split(" ")[0];
-                effectiveDate = LocalDate.parse(cleanedEffectiveDate, dateFormatter);
+            // Tạo đối tượng Customer và CustomerRegisterTicket
+            Customer customer = new Customer(customerId, fullName, dateOfBirth, gender, phoneNumber, address, identifyCard);
+            CustomerRegisterTicket registerTicket = new CustomerRegisterTicket(customerRegisterTicketId, cardId,
+                    customerId, feeCustomerId, effectiveDate, expirationDate, licensePlate, vehicleTypeId, ticketTypeId, price);
+
+            if (customerId == 0) {
+                int newCustomerId = customerService.insertAndReturnId(customer);
+                registerTicket.setCustomerId(newCustomerId);
+                customerRegisterTicketService.insertCustomerRegisterTicket(registerTicket);
+            } else {
+                customerService.updateCustomer(customer);
+                customerRegisterTicketService.updateCustomerRegisterTicket(registerTicket);
             }
 
-            if (expirationDateStr != null && !expirationDateStr.isEmpty()) {
-                String cleanedExpirationDate = expirationDateStr.split(" ")[0];
-                expirationDate = LocalDate.parse(cleanedExpirationDate, dateFormatter);
-            }
+            response.sendRedirect(request.getContextPath() + "/admin/customer");
+
         } catch (DateTimeParseException e) {
             e.printStackTrace();
-            request.setAttribute("error", "Ngày không đúng định dạng MM/dd/yyyy.");
-            request.getRequestDispatcher("/views/admin/customer/customer-detail.jsp").forward(request, response);
-            return;
+            CustomerDTO dto = extractCustomerDTOFromRequest(request);
+            setRequestAttributes(request, dto, "Ngày không đúng định dạng MM/dd/yyyy.");
+            returnToForm(request, response);
+        }
+    }
+
+    private int parseInt(String value) {
+        return (value == null || value.isEmpty()) ? 0 : Integer.parseInt(value);
+    }
+
+    private double parseDouble(String value) {
+        return (value == null || value.isEmpty()) ? 0.0 : Double.parseDouble(value);
+    }
+
+    private LocalDate parseDate(String dateStr) throws DateTimeParseException {
+        if (dateStr == null || dateStr.isEmpty()) return null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        return LocalDate.parse(dateStr.split(" ")[0], formatter);
+    }
+
+    private CustomerDTO extractCustomerDTOFromRequest(HttpServletRequest request) {
+        return new CustomerDTO(
+                parseInt(request.getParameter("customerId")),
+                request.getParameter("fullName"),
+                null,  // dateOfBirth được xử lý trong try
+                request.getParameter("gender"),
+                request.getParameter("phoneNumber"),
+                request.getParameter("address"),
+                request.getParameter("identifyCard"),
+                parseInt(request.getParameter("cardId")),
+                parseInt(request.getParameter("feeCustomerId")),
+                null,  // effectiveDate
+                null,  // expirationDate
+                request.getParameter("licensePlate"),
+                parseInt(request.getParameter("ticketTypeId")),
+                parseInt(request.getParameter("vehicleTypeId")),
+                parseDouble(request.getParameter("price"))
+        );
+    }
+
+    private void setRequestAttributes(HttpServletRequest request, CustomerDTO customerDTO, String errorMessage) {
+        request.setAttribute("error", errorMessage);
+        request.setAttribute("customerDTO", customerDTO);
+    }
+
+    private void returnToForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<VehicleType> vehicleTypes = vehicleTypeService.getAllVehicleTypes();
+        List<TicketType> ticketTypes = ticketTypeService.getAllTicketTypes();
+        List<Card> cards = cardService.getCardIdByType();
+
+        request.setAttribute("vehicleTypes", vehicleTypes);
+        request.setAttribute("ticketTypes", ticketTypes);
+        request.setAttribute("cards", cards);
+
+        // Lấy tên loại xe để hiển thị
+        CustomerDTO dto = (CustomerDTO) request.getAttribute("customerDTO");
+        String vehicleName = "";
+        if (dto != null && dto.getVehicleTypeId() != 0) {
+            VehicleType vt = vehicleTypeService.getVehicleTypeById(dto.getVehicleTypeId());
+            if (vt != null) vehicleName = vt.getVehicleTypeName();
+        }
+        request.setAttribute("displayVehicleName", vehicleName);
+
+        // Set lại ngày tháng nếu có
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        if (dto != null) {
+            request.setAttribute("dateOfBirth", dto.getDateOfBirth() != null ? dto.getDateOfBirth().format(formatter) : "");
+            request.setAttribute("effectiveDate", dto.getEffectiveDate() != null ? dto.getEffectiveDate().format(formatter) : "");
+            request.setAttribute("expirationDate", dto.getExpirationDate() != null ? dto.getExpirationDate().format(formatter) : "");
         }
 
-        Customer customer = new Customer(customerId, fullName, dateOfBirth, gender, phoneNumber, address, identifyCard);
-
-        int existCustomerUsePhoneNumber = customerService.getCustomerIdByPhoneNumber(phoneNumber);
-        if(existCustomerUsePhoneNumber != 0){
-            request.setAttribute("error", "Số điện thoại này đã có khách hàng sử dụng");
-            request.setAttribute("customerDTO", customer);
-            request.getRequestDispatcher("/views/admin/customer/customer-detail.jsp").forward(request, response);
-            return;
-        }
-
-        if (customerId == 0) {
-           int newCustomerId = customerService.insertAndReturnId(customer);
-
-            CustomerRegisterTicket customerRegisterTicket = new CustomerRegisterTicket(
-                    customerRegisterTicketId, cardId, newCustomerId, feeCustomerId,
-                    effectiveDate, expirationDate, licensePlate, vehicleTypeId, ticketTypeId, price
-            );
-
-            customerRegisterTicketService.insertCustomerRegisterTicket(customerRegisterTicket);
-        } else {
-            CustomerRegisterTicket customerRegisterTicket = new CustomerRegisterTicket(
-                    customerRegisterTicketId, cardId, customerId, feeCustomerId,
-                    effectiveDate, expirationDate, licensePlate, vehicleTypeId, ticketTypeId, price
-            );
-            customerRegisterTicketService.updateCustomerRegisterTicket(customerRegisterTicket);
-            customerService.updateCustomer(customer);
-
-        }
-        response.sendRedirect(request.getContextPath() + "/admin/customer");
+        request.getRequestDispatcher("/views/admin/customer/customer-detail.jsp").forward(request, response);
     }
 }

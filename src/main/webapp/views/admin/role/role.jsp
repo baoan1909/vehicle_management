@@ -42,7 +42,6 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 mt-4">
-                            <div class="card shadow">
                                 <div class="row">
                                     <div class="form-group col-2 ml-auto mr-3">
                                         <a href="<%= request.getContextPath() %>/admin/role/add" class="btn btn-info btn-block">
@@ -50,7 +49,6 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
                             <!-- /.info-box -->
                         </div>
                     </div>

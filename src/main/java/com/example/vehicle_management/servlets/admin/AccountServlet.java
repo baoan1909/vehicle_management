@@ -62,9 +62,6 @@ public class AccountServlet extends HttpServlet {
             int accountId = Integer.parseInt(request.getParameter("id"));
             accountService.deleteAccount(accountId);
             response.sendRedirect(request.getContextPath() + "/admin/account");
-        } else if(uri.contains("infor")) {
-            int accountId = request.getParameter("id") == null ? 0 : Integer.parseInt(request.getParameter("id"));
-
         } else {
             String isActive = request.getParameter("isActive");
             String dateRange= request.getParameter("dateRange");

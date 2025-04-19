@@ -58,7 +58,6 @@
                                         </div>
                                         <div class="col-12 callout callout-info">
                                             <div class="row">
-
                                                 <div class="col-md-2 mt-3">
                                                     <div class="form-group">
                                                         <select name="vehicleTypeId" class="form-control select2" style="width: 100%;">
@@ -96,8 +95,10 @@
                                                     </div>
                                                 </div>
                                                 <!-- /.col -->
-                                                <div class="col-md-1 mt-3 ml-auto">
-                                                    <button type="button" class="btn btn-block btn-info">Đặt lại</button>
+                                                <div class="col-md-2 ml-auto">
+                                                    <button href="${pageContext.request.contextPath}/admin/customer?dateRange=&vehicleTypeId=&ticketTypeId=" class="btn btn-info btn-block">
+                                                        Đặt lại
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

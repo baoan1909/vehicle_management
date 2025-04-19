@@ -144,7 +144,7 @@
                                                     <select class="form-control select2" id="ticketTypeSelect" style="width: 100%;" name="ticketTypeId">
                                                         <option value="">-- Loại vé --</option>
                                                         <c:forEach var="ticketType" items="${ticketTypes}">
-                                                            <option value="${ticketType.ticketTypeId}" ${customerDTO.ticketTypeName==ticketType.ticketTypeName ? "selected" : ""}>
+                                                            <option value="${ticketType.ticketTypeId}" ${customerDTO.ticketTypeId==ticketType.ticketTypeId ? "selected" : ""}>
                                                                     ${ticketType.ticketTypeName}
                                                             </option>
                                                         </c:forEach>

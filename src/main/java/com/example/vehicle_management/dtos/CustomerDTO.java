@@ -45,7 +45,105 @@ public class CustomerDTO {
         this.price = price;
     }
 
+    public CustomerDTO(int customerId, String customerName, LocalDate dateOfBirth, String gender,
+                       String customerPhoneNumber, String address, String identifyCard,
+                       int cardId, int feeCustomerId, LocalDate effectiveDate,
+                       LocalDate expirationDate, String licensePlate, int ticketTypeId,
+                       int vehicleTypeId, double price) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.address = address;
+        this.identifyCard = identifyCard;
+        this.cardId = cardId;
+        this.feeCustomerId = feeCustomerId;
+        this.effectiveDate = effectiveDate;
+        this.expirationDate = expirationDate;
+        this.licensePlate = licensePlate;
+        this.ticketTypeId = ticketTypeId;
+        this.vehicleTypeId = vehicleTypeId;
+        this.price = price;
+    }
+
     public CustomerDTO() {
+    }
+
+    public void setCustomerRegisterTicketId(int customerRegisterTicketId) {
+        this.customerRegisterTicketId = customerRegisterTicketId;
+    }
+
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setCustomerPhoneNumber(String customerPhoneNumber) {
+        this.customerPhoneNumber = customerPhoneNumber;
+    }
+
+    public void setIdentifyCard(String identifyCard) {
+        this.identifyCard = identifyCard;
+    }
+
+    public void setFeeCustomerId(int feeCustomerId) {
+        this.feeCustomerId = feeCustomerId;
+    }
+
+    public void setVehicleTypeId(int vehicleTypeId) {
+        this.vehicleTypeId = vehicleTypeId;
+    }
+
+    public void setVehicleTypeName(String vehicleTypeName) {
+        this.vehicleTypeName = vehicleTypeName;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public void setTicketTypeId(int ticketTypeId) {
+        this.ticketTypeId = ticketTypeId;
+    }
+
+    public void setTicketTypeName(String ticketTypeName) {
+        this.ticketTypeName = ticketTypeName;
+    }
+
+    public void setEffectiveDate(LocalDate effectiveDate) {
+        this.effectiveDate = effectiveDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getCustomerRegisterTicketId() {

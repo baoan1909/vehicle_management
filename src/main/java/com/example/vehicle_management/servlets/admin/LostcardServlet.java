@@ -6,6 +6,7 @@ import com.example.vehicle_management.mappers.CardSwipeMapper;
 import com.example.vehicle_management.mappers.LostCardMapper;
 import com.example.vehicle_management.mappers.ParkingFeeOfCustomerMapper;
 import com.example.vehicle_management.models.*;
+import com.example.vehicle_management.repositories.ICustomerRegisterTicketRepository;
 import com.example.vehicle_management.repositoriesImpl.*;
 import com.example.vehicle_management.services.*;
 import com.example.vehicle_management.servicesImpl.*;
@@ -31,6 +32,7 @@ public class LostcardServlet extends HttpServlet {
     private ICustomerService customerService;
     private ICardSwipeService cardSwipeService;
     private ITicketTypeService ticketTypeService;
+    private ICustomerRegisterTicketService customerRegisterTicketService;
 
     @Override
     public void init() throws ServletException {
@@ -40,6 +42,8 @@ public class LostcardServlet extends HttpServlet {
         customerService = new CustomerServiceImpl(new CustomerRepositoryImpl());
         cardSwipeService = new CardSwipeServiceImpl(new CardSwipeRepositoryImpl());
         ticketTypeService = new TicketTypeServiceImpl(new TicketTypeRepositoryImpl());
+        customerRegisterTicketService  = new CustomerRegisterTicketServiceImpl(new CustomerRegisterTicketRepositoryImpl());
+
     }
 
     @Override
@@ -62,6 +66,7 @@ public class LostcardServlet extends HttpServlet {
                 Card card = cardService.getCardById(cardId);
                 double cardPriceVisitor = cardService.getParkingFeeVisitorByCardId(cardId);
                 int customerByCardId = cardService.getCustomerIdByCardId(cardId);
+                int customerByCardIdNot = cardService.getCustomerIdByCardIdNot(cardId);
 
                 if (cardSwipe != null && card != null) {
                     if (customerByCardId != 0) {
@@ -78,15 +83,32 @@ public class LostcardServlet extends HttpServlet {
                                 customer.getIdentifyCard()
                         ));
                     } else {
-                        // Không có customerId => là khách vãng lai
-                        jsonBuilder.append(String.format(
-                                " \"type\":\"%s\", \"checkInImagePath\":\"%s\", \"price\":\"%s\"",
-                                card.getType(),
-                                cardSwipe.getCheckInImagePath(),
-                                cardPriceVisitor
-                        ));
+
+                        if(card.getType().equals("Đăng ký")){
+                            jsonBuilder.append(" \"message\": \"Thẻ đăng ký hết hạn\", ");
+                            // Có thông tin khách hàng
+                            Customer customer = customerService.getCustomerById(customerByCardIdNot);
+
+                            jsonBuilder.append(String.format(
+                                    " \"type\":\"%s\", \"checkInImagePath\":\"%s\", \"customerId\":\"%s\", \"fullName\":\"%s\", \"phoneNumber\":\"%s\", \"identifyCard\":\"%s\"",
+                                    card.getType(),
+                                    cardSwipe.getCheckInImagePath(),
+                                    customerByCardIdNot,
+                                    customer.getFullName(),
+                                    customer.getPhoneNumber(),
+                                    customer.getIdentifyCard()
+                            ));
+                        }else{
+                            // Không có customerId => là khách vãng lai
+                            jsonBuilder.append(String.format(
+                                    " \"type\":\"%s\", \"checkInImagePath\":\"%s\", \"price\":\"%s\"",
+                                    card.getType(),
+                                    cardSwipe.getCheckInImagePath(),
+                                    cardPriceVisitor
+                            ));
+                        }
                     }
-                } else {
+                } else  {
                     //Trường hợp không cardswipe nhưng là khách hàng đăng ký
                     if(customerByCardId != 0) {
                         // Có thông tin khách hàng

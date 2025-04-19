@@ -15,4 +15,5 @@ public interface ICardService {
     int getCustomerIdByCardId(int cardId);
     int getCardIdByCardNumber(String cardNumber);
     List<Card> getCardIdByType();
+    int getCustomerIdByCardIdNot(int cardId);
 }

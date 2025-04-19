@@ -21,6 +21,7 @@ public class CardRepositoryImpl implements ICardRepository {
     private static final String GET_CUSTOMER_ID_BY_CARD_ID = "SELECT customerId FROM CustomerRegisterTicket WHERE cardId = ? AND effectiveDate <= CURRENT_DATE AND CURRENT_DATE <= expirationDate ";
     private static final String GET_CARD_ID_BY_CARD_NUMBER = "SELECT cardId FROM CARD WHERE cardNumber = ? ";
     private static final String SELECT_CARD_BY_TYPE = "SELECT c.cardId FROM Card c WHERE c.type = 'Đăng ký' AND ( c.cardId NOT IN ( SELECT crt.cardId FROM CustomerRegisterTicket crt ) OR c.cardId IN ( SELECT crt.cardId FROM CustomerRegisterTicket crt WHERE crt.expirationDate < CURRENT_DATE ) );";
+    private static final String GET_CUSTOMER_ID_BY_CARD_ID_NOT = "SELECT customerId FROM CustomerRegisterTicket WHERE cardId = ?";
 
     @Override
     public boolean insert(Card card) {
@@ -165,6 +166,24 @@ public class CardRepositoryImpl implements ICardRepository {
     public int getCustomerIdByCardId(int cardId) {
         try (Connection conn = DBConnectionPool.getConnection();
              PreparedStatement stmt = conn.prepareStatement(GET_CUSTOMER_ID_BY_CARD_ID)) {
+
+            stmt.setInt(1, cardId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("CustomerId");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int getCustomerIdByCardIdNot(int cardId) {
+        try (Connection conn = DBConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(GET_CUSTOMER_ID_BY_CARD_ID_NOT)) {
 
             stmt.setInt(1, cardId);
 

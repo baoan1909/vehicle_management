@@ -57,7 +57,7 @@
                                                 <div class="col-md-2 mt-3">
                                                     <div class="form-group">
                                                         <select name="isActive" class="form-control select2" style="width: 100%;">
-                                                            <option value="2">Tất cả</option>
+                                                            <option value="2" selected>Tất cả</option>
                                                             <c:choose>
                                                                 <c:when test="${isActive}">
                                                                     <option value="1" selected>Đang hoạt động </option>
@@ -82,20 +82,20 @@
                                                 </div>
                                                 <!-- /.col -->
                                                 <div class="col-md-1 mt-3 ml-auto">
-                                                    <button type="button" class="btn btn-block btn-info">Đặt lại</button>
+                                                    <button href="${pageContext.request.contextPath}/admin/account" type="button" class="btn btn-block btn-info">Đặt lại</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-2 ml-auto mr-3">
-                                        <a href="<%= request.getContextPath() %>/admin/account/add" class="btn btn-info btn-block">
-                                            <i class="fas fa-plus-circle"></i> Thêm mới
-                                        </a>
+                                    <div class="row">
+                                        <div class="form-group col-2 ml-auto mr-3">
+                                            <a href="<%= request.getContextPath() %>/admin/account/add" class="btn btn-info btn-block">
+                                                <i class="fas fa-plus-circle"></i> Thêm mới
+                                            </a>
+                                        </div>
                                     </div>
-
                                 </div>
+
                                 <!-- /.info-box -->
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <a href="${pageContext.request.contextPath}/admin/account/delete?id=${card.accountId}" class="btn btn-outline-warning btn-block" onclick="return confirm('Bạn có chắc muốn xóa?')">
+                                                                    <a href="${pageContext.request.contextPath}/admin/account/delete?id=${account.accountId}" class="btn btn-outline-warning btn-block" onclick="return confirm('Bạn có chắc muốn xóa?')">
                                                                         <i class="fas fa-trash-alt"></i>
                                                                     </a>
                                                                 </div>
