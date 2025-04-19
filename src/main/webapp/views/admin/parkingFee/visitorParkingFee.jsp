@@ -69,7 +69,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-append">
                                                             <button class="bg-cyan btn btn-sidebar" type="submit">
-                                                                <i class="fa fa-filter"></i>
+                                                                <i class="fa fa-filter"></i> Lọc
                                                             </button>
                                                         </div>
                                                     </div>

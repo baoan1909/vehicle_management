@@ -103,8 +103,10 @@
                                                     </div>
                                                 </div>
                                                 <!-- /.col -->
-                                                <div class="col-md-1 mt-3 ml-auto">
-                                                    <button type="button" href="${pageContext.request.contextPath}/admin/card" class="btn btn-block btn-info">Đặt lại</button>
+                                                <div class="col-md-2 ml-auto">
+                                                    <button href="${pageContext.request.contextPath}/admin/card" class="btn btn-info btn-block">
+                                                        Đặt lại
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

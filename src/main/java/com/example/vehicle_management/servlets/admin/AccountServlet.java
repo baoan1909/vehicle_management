@@ -121,7 +121,7 @@ public class AccountServlet extends HttpServlet {
 //                            })
                             .map(p -> AccountMapper.toDTO(p, roleService, customerService))
                              .toList();
-            
+
             request.setAttribute("lstAccount", lstAccount);
             request.getRequestDispatcher("/views/admin/account/account.jsp").forward(request, response);
         }
