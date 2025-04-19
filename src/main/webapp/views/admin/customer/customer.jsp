@@ -58,7 +58,6 @@
                                         </div>
                                         <div class="col-12 callout callout-info">
                                             <div class="row">
-
                                                 <div class="col-md-2 mt-3">
                                                     <div class="form-group">
                                                         <select name="vehicleTypeId" class="form-control select2" style="width: 100%;">

@@ -62,5 +62,10 @@ public class CardServiceImpl implements ICardService {
         return cardRepository.getCardIdByType();
     }
 
+    @Override
+    public int getCustomerIdByCardIdNot(int cardId) {
+        return cardRepository.getCustomerIdByCardIdNot(cardId);
+    }
+
 
 }
